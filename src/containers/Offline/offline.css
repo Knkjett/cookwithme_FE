@@ -1,0 +1,87 @@
+.banner {
+  background: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=931&q=80') no-repeat;
+  background-size: cover;
+  height: 100vh;
+  z-index: 100;
+  margin-bottom: 15px;
+}
+
+.bannerContainer {
+  height: 100vh;
+}
+
+.bannerText {
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  top: 40%;
+}
+
+@media (max-width: 575.98px) {
+  .bannerText {
+    top: 15%;
+    padding-left: 10px;
+    padding-right: 0px;
+    background-color: #EFF3F6;
+    border: 1px solid #EFF3F6;
+    border-radius: 25px;
+  }
+
+  .mobileLogo {
+    background-color: white;
+    border-radius: 0 0 25px 0;
+  }
+
+}
+
+.flavorText {
+  color: red;
+}
+
+.noPadding {
+  padding: 0px !important;
+}
+
+.foodCaption {
+  background: rgba(0, 0, 0, 0.45);
+  bottom: 0;
+  color: #fff;
+  overflow: hidden;
+  padding: 2% 3% 3%;
+  position: absolute;
+  white-space: normal;
+  width: 100%;
+  z-index: 100;
+}
+
+.foodSlider {
+  display: block;
+  font-size: 0;
+  position: relative;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: scroll;
+  overflow-y: hidden;
+}
+
+.foodSlider::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.foodImg {
+  bottom: 0;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
+.foodContainer {
+  display: inline-block;
+  height: 375px;
+  overflow: hidden;
+  position: relative;
+  width: 350px;
+}
+
