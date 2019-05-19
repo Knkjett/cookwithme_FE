@@ -72,10 +72,11 @@ class Offline extends Component {
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       <h1>GIF HERE OF APP IN USE</h1>
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <h3>SEARCH BAR GOES HERE</h3>
       <div className='foodSlider' >
         <this.Recipes />
       </div>
-      <div className='container' style={{ marginTop: '40px', backgroundColor:'#F1F1F1'}}>
+      <div className='container z-depth-5' style={{ marginTop: '40px', backgroundColor:'#F1F1F1'}}>
         <div className='row' >
           <div className='col s12 l6'>
             <h3 style={{textAlign:'center'}}>Join Today!</h3>

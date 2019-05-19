@@ -1,0 +1,45 @@
+.createBackground{
+  position: fixed;
+  background: url('../../assets/cookbook2.jpg') no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  /* z-index: 100; */
+  background-position: center; 
+  /* transform: scale(0.9) */
+}
+@media (max-width: 575.98px) {
+  .createBackground{
+    background: url('../../assets/cookbookmobile.jpg') no-repeat;
+    /* height: 100vh; */
+    background-position: center; 
+    background-size: 175%;
+  }
+}
+.bookContainer {
+      display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 1em;
+    justify-items: stretch;
+    align-items: stretch;
+}
+/* .item-a {
+  grid-area: header;
+}
+.item-b {
+  grid-area: main;
+}
+.item-c {
+  grid-area: sidebar;
+} */
+.item-d {
+      grid-column: 1;
+    grid-row: 2/4;
+    border: 1px solid #333;
+} 
+.imgPreview{
+  background-color:aqua;
+  height: 250px;
+  width: 250px;
+}
