@@ -17,18 +17,19 @@ class Create extends Component{
   }
 
   componentDidMount = () =>{
-    // ingredientScrape('https://www.allrecipes.com/','https://www.allrecipes.com/recipe/17916/german-style-weck-rolls/')
-    // .then((res)=>{
-    //   this.setState({
-    //     ingredients : res
-    //   })
-    // })
-    // stepScrape('https://www.allrecipes.com/','https://www.allrecipes.com/recipe/17916/german-style-weck-rolls/')
-    // .then((res)=>{
-    //   this.setState({
-    //     steps: res
-    //   })
-    // })
+    ingredientScrape('https://www.allrecipes.com/','https://www.allrecipes.com/recipe/17916/german-style-weck-rolls/')
+    .then((res)=>{
+      this.setState({
+        ingredients : res
+       
+      })
+    })
+    stepScrape('https://www.allrecipes.com/','https://www.allrecipes.com/recipe/17916/german-style-weck-rolls/')
+    .then((res)=>{
+      this.setState({
+        steps: res
+      })
+    })
     // this.setState({
     //   ingredients: recipe,
     //   steps: recipe
