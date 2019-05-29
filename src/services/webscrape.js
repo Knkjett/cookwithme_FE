@@ -3,37 +3,49 @@ const allrecipe = 'http://localhost:5001/webscrape/allrecipe'
 
 const allrecipeIngred = (sourceurl) => {
   return (axios({
-    method:'post',
+    method: 'post',
     baseURL: `${allrecipe}/ingredients`,
-    data:{sourceurl}
+    data: { sourceurl }
   })
-  .then((res)=>{
-    return res.data
-  }));
+    .then((res) => {
+      return res.data
+    }));
 }
 const allrecipeSteps = (sourceurl) => {
-  return(axios({
-    method:'post',
+  return (axios({
+    method: 'post',
     baseURL: `${allrecipe}/steps`,
-    data:{sourceurl}
+    data: { sourceurl }
   })
-  .then((res)=>{
-    return res.data
-  }));
+    .then((res) => {
+      return res.data
+    }));
 }
 
 
-const ingredientScrape = (baseurl, sourceurl) =>{
-    if(baseurl === 'https://www.allrecipes.com/'){
+const ingredientScrape = (baseurl, sourceurl) => {
+  if (baseurl === 'https://www.allrecipes.com/') {
     return allrecipeIngred(sourceurl)
   }
-  // if(baseurl==)
+  if (baseurl === 'https://www.foodnetwork.com/') {
+    return allrecipeIngred(sourceurl)
+  }
+  if (baseurl === 'https://www.closetcooking.com/') {
+    return allrecipeIngred(sourceurl)
+  }
+
 }
-const stepScrape = (baseurl, sourceurl) =>{
-  if(baseurl === 'https://www.allrecipes.com/'){
-  return allrecipeSteps(sourceurl)
-}
+const stepScrape = (baseurl, sourceurl) => {
+  if (baseurl === 'https://www.allrecipes.com/') {
+    return allrecipeSteps(sourceurl)
+  }
+  if (baseurl === 'https://www.foodnetwork.com/') {
+    return allrecipeSteps(sourceurl)
+  }
+  if (baseurl === 'https://www.closetcooking.com/') {
+    return allrecipeSteps(sourceurl)
+  }
 }
 
 
-export {ingredientScrape, stepScrape}
+export { ingredientScrape, stepScrape }
