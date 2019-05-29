@@ -17,14 +17,18 @@
 }
 .grocery-list {
   height: 300px;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 
 .card {
   margin: 50px;
  }
 
-.row::-webkit-scrollbar {
+.userSlider{
+  overflow-y: hidden;
+}
+
+.userSlider::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }

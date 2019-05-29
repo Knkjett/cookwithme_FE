@@ -46,7 +46,7 @@ export default class RecipePage extends React.Component {
  
  render() {
   if(!this.state.ingredients || !this.state.steps){
-    return(<h1 style={{marginTop:'0px', paddingTop:'150px'}} onClick={this.handleOnClick}>Loading</h1>);
+    return(<h1 style={{marginTop:'0px', paddingTop:'150px', height:'calc(100vh - 150px)'}} onClick={this.handleOnClick}>Loading</h1>);
   } 
   else {
     return(<React.Fragment>
