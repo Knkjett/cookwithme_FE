@@ -74,7 +74,7 @@ export default class UserProfile extends Component {
                   src="https://www.skinnytaste.com/wp-content/uploads/2019/01/Instant-Pot-Chicken-Parmesan-4.jpg" alt='food-pic' /></a>
             </div>
             <div>
-          <a href='#' className="waves-effect waves-light btn-large">Create Recipe</a>
+          <a href='#/create' className="waves-effect waves-light btn-large">Create Recipe</a>
         </div>
           </div>
         </div>
