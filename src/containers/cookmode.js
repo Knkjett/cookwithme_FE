@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './cookmode.css'
 class Cookmode extends Component{
     render(){
-        return <><div class="row container">
+        return <>
+        <div className='cookBG'>
+        <div class="row container">
         <div class="col s12 m8">
           <div class="card-panel white opacitywebmobile" style={{maxHeight:'610px',overflow:'scroll'}}>
             <span class="black-text fontwebmobile" style={{fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',opacity:1}}>
@@ -44,6 +46,7 @@ class Cookmode extends Component{
                 
           </div>
             
+      </div>
       </div>
       </>
     }

@@ -24,26 +24,31 @@ const allrecipeSteps = (sourceurl) => {
 
 
 const ingredientScrape = (baseurl, sourceurl) => {
-  if (baseurl === 'https://www.allrecipes.com/') {
+  if (baseurl === 'http://allrecipes.com') {
     return allrecipeIngred(sourceurl)
   }
-  if (baseurl === 'https://www.foodnetwork.com/') {
+  if (baseurl === 'http://foodnetwork.com') {
     return allrecipeIngred(sourceurl)
   }
-  if (baseurl === 'https://www.closetcooking.com/') {
+  if (baseurl === 'http://closetcooking.com') {
     return allrecipeIngred(sourceurl)
   }
-
+  if (baseurl === 'http://thepioneerwoman.com'){
+    return allrecipeIngred(sourceurl)
+  }
 }
 const stepScrape = (baseurl, sourceurl) => {
-  if (baseurl === 'https://www.allrecipes.com/') {
+  if (baseurl === 'http://allrecipes.com') {
     return allrecipeSteps(sourceurl)
   }
-  if (baseurl === 'https://www.foodnetwork.com/') {
+  if (baseurl === 'http://foodnetwork.com') {
     return allrecipeSteps(sourceurl)
   }
-  if (baseurl === 'https://www.closetcooking.com/') {
+  if (baseurl === 'http://closetcooking.com') {
     return allrecipeSteps(sourceurl)
+  }
+  if (baseurl === 'http://thepioneerwoman.com'){
+    return allrecipeIngred(sourceurl)
   }
 }
 
