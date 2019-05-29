@@ -13,6 +13,17 @@ const checkRecipe = async(url) => {
    })));
 }
 
+const postRecipes = (users_id, title, source_img, source_url, ingredients, steps) => {
+  return (axios({
+    method:'post',
+    baseURL: `${recipebaseURL}/`,
+    data:{users_id, title, source_img, source_url, ingredients, steps}
+  })
+  .then((res)=>{
+    return res.data
+  }));
+}
+
 const getFood2Fork = async(query) => {
     return(await(axios({
       method:'get',
@@ -26,4 +37,4 @@ const getFood2Fork = async(query) => {
    
    
 
-export {checkRecipe,getFood2Fork} 
+export {postRecipes ,checkRecipe,getFood2Fork}
