@@ -16,7 +16,7 @@ const checkRecipe = async(url) => {
 const postRecipes = (users_id, title, source_img, source_url, ingredients, steps) => {
   return (axios({
     method:'post',
-    baseURL: `${recipesBaseURL}/`,
+    // baseURL: `${recipesBaseURL}/`,
     data:{users_id, title, source_img, source_url, ingredients, steps}
   })
   .then((res)=>{

@@ -135,7 +135,7 @@ export default class UserProfile extends Component {
             </div>
           </div>
           <h5>Your Recipes:</h5>
-          <div className="row" styling={'margin: 10px'}>
+          <div className="row" style={{display:'inline-flex',width:'100vw',overflow:'scroll'}}>
             <div className="col s6 card small card-container">
               <div className="card-image">
                 <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" />
