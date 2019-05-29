@@ -46,21 +46,10 @@ export default class RecipePage extends React.Component {
  
  render() {
   if(!this.state.ingredients || !this.state.steps){
-    return(<h1 onClick={this.handleOnClick}>test</h1>);
+    return(<h1 style={{marginTop:'0px', paddingTop:'150px'}} onClick={this.handleOnClick}>Loading</h1>);
   } 
   else {
     return(<React.Fragment>
-      <nav>
-        <div className="nav-wrapper">
-          <button className="brand-logo" onClick={this.handleOnClick}><i className="material-icons">cloud</i>Logo</button>
-          <ul className="right hide-on-med-and-down">
-            <li><a href="sass.html"><i className="material-icons">search</i></a></li>
-            <li><a href="badges.html"><i className="material-icons">view_module</i></a></li>
-            <li><a href="collapsible.html"><i className="material-icons">refresh</i></a></li>
-            <li><a href="mobile.html"><i className="material-icons">more_vert</i></a></li>
-          </ul>
-        </div>
-      </nav>
       <div className="row">
         <img className="col s12 m7 materialboxed hoverable" src={require('../../assets/fish.jpg')} alt='' />
         <div className="col s12 m5">

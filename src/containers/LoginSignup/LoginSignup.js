@@ -78,6 +78,7 @@ $(document).ready(function(){
         const displayError = error === '' ? '' :  window.alert(JSON.stringify(error))
         const displayForm = 
             <React.Fragment>
+                <div style={{height:'calc(100vh - 64px)'}}>
                 <div className='container'>
      <div className='row'>
      {displayError}
@@ -146,6 +147,7 @@ $(document).ready(function(){
          </form>  
      
      </div>
+    </div>
     </div>
                 </React.Fragment>
      return (

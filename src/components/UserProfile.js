@@ -14,10 +14,8 @@ export default class UserProfile extends Component {
   }
 
   componentDidMount = () => {
-    document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('.carousel');
-      var instances = Materialize.Carousel.init(elems, {duration: '200'});
-    });
+      Materialize.Carousel.init(elems, {duration: '200'});
   }
 
   ListItem = () =>{
