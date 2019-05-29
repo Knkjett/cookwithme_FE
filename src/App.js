@@ -8,6 +8,7 @@ import CreateRecipe from './containers/CreateRecipe/Create'
 import RecipePage from './containers/RecipePage/RecipePage'
 import Footer from './components/Footer'
 import LoginSignup from './containers/LoginSignup/LoginSignup';
+import Logout from './containers/Logout/Logout';
 //====Context
 import firebase from './firebase';
 import AuthContext from './contexts/auth';
@@ -40,15 +41,18 @@ class App extends Component {
   render() {
    return( <>
  <HashRouter>
+          <AuthContext.Provider value={this.state.user}>
           <Route path='/' component={Navbar} />
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/login' exact component={LoginSignup} />
             <Route path='/create' exact component={CreateRecipe} />
             <Route path='/recipepage' exact component={RecipePage} />
+            <Route path='/logout' exact component={Logout} />
             <Route component={Err} />
           </Switch>
           <Route path='/' component={Footer} />
+          </AuthContext.Provider>
       </HashRouter>
     </>);
   }
