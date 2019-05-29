@@ -6,6 +6,7 @@ import Navbar from './components/Logo'
 import Home from './containers/Landing'
 import CreateRecipe from './containers/CreateRecipe/Create'
 import Footer from './components/Footer'
+import Member from './components/Member'
 //====Context
 
 const Err = () => {
@@ -19,6 +20,7 @@ class App extends Component {
    return( <>
  <HashRouter>
           <Route path='/' component={Navbar} />
+          <Route path='/' component={Member} />
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/create' exact component={CreateRecipe} />

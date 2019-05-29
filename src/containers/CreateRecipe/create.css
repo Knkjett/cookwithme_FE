@@ -35,6 +35,8 @@
  overflow: scroll;
  overflow-x: hidden;
 } 
-/* .list::-webkit-scrollbar { width: 0 !important }
-.list { overflow: -moz-scrollbars-none; }
-.list { -ms-overflow-style: none; } */
+@media (max-width: 575.98px) {
+  .list {
+    max-height: 75px;
+  }
+}
