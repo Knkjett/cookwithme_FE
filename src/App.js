@@ -7,6 +7,7 @@ import Home from './containers/Landing'
 import CreateRecipe from './containers/CreateRecipe/Create'
 import RecipePage from './containers/RecipePage/RecipePage'
 import Footer from './components/Footer'
+import Member from './components/Member'
 import LoginSignup from './containers/LoginSignup/LoginSignup';
 //====Context
 
@@ -21,6 +22,7 @@ class App extends Component {
    return( <>
  <HashRouter>
           <Route path='/' component={Navbar} />
+          <Route path='/' component={Member} />
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/login' exact component={LoginSignup} />

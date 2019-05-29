@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ExampleRecipe from '../../components/Offline/ExampleRecipe'
 import JoinToday from '../../components/Offline/JoinToday'
 import './offline.css'
+import MobilePhone from '../../components/Offline/MobilePhone'
 
 class Offline extends Component {
   constructor(props) {
@@ -20,7 +21,25 @@ class Offline extends Component {
       )
     })
   }
-
+  PhonePreview = () =>{
+    return (<>
+    <div className='container hide-on-small-only'>
+      <div className='row'>
+        <div className='col s12 m5'>
+    <MobilePhone />
+        </div>
+        <div className='col s12 offset-m2 m5'>
+          <h4>Try Me!</h4>
+          <span className='flow-text'>Mobile </span>
+          <span className='flow-text flavorText'>Friendly</span>
+          <span className='flow-text'> Design</span>
+          <h5>Test</h5>
+        </div>
+      </div>
+    </div>
+     
+    </>)
+  }
   render() {
     return (<>
       <div className='row banner'>
@@ -69,10 +88,16 @@ class Offline extends Component {
           </div>
         </div>
       </div>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <h1>GIF HERE OF APP IN USE</h1>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <h3>SEARCH BAR GOES HERE</h3>
+      <this.PhonePreview />
+      <form>
+        <div className='container'>
+        <div className='row lighten-3 orange searchBar' style={{borderRadius:'25px',paddingLeft:'25px',paddingRight:'25px'}}>
+        <div className='col s12 m12' >
+        <input style={{borderBottom:'0'}}/>
+        </div>
+        </div>
+        </div>
+      </form>
       <div className='foodSlider' >
         <this.Recipes />
       </div>
