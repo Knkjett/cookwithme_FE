@@ -43,7 +43,7 @@ export default class UserProfile extends Component {
   render() {
     return (
       <div className='background'>
-        <h1 style={{textAlign: 'center'}}>Welcome back, User!</h1>
+        <h1 style={{marginTop:'0px',textAlign: 'center'}}>Welcome back, User!</h1>
         <div className="row">
           <div className="col s12 m7 top-col">
             <div className="card grocery-container">
@@ -79,7 +79,19 @@ export default class UserProfile extends Component {
           </div>
         </div>
         <h5>Your Favorites:</h5>
-          <div className="row" style={{display:'inline-flex',width:'100vw',overflow:'scroll', overflowy: 'hidden'}}>
+          <div className="row userSlider" style={{display:'inline-flex',width:'100vw',overflow:'scroll'}}>
+            <div className="col s6 card small card-container">
+              <div className="card-image">
+                <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" />
+                <span className="card-title">Recipe Name</span>
+              </div>
+              <div className="card-content">
+                <p>Quick blurb about this recipe, maybe.</p>
+              </div>
+              <div className="card-action">
+                <a href="#">This is a link</a>
+              </div>
+            </div>
             <div className="col s6 card small card-container">
               <div className="card-image">
                 <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" />
