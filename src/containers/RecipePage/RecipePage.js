@@ -13,17 +13,20 @@ export default class RecipePage extends React.Component {
 
       }
   componentDidMount = (props) => {
-    checkRecipe("https://www.allrecipes.com/recipe/10549/best-brownies/")
+    // console.log(this.props.location.state)
+    let {publisher, url} = this.props.location.state
+    console.log(publisher)
+    checkRecipe(url)
     .then((res)=> {
       if(!res){
-        ingredientScrape('https://www.allrecipes.com/',"https://www.allrecipes.com/recipe/10549/best-brownies/")
+        ingredientScrape(publisher,url)
         .then((res)=>{
           this.setState({
             ingredients : res
            
           })
         })
-        stepScrape('https://www.allrecipes.com/',"https://www.allrecipes.com/recipe/10549/best-brownies/")
+        stepScrape(publisher,url)
         .then((res)=>{
           this.setState({
             steps: res

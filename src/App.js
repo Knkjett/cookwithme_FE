@@ -55,7 +55,7 @@ class App extends Component {
             <Route path = '/home' exact component = {SignInHome} />
             <Route path='/login' exact component={LoginSignup} />
             <Route path='/create' exact component={CreateRecipe} />
-            <Route path='/recipepage' exact component={RecipePage} />
+            <Route path='/recipepage/:id' exact component={RecipePage} />
             <Route path='/userprofile' exact component={UserProfile} />
             <Route path='/cookmode' exact component={Cookmode} />
             <Route path='/logout' exact component={Logout} />

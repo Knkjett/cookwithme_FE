@@ -21,7 +21,12 @@ class SignInHome extends Component{
             <div className="container webContainer " >
             <div className="row" style={{marginBottom:'0px'}}>
                 {this.state.recipes.map((obj,i)=>{
-                    return <Link to={`/recipepage/${obj.source_url}`}><div className="col s12 m4">
+                    console.log(obj)
+                    return <Link to={{ 
+                    pathname: `/recipepage/${obj.title}`, 
+                    state: { url: obj.source_url, publisher: obj.publisher_url } 
+                  }}>
+                  <div className="col s12 m4">
                         <div className="card">
                             <div className="card-image">
                                 <img style={{height:'281.17px'}} src={obj.image_url} />
