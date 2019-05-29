@@ -10,6 +10,7 @@ import RecipePage from './containers/RecipePage/RecipePage'
 import Footer from './components/Footer'
 import Member from './components/Member'
 import LoginSignup from './containers/LoginSignup/LoginSignup';
+import UserProfile from './components/UserProfile';
 import Landing from './containers/Landing';
 //====Context
 import firebase from './firebase';
@@ -51,6 +52,7 @@ class App extends Component {
             <Route path='/login' exact component={LoginSignup} />
             <Route path='/create' exact component={CreateRecipe} />
             <Route path='/recipepage' exact component={RecipePage} />
+            <Route path='/userprofile' exact component={UserProfile} />
             <Route component={Err} />
           </Switch>
           <Route path='/' component={Footer} />
