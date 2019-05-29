@@ -7,26 +7,26 @@ import AuthContext from '../../contexts/auth';
 
 //--- JQUERY FOR ROTATING CARDS 
 $(document).ready(function(){
-    $("#bt").click(function(){
+    $('#bt').click(function(){
       if ($('.rotate').length > 0) {
-        $("#iwp").removeClass("rotate");
+        $('#iwp').removeClass('rotate');
     }  
   if ($('.rotateb').length > 0) {
-        $("#iwp").removeClass("rotateb");
+        $('#iwp').removeClass('rotateb');
    
   }  
-      $("#iwp").addClass("rotate");
+      $('#iwp').addClass('rotate');
    
     });
-    $("#bt2").click(function(){
+    $('#bt2').click(function(){
      
        if ($('.rotate').length > 0) {
-        $("#iwp").removeClass("rotate");
+        $('#iwp').removeClass('rotate');
        }
        if ($('.rotateb').length > 0) {
-        $("#iwp").removeClass("rotateb");
+        $('#iwp').removeClass('rotateb');
   }  
-       $("#iwp").addClass("rotateb");
+       $('#iwp').addClass('rotateb');
     });
   });
 
@@ -78,63 +78,63 @@ $(document).ready(function(){
         const displayError = error === '' ? '' :  window.alert(JSON.stringify(error))
         const displayForm = 
             <React.Fragment>
-                <div class="container">
-     <div class="row">
+                <div className='container'>
+     <div className='row'>
      {displayError}
          <form>
-           <div class="row">   
-               <div class="col s12 m6 offset-m3">
-                   <div class="wrapper" id="wp">
-                     <div class="iwrapper" id="iwp">  
-                     <div class="card center-align mg front">
-                         <div class="card-content">
-                             <span class="card-title">Login</span>
-                              <a class="btn-floating halfway-fab waves-effect waves-light red" id="bt"><i class="material-icons">person_add</i></a>
-                             <div class="input-field">
-                                 <input id="email" type="email" class="validate" aria-describedby='emailHelp' name='email' value={email} onChange={this.handleChange} />
-                                 <label htmlFor="email">Email</label>
+           <div className='row'>   
+               <div className='col s12 m6 offset-m3'>
+                   <div className='wrapper' id='wp'>
+                     <div className='iwrapper' id='iwp'>  
+                     <div className='card center-align mg front'>
+                         <div className='card-content'>
+                             <span className='card-title login-title'>Login</span>
+                              <a className='btn-floating halfway-fab waves-effect waves-light red' id='bt'><i className='material-icons'>person_add</i></a>
+                             <div className='input-field'>
+                                 <input id='email' type='email' className='validate' aria-describedby='emailHelp' name='email' value={email} onChange={this.handleChange} />
+                                 <label htmlFor='email'>Email</label>
                              </div>
-                             <div class="input-field" >
-                                 <input id="password" type="password" class="validate" name='password' autoComplete='new-password' value={password} onChange={this.handleChange}/>
-                                 <label htmlFor="password">Password</label>
+                             <div className='input-field' >
+                                 <input id='password' type='password' className='validate' name='password' autoComplete='new-password' value={password} onChange={this.handleChange}/>
+                                 <label htmlFor='password'>Password</label>
                              </div>
                               <div className = 'input-field'>
-                                <label htmlFor="chk">
-                                <input type="checkbox" id="chk" />
+                                <label htmlFor='chk'>
+                                <input type='checkbox' id='chk' />
                                 <span >Remember me</span>
                                 </label>
                                </div> <br></br><br></br>
-                             <button class="btn  waves-effect waves-light" type="submit" name="action" onClick={this.handleSubmit}>Submit
-                                 <i class="material-icons right">send</i>
+                             <button className='btn  waves-effect waves-light' type='submit' name='action' onClick={this.handleSubmit}>Submit
+                                 <i className='material-icons right'>send</i>
                              </button>
                          </div>
                        
                        </div>   
-                         <div class="card center-align mg back"> 
-                         <div class="card-content ">
-                             <span class="card-title">Registration</span>
-                              <a class="btn-floating halfway-fab waves-effect waves-light red" id="bt2"><i class="material-icons">person</i></a>
-                             {/* <div class="input-field">
-                                 <input id="name" type="text" class="validate" name='name' onc />
-                                 <label htmlFor="name">Name</label>
+                         <div className='card center-align mg back'> 
+                         <div className='card-content '>
+                             <span className='card-title login-title'>Registration</span>
+                              <a className='btn-floating halfway-fab waves-effect waves-light red' id='bt2'><i className='material-icons'>person</i></a>
+                             {/* <div className='input-field'>
+                                 <input id='name' type='text' className='validate' name='name' onc />
+                                 <label htmlFor='name'>Name</label>
                              </div> */}
-                             <div class="input-field" >
-                                 <input id="email" type="email" class="validate" name='email' value={email} onChange={this.handleChange}/>
-                                 <label htmlFor="email">Email</label>
+                             <div className='input-field' >
+                                 <input id='email' type='email' className='validate' name='email' value={email} onChange={this.handleChange}/>
+                                 <label htmlFor='email'>Email</label>
                               
                              </div>
-                              <div class="input-field" >
-                                 <input id="password" type="password" class="validate" name='password'/>
-                                 <label htmlFor="password">Password</label>
+                              <div className='input-field' >
+                                 <input id='password' type='password' className='validate' name='password'/>
+                                 <label htmlFor='password'>Password</label>
                               
                              </div>
-                              <div class="input-field" >
-                                 <input id="password" type="password" class="validate" name='confirm password'/>
-                                 <label htmlFor="password">Confirm Password</label>
+                              <div className='input-field' >
+                                 <input id='password' type='password' className='validate' name='confirm password'/>
+                                 <label htmlFor='password'>Confirm Password</label>
                               
                              </div>
-                             <button class="btn  waves-effect waves-light" type="submit" name="action">Submit
-                                 <i class="material-icons right">send</i>
+                             <button className='btn  waves-effect waves-light' type='submit' name='action'>Submit
+                                 <i className='material-icons right'>send</i>
                              </button>
                          </div>
                        
