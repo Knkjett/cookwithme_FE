@@ -51,7 +51,7 @@ class App extends Component {
           <Route path='/' component={Member} />
           <Switch>
             <Route path='/' exact component={ Landing} />
-            {/* <Route path = '/home' exact component = {SignInHome} /> */}
+            <Route path = '/home' exact component = {SignInHome} />
             <Route path='/login' exact component={LoginSignup} />
             <Route path='/create' exact component={CreateRecipe} />
             <Route path='/recipepage' exact component={RecipePage} />
