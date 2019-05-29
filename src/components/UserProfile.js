@@ -15,7 +15,7 @@ export default class UserProfile extends Component {
 
   componentDidMount = () => {
       var elems = document.querySelectorAll('.carousel');
-      var instances = Materialize.Carousel.init(elems, {duration: '200'});
+      Materialize.Carousel.init(elems, {duration: '200'});
   }
 
   ListItem = () =>{

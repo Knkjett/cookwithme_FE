@@ -20,7 +20,7 @@ import AuthContext from './contexts/auth';
 
 const Err = () => {
   return (<>
-    <h2 className='headerSpace'>404 Missing Page.</h2>
+    <h2 style={{marginTop:'0px', paddingTop:'150px',paddingBottom:'calc(100vh - 330px'}}>404 Missing Page.</h2>
   </>)
 }
 class App extends Component {
@@ -46,7 +46,7 @@ class App extends Component {
   render() {
    return( <>
  <HashRouter>
-          <AuthContext.Provider value={this.state.user}>
+ <AuthContext.Provider value={this.state.user}>
           <Route path='/' component={Navbar} />
           <Route path='/' component={Member} />
           <Switch>
