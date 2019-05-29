@@ -9,6 +9,8 @@ import RecipePage from './containers/RecipePage/RecipePage'
 import Footer from './components/Footer'
 import LoginSignup from './containers/LoginSignup/LoginSignup';
 //====Context
+import firebase from './firebase';
+import AuthContext from './contexts/auth';
 
 const Err = () => {
   return (<>
@@ -16,6 +18,24 @@ const Err = () => {
   </>)
 }
 class App extends Component {
+  state = {
+    user: null,
+  }
+  
+  componentDidMount = () => {
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user =>{
+      if(user) {
+        this.setState({user});
+      }
+      else {
+        this.setState({user: null})
+      }
+    })
+  }
+
+  componentWillUnmount = () => {
+    this.unsubsribe();
+  }
   
   render() {
    return( <>
@@ -33,5 +53,6 @@ class App extends Component {
     </>);
   }
 }
+
 
 export default App;
