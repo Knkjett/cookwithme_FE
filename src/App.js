@@ -12,6 +12,8 @@ import Member from './components/Member'
 import LoginSignup from './containers/LoginSignup/LoginSignup';
 import Landing from './containers/Landing';
 //====Context
+import firebase from './firebase';
+import AuthContext from './contexts/auth';
 
 const Err = () => {
   return (<>
@@ -19,6 +21,24 @@ const Err = () => {
   </>)
 }
 class App extends Component {
+  state = {
+    user: null,
+  }
+  
+  componentDidMount = () => {
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user =>{
+      if(user) {
+        this.setState({user});
+      }
+      else {
+        this.setState({user: null})
+      }
+    })
+  }
+
+  componentWillUnmount = () => {
+    this.unsubsribe();
+  }
   
   render() {
    return( <>
@@ -38,5 +58,6 @@ class App extends Component {
     </>);
   }
 }
+
 
 export default App;
