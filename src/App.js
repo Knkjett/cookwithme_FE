@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 //=====Container
 import Navbar from './components/Logo'
 import Home from './containers/Landing'
+import SignInHome from './containers/SignInHome'
 import CreateRecipe from './containers/CreateRecipe/Create'
 import Footer from './components/Footer'
 //====Context
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path='/' component={Navbar} />
           <Switch>
             <Route path='/' exact component={Home} />
+            <Route path = '/home' exact component = {SignInHome} />
             <Route path='/create' exact component={CreateRecipe} />
             <Route component={Err} />
           </Switch>
