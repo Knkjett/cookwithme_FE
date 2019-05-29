@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 //=====Container
 import Navbar from './components/Logo'
 import Home from './containers/Landing'
+import SignInHome from './containers/SignInHome'
 import CreateRecipe from './containers/CreateRecipe/Create'
 import RecipePage from './containers/RecipePage/RecipePage'
 import Footer from './components/Footer'
@@ -25,6 +26,7 @@ class App extends Component {
           <Route path='/' component={Member} />
           <Switch>
             <Route path='/' exact component={Home} />
+            <Route path = '/home' exact component = {SignInHome} />
             <Route path='/login' exact component={LoginSignup} />
             <Route path='/create' exact component={CreateRecipe} />
             <Route path='/recipepage' exact component={RecipePage} />
