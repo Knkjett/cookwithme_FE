@@ -10,6 +10,7 @@ import RecipePage from './containers/RecipePage/RecipePage'
 import Footer from './components/Footer'
 import Member from './components/Member'
 import LoginSignup from './containers/LoginSignup/LoginSignup';
+import Landing from './containers/Landing';
 //====Context
 
 const Err = () => {
@@ -25,8 +26,8 @@ class App extends Component {
           <Route path='/' component={Navbar} />
           <Route path='/' component={Member} />
           <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path = '/home' exact component = {SignInHome} />
+            <Route path='/' exact component={ Landing} />
+            {/* <Route path = '/home' exact component = {SignInHome} /> */}
             <Route path='/login' exact component={LoginSignup} />
             <Route path='/create' exact component={CreateRecipe} />
             <Route path='/recipepage' exact component={RecipePage} />
