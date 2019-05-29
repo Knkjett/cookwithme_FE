@@ -12,6 +12,8 @@ import Member from './components/Member'
 import LoginSignup from './containers/LoginSignup/LoginSignup';
 import UserProfile from './components/UserProfile';
 import Landing from './containers/Landing';
+import Logout from './containers/Logout/Logout';
+
 //====Context
 import firebase from './firebase';
 import AuthContext from './contexts/auth';
@@ -44,7 +46,6 @@ class App extends Component {
   render() {
    return( <>
  <HashRouter>
-
  <AuthContext.Provider value={this.state.user}>
           <Route path='/' component={Navbar} />
           <Route path='/' component={Member} />
@@ -55,11 +56,11 @@ class App extends Component {
             <Route path='/create' exact component={CreateRecipe} />
             <Route path='/recipepage' exact component={RecipePage} />
             <Route path='/userprofile' exact component={UserProfile} />
+            <Route path='/logout' exact component={Logout} />
             <Route component={Err} />
           </Switch>
           <Route path='/' component={Footer} />
-
-      </AuthContext.Provider>
+          </AuthContext.Provider>
       </HashRouter>
     </>);
   }
