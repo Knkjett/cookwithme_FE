@@ -1,0 +1,27 @@
+@media only screen and (min-width: 600px) {
+    body { 
+        background-image: url('../assets/carrots-food-fresh-616401.jpg'); 
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .fontwebmobile{
+        font-size: 30px
+    }
+
+    .opacitywebmobile{
+        opacity: .5
+    }
+}
+@media only screen and (max-width: 500px) {
+    body {
+        background-image: url('https://images.unsplash.com/photo-1514516870926-20598973e480?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=411&h=731&fit=crop&ixid=eyJhcHBfaWQiOjF9');
+        background-repeat: repeat;
+        
+    }
+    .fontwebmobile{
+        font-size: 20px
+    }
+    .opacitywebmobile{
+        opacity: .7
+    }
+}

@@ -24,8 +24,7 @@ class SignInHome extends Component{
                     return <Link to={`/recipepage/${obj.source_url}`}><div className="col s12 m4">
                         <div className="card">
                             <div className="card-image">
-                                <img style={{height:'281.17px'}}
-                                    src={obj.image_url} />
+                                <img style={{height:'281.17px'}} src={obj.image_url} />
 
                                 <a className="btn-floating halfway-fab waves-effect waves-light red"><i
                                         className="material-icons">add</i></a>
