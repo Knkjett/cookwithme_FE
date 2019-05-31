@@ -14,11 +14,12 @@ export default class UserProfile extends Component {
   }
 
   componentDidMount = () => {
-    var elems = document.querySelectorAll('.carousel');
+    let elems = document.querySelectorAll('.carousel');
     Materialize.Carousel.init(elems, { duration: '200' });
 
-    var elems2 = document.querySelectorAll('.collapsible');
-    Materialize.Collapsible.init(elems2, { accordion: true });
+    let elems2 = document.querySelectorAll('.collapsible');
+    let instance = Materialize.Collapsible.init(elems2, { accordion: true });
+    // instance.open(0);
   }
 
   ListItem = () => {
@@ -45,12 +46,13 @@ export default class UserProfile extends Component {
   render() {
     return (<>
       <div className='background'>
-        <div className="show-on-small hide-on-med-and-up">
-        <h1 style={{ marginTop: '0px', textAlign: 'center' }}>Welcome back, User!</h1>
-        <ul className="collapsible">
+        {/* Styling for Mobile */}
+        <div className="show-on-small hide-on-med-and-up" style={{backgroundColor: 'orange'}}>
+        <h3 style={{ marginTop: '0px', textAlign: 'center' , paddingTop: '150px'}}>Welcome back, User!</h3>
+        <ul className="collapsible" style={{marginTop: '125px'}}>
           <li>
             <div className="collapsible-header">Grocery List</div>
-            <div className="collapsible-body">
+            <div className="collapsible-body" style={{padding: '0 !important'}}>
               <div className="card grocery-container">
                 <div className="card-action white-text blue-grey">
                   <span className="card-title">Grocery List</span>
@@ -219,10 +221,12 @@ export default class UserProfile extends Component {
         </ul>
         </div>
 
+        {/* Styling for Web App */}
         <div className="show-on-large hide-on-small-only">
         <div className="row">
           <div className="col s12 m7 top-col">
-            <div className="card grocery-container">
+            {/* Grocery List Card */}
+            <div className="card grocery-container" style={{width: '550px'}}>
               <div className="card-action white-text blue-grey">
                 <span className="card-title">Grocery List</span>
               </div>
@@ -249,9 +253,9 @@ export default class UserProfile extends Component {
               <a className="carousel-item" href="#four!"><img
                 src="https://www.skinnytaste.com/wp-content/uploads/2019/01/Instant-Pot-Chicken-Parmesan-4.jpg" alt='food-pic' /></a>
             </div>
-            <div>
+            {/* <div>
               <a href='/#' className="waves-effect waves-light btn-large">Create Recipe</a>
-            </div>
+            </div> */}
           </div>
         </div>
         <h5>Your Favorites:</h5>
@@ -330,6 +334,9 @@ export default class UserProfile extends Component {
           </div>
         </div>
         <h5>Your Recipes:</h5>
+        <div>
+              <a href='/#/create' className="waves-effect waves-light btn-large">Create Recipe</a>
+            </div>
         <div className="row" style={{ display: 'inline-flex', width: '100vw', overflow: 'scroll' }}>
           <div className="col s6 card small card-container">
             <div className="card-image">
