@@ -5,7 +5,8 @@
 .background {
   background-position: fixed;
   /* background: url('http://wellnesswithroxie.net/wp-content/uploads/2019/01/cropped-carrots-food-fresh-616401.jpg') no-repeat; */
-  background-image: url('https://www.thekrogerco.com/wp-content/uploads/2017/08/homepage-background.jpg');
+  /* background-image: url('https://www.thekrogerco.com/wp-content/uploads/2017/08/homepage-background.jpg'); */
+  background-color: #F2F7F8;
   background-size: cover;
   height: 100%;
   width: 100%;
