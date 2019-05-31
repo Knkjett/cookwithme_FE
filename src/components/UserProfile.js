@@ -52,7 +52,7 @@ export default class UserProfile extends Component {
         <ul className="collapsible" style={{marginTop: '125px'}}>
           <li>
             <div className="collapsible-header">Grocery List</div>
-            <div className="collapsible-body" style={{padding: '0 !important'}}>
+            <div className="collapsible-body">
               <div className="card grocery-container">
                 <div className="card-action white-text blue-grey">
                   <span className="card-title">Grocery List</span>
@@ -74,11 +74,11 @@ export default class UserProfile extends Component {
                 <a className="carousel-item" href="#one!" alt='food-pic'><img
                   src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food-pic' /></a>
                 <a className="carousel-item" href="#two!"><img
-                  src="https://blog.bulletproof.com/wp-content/uploads/2019/01/54-of-the-Best-Whole30-Recipes-on-the-Internet-_header-752x401.jpg" alt='food-pic' /></a>
+                  src="https://blog.bulletproof.com/wp-content/uploads/2019/01/54-of-the-Best-Whole30-Recipes-on-the-Internet-_header-400x400.jpg" alt='food-pic' /></a>
                 <a className="carousel-item" href="#three!"><img
                   src="https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco/https://storage.googleapis.com/gen-atmedia/3/2019/01/45213b64c6d3a673141f38fc34414f9e74e5f584.jpeg" alt='food-pic' /></a>
                 <a className="carousel-item" href="#four!"><img
-                  src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2003/9/29/3/iag1a01_humus.jpg.rend.hgtvcom.826.620.suffix/1382544965184.jpeg" alt='food-pic' /></a>
+                  src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2003/9/29/3/iag1a01_humus.jpg.rend.hgtvcom.400.400.suffix/1382544965184.jpeg" alt='food-pic' /></a>
                 <a className="carousel-item" href="#four!"><img
                   src="https://www.skinnytaste.com/wp-content/uploads/2019/01/Instant-Pot-Chicken-Parmesan-4.jpg" alt='food-pic' /></a>
               </div>
@@ -224,7 +224,7 @@ export default class UserProfile extends Component {
         {/* Styling for Web App */}
         <div className="show-on-large hide-on-small-only">
         <div className="row">
-          <div className="col s12 m7 top-col">
+          <div className="col s12 m5 top-col">
             {/* Grocery List Card */}
             <div className="card grocery-container" style={{width: '550px'}}>
               <div className="card-action white-text blue-grey">
@@ -239,7 +239,7 @@ export default class UserProfile extends Component {
               </div>
             </div>
           </div>
-          <div className="col s12 m5 top-col">
+          <div className="col s12 m6 top-col">
             <h5>Recently Viewed:</h5>
             <div className="carousel">
               <a className="carousel-item" href="#one!" alt='food-pic'><img
