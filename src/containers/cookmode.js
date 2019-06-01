@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import './cookmode.css'
+import Axios from 'axios';
 class Cookmode extends Component{
+
+  state = {
+    previousStep:'',
+    currentStep: '',
+    nextStep: '',
+  }
+  componentDidMount(){
+    const { ingredients, steps } = this.props.location.cook  //object with two arrays
+    this.setState({currentStep:steps[0],nextStep:steps[1]})
+  }
+
     render(){
         return <>
         <div className='cookBG'>

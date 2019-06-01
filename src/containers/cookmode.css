@@ -3,6 +3,7 @@
         background-image: url('../assets/carrots-food-fresh-616401.jpg'); 
         background-repeat: no-repeat;
         background-size: cover;
+        height: 100%;
     }
     .fontwebmobile{
         font-size: 30px
