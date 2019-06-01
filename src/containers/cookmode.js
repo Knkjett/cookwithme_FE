@@ -4,38 +4,41 @@ import Axios from 'axios';
 class Cookmode extends Component {
 
   state={
+    steps: ['1. prep stuff', '2. cook stuff', '3. cool food', '4. serve food', '5. Rinse and Repeat'], // for testing purposes
     currentStepIndex:0,
-    stepsLength:0
+    stepsLength:0,
   }
 
-  // componentDidMount(){
-  //   const { ingredients, steps } = this.props.location.cook  //object with two arrays
-  //   this.setState({length:steps.length-1})
-  // }
+  componentDidMount(){
+    // const { ingredients, steps } = this.props.location.cook  //object with two arrays
+    const { steps, currentStepIndex, stepsLength} = this.state;
+    this.setState({stepsLength:steps.length-1})
+  }
 
   HandleBackClick = (e) => {
-    let {currentStepIndex} = this.state;
+    const {currentStepIndex} = this.state;
 
-    if (currentStepIndex < 0) new alert('No Previous Step')
+    if (currentStepIndex -1 < 0) alert('No Previous Step')
     else this.setState({currentStepIndex: currentStepIndex-1});
   }
 
   HandleForwardClick = (e) => {
-    let {currentStepIndex, stepsLength} = this.state;
+    const {currentStepIndex, stepsLength} = this.state;
 
-    if (currentStepIndex + 1 > stepsLength ) new alert('No Next Steps')
+    if (currentStepIndex + 1 > stepsLength ) alert('No Next Steps')
     else this.setState({currentStepIndex: currentStepIndex + 1});
   }
 
 
   render() {
+    const { steps, currentStepIndex, stepsLength} = this.state;
     return <>
       <div className='cookBG'>
         <div class="row container">
           <div class="col s12 m8">
             <div class="card-panel white opacitywebmobile" style={{ maxHeight: '610px', overflow: 'scroll' }}>
               <span class="black-text fontwebmobile" style={{ fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif', opacity: 1 }}>
-                1. Preheat the oven to 450 degrees Fahrenheit. Scrub and peel the sweet potatoes. Chop them into large, bite-sized chunks, about 1 to 1 ½-inches wide/long and ½-inch deep. Toss the sweet potatoes with the olive oil, cumin, smoked hot paprika, cayenne pepper and salt and pepper. Make sure they are lightly coated in oil on all sides. Pour the sweet potatoes onto a large baking sheet lined with parchment paper. Arrange the sweet potatoes evenly in a single layer. Do not overcrowd. Bake for about 45 minutes, flipping the sweet potato chunks halfway, until they are golden and caramelized around the edges.
+                {steps[currentStepIndex]}
             </span>
             </div>
           </div>
@@ -58,17 +61,14 @@ class Cookmode extends Component {
         </div>
         <div class='row container'>
           <div class='col s4 m4' style={{ paddingLeft: 'auto' }}>
-            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">arrow_back</i></a>
+            <a class="btn-floating btn-large waves-effect waves-light red" onClick={this.HandleBackClick}><i class="material-icons">arrow_back</i></a>
           </div>
           <div class='col s4 m4'>
             <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">play_arrow</i></a>
-
           </div>
           <div class='col s4 m4'>
-            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">arrow_forward</i></a>
-
+            <a class="btn-floating btn-large waves-effect waves-light red" onClick={this.HandleForwardClick}><i class="material-icons">arrow_forward</i></a>
           </div>
-
         </div>
       </div>
     </>
