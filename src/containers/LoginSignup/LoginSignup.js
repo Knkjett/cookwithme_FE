@@ -92,7 +92,7 @@ export default class LoginSignup extends React.Component {
                                                 <div className='card center-align mg front'>
                                                     <div className='card-content'>
                                                         <span className='card-title login-title'>Login</span>
-                                                        <a className='btn-floating halfway-fab waves-effect waves-light red' id='bt'><i className='material-icons'>person_add</i></a>
+                                                        <a className='btn-floating halfway-fab waves-light red' id='bt'><i className='material-icons'>person_add</i></a>
                                                         <div className='input-field'>
                                                             <input id='email' type='email' className='validate' aria-describedby='emailHelp' name='email' value={email} onChange={this.handleChange} />
                                                             <label htmlFor='email'>Email</label>
@@ -107,7 +107,7 @@ export default class LoginSignup extends React.Component {
                                                                 <span >Remember me</span>
                                                             </label>
                                                         </div> <br></br><br></br>
-                                                        <button className='btn  waves-effect waves-light' type='submit' name='action' onClick={this.handleSubmit}>Submit
+                                                        <button className='btn  waves-light' type='submit' name='action' onClick={this.handleSubmit}>Submit
                                  <i className='material-icons right'>send</i>
                                                         </button>
                                                     </div>
@@ -116,7 +116,7 @@ export default class LoginSignup extends React.Component {
                                                 <div className='card center-align mg back'>
                                                     <div className='card-content '>
                                                         <span className='card-title login-title'>Registration</span>
-                                                        <a className='btn-floating halfway-fab waves-effect waves-light red' id='bt2'><i className='material-icons'>person</i></a>
+                                                        <a className='btn-floating halfway-fab  waves-light red' id='bt2'><i className='material-icons'>person</i></a>
                                                         {/* <div className='input-field'>
                                  <input id='name' type='text' className='validate' name='name' onc />
                                  <label htmlFor='name'>Name</label>
@@ -136,7 +136,7 @@ export default class LoginSignup extends React.Component {
                                                             <label htmlFor='password'>Confirm Password</label>
 
                                                         </div>
-                                                        <button className='btn  waves-effect waves-light' type='submit' name='action'>Submit
+                                                        <button className='btn  waves-light' type='submit' name='action'>Submit
                                  <i className='material-icons right'>send</i>
                                                         </button>
                                                     </div>
