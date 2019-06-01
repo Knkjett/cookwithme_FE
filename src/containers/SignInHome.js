@@ -10,7 +10,7 @@ class SignInHome extends Component{
     componentDidMount(){
         axios.get('https://www.food2fork.com/api/search?key=b3ea659f1dcf2f54cf62f52de6d01cc6')
         .then(res=>{
-            //console.log(res.data)
+            console.log(res.data)
             const recipes_arr = res.data.recipes.slice(0,12)
             this.setState({recipes:recipes_arr},()=>console.log(this.state))
         })
@@ -24,7 +24,7 @@ class SignInHome extends Component{
                     console.log(obj)
                     return <Link to={{ 
                     pathname: `/recipepage/${obj.title}`, 
-                    state: { url: obj.source_url, publisher: obj.publisher_url } 
+                    state: { url: obj.source_url, publisher: obj.publisher_url, source_img: obj.image_url } 
                   }}>
                   <div className="col s12 m4">
                         <div className="card">
