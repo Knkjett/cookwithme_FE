@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './cookmode.css'
+import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import Axios from 'axios';
 class Cookmode extends Component {
 
@@ -10,6 +11,8 @@ class Cookmode extends Component {
   }
 
   componentDidMount(){
+    let elems = document.querySelectorAll('.collapsible');
+    Materialize.Collapsible.init(elems, { accordion: true });
     // const { ingredients, steps } = this.props.location.cook  //object with two arrays
     const { steps, currentStepIndex, stepsLength} = this.state;
     this.setState({stepsLength:steps.length-1})

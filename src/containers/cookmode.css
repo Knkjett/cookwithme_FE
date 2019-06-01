@@ -15,7 +15,7 @@
     .button-container {
         position: absolute;
         bottom: 20px;
-        left: 20%
+        left: 22%
     }
 }
 @media only screen and (max-width: 500px) {
