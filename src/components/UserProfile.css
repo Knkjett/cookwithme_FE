@@ -5,16 +5,25 @@
 .background {
   background-position: fixed;
   /* background: url('http://wellnesswithroxie.net/wp-content/uploads/2019/01/cropped-carrots-food-fresh-616401.jpg') no-repeat; */
-  background-image: url('https://www.thekrogerco.com/wp-content/uploads/2017/08/homepage-background.jpg');
+  /* background-image: url('https://www.thekrogerco.com/wp-content/uploads/2017/08/homepage-background.jpg'); */
+  background-color: #F2F7F8;
   background-size: cover;
   height: 100%;
   width: 100%;
   background-size: center; 
 }
+
+.collapsible-body {
+  padding: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
 .card{
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+
 .grocery-list {
   height: 300px;
   overflow-x: scroll;
@@ -22,7 +31,7 @@
 
 .card {
   margin: 50px;
- }
+}
 
 .userSlider{
   overflow-y: hidden;
