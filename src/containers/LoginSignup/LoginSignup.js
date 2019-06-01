@@ -4,6 +4,7 @@ import '../LoginSignup/loginsignup.css'
 import firebase from '../../firebase';
 import $ from 'jquery';
 import AuthContext from '../../contexts/auth';
+import Materialize from 'materialize-css'
 
 
 
@@ -13,12 +14,12 @@ export default class LoginSignup extends React.Component {
         this.state = {
             email: '',
             password: '',
-            error: '',
             regEmail: '',
             regPassword: ''
         }
     }
     componentDidMount = () => {
+
         //--- JQUERY FOR ROTATING CARDS 
         $(document).ready(function () {
             $('#bt').click(function () {
@@ -48,7 +49,13 @@ export default class LoginSignup extends React.Component {
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
         console.log('this is handle change', e)
+        
     }
+
+    // regHandleChange = (e) => {
+    //     this.setState({ [e.target.regname]: e.target.regvalue });
+    //     console.log('this is reg handle change', e)
+    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -59,7 +66,7 @@ export default class LoginSignup extends React.Component {
             })
             .catch(err => {
                 const { message } = err;
-                this.setState({ error: message });
+                Materialize.toast({html: message})
             })
     }
     handleRegSubmit = (e) => {
@@ -71,19 +78,19 @@ export default class LoginSignup extends React.Component {
             })
             .catch(err => {
                 const { message } = err;
-                this.setState({ error: message });
+                console.log(this.setState)
+                Materialize.toast({html: message})
             })
     }
+
     render() {
 
-        const { email, password, error, regEmail, regPassword } = this.state;
-        const displayError = error === '' ? '' : window.alert(JSON.stringify(error))
+        const { email, password, regEmail, regPassword } = this.state;
         const displayForm =
             <React.Fragment>
                 <div style={{ height: 'calc(100vh - 64px)' }}>
                     <div className='container'>
                         <div className='row'>
-                            {displayError}
                             <form>
                                 <div className='row'>
                                     <div className='col s12 m6 offset-m3'>
@@ -117,24 +124,18 @@ export default class LoginSignup extends React.Component {
                                                     <div className='card-content '>
                                                         <span className='card-title login-title'>Registration</span>
                                                         <a className='btn-floating halfway-fab  waves-light red' id='bt2'><i className='material-icons'>person</i></a>
-                                                        {/* <div className='input-field'>
-                                 <input id='name' type='text' className='validate' name='name' onc />
-                                 <label htmlFor='name'>Name</label>
-                             </div> */}
                                                         <div className='input-field' >
-                                                            <input id='email' type='email' className='validate' name='email' value={email} onChange={this.handleChange} />
-                                                            <label htmlFor='email'>Email</label>
+                                                            <input id='regemail' type='email' className='validate' name='regEmail' value={regEmail} onChange={this.handleChange} />
+                                                            <label htmlFor='regemail'>Email</label>
 
                                                         </div>
                                                         <div className='input-field' >
-                                                            <input id='password' type='password' className='validate' name='password' />
+                                                            <input id='password' type='password' className='validate' name='regPassword' value={regPassword} onChange={this.handleChange} />
                                                             <label htmlFor='password'>Password</label>
-
                                                         </div>
                                                         <div className='input-field' >
                                                             <input id='password' type='password' className='validate' name='confirm password' />
                                                             <label htmlFor='password'>Confirm Password</label>
-
                                                         </div>
                                                         <button className='btn  waves-light' type='submit' name='action'>Submit
                                  <i className='material-icons right'>send</i>
