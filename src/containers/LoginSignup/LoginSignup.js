@@ -99,7 +99,7 @@ export default class LoginSignup extends React.Component {
                                                 <div className='card center-align mg front'>
                                                     <div className='card-content'>
                                                         <span className='card-title login-title'>Login</span>
-                                                        <a className='btn-floating halfway-fab  waves-light red' id='bt'><i className='material-icons'>person_add</i></a>
+                                                        <a className='btn-floating halfway-fab waves-light red' id='bt'><i className='material-icons'>person_add</i></a>
                                                         <div className='input-field'>
                                                             <input id='email' type='email' className='validate' aria-describedby='emailHelp' name='email' value={email} onChange={this.handleChange} />
                                                             <label htmlFor='email'>Email</label>
@@ -114,7 +114,7 @@ export default class LoginSignup extends React.Component {
                                                                 <span >Remember me</span>
                                                             </label>
                                                         </div> <br></br><br></br>
-                                                        <button className='btn   waves-light' type='submit' name='action' onClick={this.handleSubmit}>Submit
+                                                        <button className='btn  waves-light' type='submit' name='action' onClick={this.handleSubmit}>Submit
                                  <i className='material-icons right'>send</i>
                                                         </button>
                                                     </div>
@@ -124,7 +124,6 @@ export default class LoginSignup extends React.Component {
                                                     <div className='card-content '>
                                                         <span className='card-title login-title'>Registration</span>
                                                         <a className='btn-floating halfway-fab  waves-light red' id='bt2'><i className='material-icons'>person</i></a>
-                                                    
                                                         <div className='input-field' >
                                                             <input id='regemail' type='email' className='validate' name='regEmail' value={regEmail} onChange={this.handleChange} />
                                                             <label htmlFor='regemail'>Email</label>
@@ -133,14 +132,12 @@ export default class LoginSignup extends React.Component {
                                                         <div className='input-field' >
                                                             <input id='password' type='password' className='validate' name='regPassword' value={regPassword} onChange={this.handleChange} />
                                                             <label htmlFor='password'>Password</label>
-
                                                         </div>
-                                                        {/* <div className='input-field' >
+                                                        <div className='input-field' >
                                                             <input id='password' type='password' className='validate' name='confirm password' />
                                                             <label htmlFor='password'>Confirm Password</label>
-
-                                                        </div> */}
-                                                        <button className='btn   waves-light' type='submit' name='action' onClick={this.handleRegSubmit}>Submit
+                                                        </div>
+                                                        <button className='btn  waves-light' type='submit' name='action'>Submit
                                  <i className='material-icons right'>send</i>
                                                         </button>
                                                     </div>

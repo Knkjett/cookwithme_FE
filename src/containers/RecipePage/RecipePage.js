@@ -13,31 +13,35 @@ export default class RecipePage extends React.Component {
 
       }
   componentDidMount = (props) => {
+    // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
     // console.log(this.props.location.state)
+    if (!this.props.location.state){
+      // checkRecipe(url)
+    }
+    else{
     let {publisher, url} = this.props.location.state
-    console.log(publisher)
-    checkRecipe(url)
-    .then((res)=> {
-      if(!res){
-        ingredientScrape(publisher,url)
-        .then((res)=>{
-          this.setState({
-            ingredients : res
-           
+      checkRecipe(url)
+      .then((res)=> {
+        if(!res){
+          ingredientScrape(publisher,url)
+          .then((res)=>{
+            this.setState({
+              ingredients : res
+            })
           })
-        })
-        stepScrape(publisher,url)
-        .then((res)=>{
-          this.setState({
-            steps: res
+          stepScrape(publisher,url)
+          .then((res)=>{
+            this.setState({
+              steps: res
+            })
           })
-        })
-      }
-      else {
-        this.setState({ingredients: res[0].ingredients, steps: res[0].steps})
-         console.log('has data', res)
-      }
-    })
+        }
+        else {
+          this.setState({ingredients: res[0].ingredients, steps: res[0].steps})
+           console.log('has data', res)
+        }
+      })
+    }
  }
 
  handleOnClick = () => {
