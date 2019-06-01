@@ -4,7 +4,7 @@ import Axios from 'axios';
 class Cookmode extends Component {
 
   state={
-    steps: ['1. prep stuff', '2. cook stuff', '3. cool food', '4. serve food', '5. Rinse and Repeat'], // for testing purposes
+    steps: ['1. prep stuff. This is also where I now I will ramble so that this is much longer to test how the styling may change when I make this super long. So long, in fact, that this div will get huge. Seriously, I want to test this bad boy out. I want to make sure the buttons stay right above the footer on this page. Fingers crossed.', '2. cook stuff', '3. cool food', '4. serve food', '5. Rinse and Repeat'], // for testing purposes
     currentStepIndex:0,
     stepsLength:0,
   }
@@ -18,20 +18,20 @@ class Cookmode extends Component {
   HandleBackClick = (e) => {
     const {currentStepIndex} = this.state;
 
-    if (currentStepIndex -1 < 0) alert('No Previous Step')
+    if (currentStepIndex -1 < 0) alert('This is the first step!')
     else this.setState({currentStepIndex: currentStepIndex-1});
   }
 
   HandleForwardClick = (e) => {
     const {currentStepIndex, stepsLength} = this.state;
 
-    if (currentStepIndex + 1 > stepsLength ) alert('No Next Steps')
+    if (currentStepIndex + 1 > stepsLength ) alert("You're finished cooking!")
     else this.setState({currentStepIndex: currentStepIndex + 1});
   }
 
 
   render() {
-    const { steps, currentStepIndex, stepsLength} = this.state;
+    const { steps, currentStepIndex } = this.state;
     return <>
       <div className='cookBG'>
         <div class="row container">
@@ -59,7 +59,7 @@ class Cookmode extends Component {
             </ul>
           </div>
         </div>
-        <div class='row container'>
+        <div class='row container button-container'>
           <div class='col s4 m4' style={{ paddingLeft: 'auto' }}>
             <a class="btn-floating btn-large waves-effect waves-light red" onClick={this.HandleBackClick}><i class="material-icons">arrow_back</i></a>
           </div>
