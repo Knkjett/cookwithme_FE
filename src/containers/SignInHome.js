@@ -10,8 +10,11 @@ class SignInHome extends Component{
     componentDidMount(){
         axios.get('https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca')
         .then(res=>{
-            console.log(res.data)
-            const recipes_arr = res.data.recipes.slice(0,12)
+            //console.log(res.data)
+            let recipes_arr = res.data.recipes.filter(e=>{
+                return e.publisher ==='Closet Cooking' || e.publisher === "The Pioneer Woman" || e.publisher === 'All Recipes'
+            })
+            recipes_arr = recipes_arr.slice(12)
             this.setState({recipes:recipes_arr},()=>console.log(this.state))
         })
     }
