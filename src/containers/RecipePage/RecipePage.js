@@ -1,6 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {checkRecipe, getFood2Fork} from '../../services/services';
+import {checkRecipe, getFood2Fork, postRecipes} from '../../services/services';
 
 
 export default class RecipePage extends React.Component {
@@ -15,11 +15,15 @@ export default class RecipePage extends React.Component {
   componentDidMount = (props) => {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
     // console.log(this.props.location.state)
-    if (!this.props.location.state){
+    let title = this.props.location.pathname.split('/recipepage/')[1]
+    if (this.props.location.state){
       // checkRecipe(url)
     }
     else{
-    let {publisher, url} = this.props.location.state
+    // let {publisher, url, source_img} = this.props.location.state
+    let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
+    let publisher = "http://foodnetwork.com"
+   let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
       checkRecipe(url)
       .then((res)=> {
         if(!res){
@@ -29,11 +33,25 @@ export default class RecipePage extends React.Component {
               ingredients : res
             })
           })
+          .then(()=>{
+            if(this.state.steps && this.state.ingredients){
+              console.log('stes', this.state.steps)
+              console.log('ingredi' , this.state.ingredients)
+              postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
+            }
+          })
           stepScrape(publisher,url)
           .then((res)=>{
             this.setState({
               steps: res
             })
+          })
+          .then(()=>{
+            if(this.state.steps && this.state.ingredients){
+              console.log('stes', this.state.steps)
+              console.log('ingredi' , this.state.ingredients)
+              postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
+            }
           })
         }
         else {
@@ -41,6 +59,7 @@ export default class RecipePage extends React.Component {
            console.log('has data', res)
         }
       })
+      
     }
  }
 
