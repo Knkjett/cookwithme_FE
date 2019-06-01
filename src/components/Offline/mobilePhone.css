@@ -1,3 +1,13 @@
+.mobileBG{
+  background: url('../../assets/mobileDemo.png') fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+
+/* PHONE CSS */
 .marvel-device {
   display: inline-block;
   position: relative;

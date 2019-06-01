@@ -1,6 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {checkRecipe, getFood2Fork} from '../../services/services';
+import {checkRecipe, getFood2Fork, postRecipes} from '../../services/services';
 
 
 export default class RecipePage extends React.Component {
@@ -15,11 +15,13 @@ export default class RecipePage extends React.Component {
   componentDidMount = (props) => {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
     // console.log(this.props.location.state)
+    let title = this.props.location.pathname.split('/recipepage/')[1]
     if (!this.props.location.state){
       // checkRecipe(url)
     }
     else{
-    let {publisher, url} = this.props.location.state
+    let {publisher, url, source_img} = this.props.location.state
+    console.log('publisher ', publisher)
       checkRecipe(url)
       .then((res)=> {
         if(!res){
@@ -34,6 +36,10 @@ export default class RecipePage extends React.Component {
             this.setState({
               steps: res
             })
+          })
+          .then(()=>{
+            console.log(this.state.ingredients)
+            // postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
           })
         }
         else {

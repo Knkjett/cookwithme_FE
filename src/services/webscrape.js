@@ -1,5 +1,8 @@
 import axios from 'axios'
 const allrecipe = 'http://localhost:5001/webscrape/allrecipe'
+const network = 'http://localhost:5001/webscrape/foodnetwork'
+const closet = 'http://localhost:5001/webscrape/closetcooking'
+const pioneer = 'http://localhost:5001/webscrape/pioneerwoman'
 
 const allrecipeIngred = (sourceurl) => {
   return (axios({
@@ -8,6 +11,7 @@ const allrecipeIngred = (sourceurl) => {
     data: { sourceurl }
   })
     .then((res) => {
+      console.log(res)
       return res.data
     }));
 }
@@ -21,6 +25,69 @@ const allrecipeSteps = (sourceurl) => {
       return res.data
     }));
 }
+const networkIngred = (sourceurl) => {
+  return (axios({
+    method: 'post',
+    baseURL: `${network}/ingredients`,
+    data: { sourceurl }
+  })
+    .then((res) => {
+      return res.data
+    }));
+}
+const networkSteps = (sourceurl) => {
+  return (axios({
+    method: 'post',
+    baseURL: `${network}/steps`,
+    data: { sourceurl }
+  })
+    .then((res) => {
+      return res.data
+    }));
+}
+
+const closetIngred = (sourceurl) => {
+  return (axios({
+    method: 'post',
+    baseURL: `${closet}/ingredients`,
+    data: { sourceurl }
+  })
+    .then((res) => {
+      return res.data
+    }));
+}
+const closetSteps = (sourceurl) => {
+  return (axios({
+    method: 'post',
+    baseURL: `${closet}/steps`,
+    data: { sourceurl }
+  })
+    .then((res) => {
+      return res.data
+    }));
+}
+
+const pioneerIngred = (sourceurl) => {
+  return (axios({
+    method: 'post',
+    baseURL: `${pioneer}/ingredients`,
+    data: { sourceurl }
+  })
+    .then((res) => {
+      return res.data
+    }));
+}
+const pioneerSteps = (sourceurl) => {
+  return (axios({
+    method: 'post',
+    baseURL: `${pioneer}/steps`,
+    data: { sourceurl }
+  })
+    .then((res) => {
+      return res.data
+    }));
+}
+
 
 
 const ingredientScrape = (baseurl, sourceurl) => {
@@ -28,13 +95,13 @@ const ingredientScrape = (baseurl, sourceurl) => {
     return allrecipeIngred(sourceurl)
   }
   if (baseurl === 'http://foodnetwork.com') {
-    return allrecipeIngred(sourceurl)
+    return networkIngred(sourceurl)
   }
   if (baseurl === 'http://closetcooking.com') {
-    return allrecipeIngred(sourceurl)
+    return closetIngred(sourceurl)
   }
   if (baseurl === 'http://thepioneerwoman.com'){
-    return allrecipeIngred(sourceurl)
+    return pioneerIngred(sourceurl)
   }
 }
 const stepScrape = (baseurl, sourceurl) => {
@@ -42,13 +109,13 @@ const stepScrape = (baseurl, sourceurl) => {
     return allrecipeSteps(sourceurl)
   }
   if (baseurl === 'http://foodnetwork.com') {
-    return allrecipeSteps(sourceurl)
+    return networkSteps(sourceurl)
   }
   if (baseurl === 'http://closetcooking.com') {
-    return allrecipeSteps(sourceurl)
+    return closetSteps(sourceurl)
   }
   if (baseurl === 'http://thepioneerwoman.com'){
-    return allrecipeIngred(sourceurl)
+    return pioneerSteps(sourceurl)
   }
 }
 

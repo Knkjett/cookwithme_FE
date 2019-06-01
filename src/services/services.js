@@ -1,6 +1,5 @@
 import axios from 'axios'; 
 
-
 const recipebaseURL = 'http://localhost:5001/recipes'
 const checkRecipe = async(url) => {
  return(await(axios({
@@ -13,7 +12,7 @@ const checkRecipe = async(url) => {
    })));
 }
 
-const postRecipes = (users_id, title, source_img, source_url, ingredients, steps) => {
+const postRecipes = (users_id=null, title, source_img, source_url=null, ingredients, steps) => {
   return (axios({
     method:'post',
     baseURL: `${recipebaseURL}/`,
@@ -28,6 +27,7 @@ const getFood2Fork = async(query) => {
     return(await(axios({
       method:'get',
       baseURL: 'https://www.food2fork.com/api/search?key=0a689ee4c676e04aaae774935df0e3d8',
+        // baseURL: 'https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca',
       q: query
     })
       .then((res)=>{
