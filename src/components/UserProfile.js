@@ -254,17 +254,16 @@ export default class UserProfile extends Component {
             </div>
             <div className="col s12 m6 top-col">
               <h5>Recently Viewed:</h5>
+              {/* RECENTLY VIEWED CAROUSEL */}
               <div class="carousel">
                 <div class="carousel-item">
                   <div class="card sticky-action">
                     <div class="card-image ">
-                      <img src="https://images.pexels.com/photos/160933/girl-rabbit-friendship-love-160933.jpeg?h=350&auto=compress&cs=tinysrgb"
-                      />
-                      <span class="card-title">Card Title</span>
-                      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons md1"  ></i></a>
+                      <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg?h=350" alt='food-pic' />
+                      <span class="card-title">Recipe Name</span>
                     </div>
                     <div class="card-content">
-                      <p>I am a very simple card.</p>
+                      <p>This is a content.</p>
                     </div>
                     <div class="card-action">
                       <a href="#">This is a link</a>
@@ -277,53 +276,48 @@ export default class UserProfile extends Component {
                       <img src="https://images.pexels.com/photos/160933/girl-rabbit-friendship-love-160933.jpeg?h=350&auto=compress&cs=tinysrgb" />
                         <span class="card-title">
                           This is a Title
-        </span>
-        </div>
+                        </span>
+                    </div>
                       <span class="card-content">
                         This is a content
-        </span>
+                      </span>
                       <div class="card-action">
                         <a href="#">This is a link</a>
                       </div>
                     </div>
                   </div>
-
                   <div class="carousel-item">
                     <div class="card">
                       <div class="card-image">
                         <img src="https://images.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg?h=350&auto=compress&cs=tinysrgb" />
-
                           <span class="card-title">
                             This is a Title
-        </span>
-        </div>
-
+                          </span>
+                      </div>
                         <span class="card-content">
                           This is a content
-        </span>
+                        </span>
                         <div class="card-action">
                           <a href="#">This is a link</a>
                         </div>
                       </div>
                     </div>
-
                     <div class="carousel-item">
                       <div class="card">
                         <div class="card-image">
                           <img src="https://images.pexels.com/photos/573299/pexels-photo-573299.jpeg?h=350&auto=compress&cs=tinysrgb" />
                             <span class="card-title">
                               This is a Title
-        </span>
-        </div>
+                            </span>
+                        </div>
                           <span class="card-content">
                             This is a content
-        </span>
+                          </span>
                           <div class="card-action">
                             <a href="#">This is a link</a>
                           </div>
                         </div>
                       </div>
-
                     </div>
 
                     {/* <div className="carousel">

@@ -2,34 +2,105 @@ import React, { Component } from 'react';
 import './cookmode.css'
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import Axios from 'axios';
+import Artyom from 'artyom.js';
+import ArtyomCommandsManager from '../components/ArtyomCommands';
+
+const Jarvis = new Artyom();
+
+
 class Cookmode extends Component {
 
-  state={
-    steps: ['1. prep stuff. This is also where I now I will ramble so that this is much longer to test how the styling may change when I make this super long. So long, in fact, that this div will get huge. Seriously, I want to test this bad boy out. I want to make sure the buttons stay right above the footer on this page. Fingers crossed. I;M TYPING MORE STUFF NOW TO MAKE THIS EVEN BIGGER THAN IT WAS. HHHKBB;G;UG;U OUUO;;;OUG;OUG ;OU;OUGO ;OUG;OGU O LIG;IG;IG ;UG;G;GU ;UGUGH;', '2. cook stuff', '3. cool food', '4. serve food', '5. Rinse and Repeat'], // for testing purposes
-    currentStepIndex:0,
-    stepsLength:0,
+  constructor(props, context) {
+    super(props, context)
+    // Add `this` context to the handler functions
+    this.startAssistant = this.startAssistant.bind(this);
+    this.stopAssistant = this.stopAssistant.bind(this);
+    // this.speakText = this.speakText.bind(this);
+
+    this.state = {
+      artyomActive: false,
+      textareaValue: "",
+      artyomIsReading: false,
+      steps: ['boil five cups of water for 15 minutes', 'dice tomaotes', 'add pasta to boiling water and cover the pot', 'drain pasta and save half a cup of pasta water', 'Rinse and Repeat'], // for testing purposes
+      currentStepIndex: 0,
+      stepsLength: 0,
+      play_arrow:'block',
+      pause:'none'
+    }
+
+    let CommandsManager = new ArtyomCommandsManager(Jarvis, this.state);
+    CommandsManager.loadCommands();
   }
 
-  componentDidMount(){
+  startAssistant() {
+    let _this = this;
+    console.log("Artyom succesfully started !");
+    Jarvis.initialize({
+      lang: "en-US",
+      debug: true,
+      continuous: true,
+      soundex: true,
+      listen: true,
+      speed: 0.9
+    }).then(() => {
+      // Display loaded commands in the console
+      console.log(Jarvis.getAvailableCommands());
+
+      Jarvis.say("Welcome there, how are you?");
+
+      _this.setState({
+        artyomActive: true, play_arrow: 'none', pause: 'block'
+      });
+    }).catch((err) => {
+      console.error("Oopsy daisy, this shouldn't happen !", err);
+    });
+  }
+
+  stopAssistant() {
+    let _this = this;
+
+    Jarvis.fatality().then(() => {
+      console.log("Jarvis has been succesfully stopped");
+
+      _this.setState({
+        artyomActive: false, play_arrow: 'block', pause: 'none'
+      });
+
+    }).catch((err) => {
+      console.error("Oopsy daisy, this shouldn't happen neither!", err);
+
+      _this.setState({
+        artyomActive: false
+      });
+    });
+  }
+
+
+  componentDidMount() {
     let elems = document.querySelectorAll('.collapsible');
     Materialize.Collapsible.init(elems, { accordion: true });
     // const { ingredients, steps } = this.props.location.cook  //object with two arrays
     const { steps } = this.state;
-    this.setState({stepsLength:steps.length-1})
+    this.setState({ stepsLength: steps.length - 1 })
   }
 
   HandleBackClick = (e) => {
-    const {currentStepIndex} = this.state;
+    const { currentStepIndex } = this.state;
 
-    if (currentStepIndex -1 < 0) alert('This is the first step!')
-    else this.setState({currentStepIndex: currentStepIndex-1});
+    if (currentStepIndex - 1 < 0) alert('This is the first step!')
+    else this.setState({ currentStepIndex: currentStepIndex - 1 });
   }
 
   HandleForwardClick = (e) => {
-    const {currentStepIndex, stepsLength} = this.state;
+    const { currentStepIndex, stepsLength } = this.state;
 
-    if (currentStepIndex + 1 > stepsLength ) alert("You're finished cooking!")
-    else this.setState({currentStepIndex: currentStepIndex + 1});
+    if (currentStepIndex + 1 > stepsLength) alert("You're finished cooking!")
+    else this.setState({ currentStepIndex: currentStepIndex + 1 });
+  }
+
+  HandlePlayClick = (e) => {
+    const {play_arrow} = this.state;
+    this.setState({play_arrow: 'none'})
   }
 
 
@@ -42,7 +113,7 @@ class Cookmode extends Component {
             <div className="card-panel white opacitywebmobile" style={{ maxHeight: '500px', overflow: 'scroll' }}>
               <span className="black-text fontwebmobile" style={{ fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif', opacity: 1 }}>
                 {steps[currentStepIndex]}
-            </span>
+              </span>
             </div>
           </div>
           <div className="col s12 m4">
@@ -64,13 +135,16 @@ class Cookmode extends Component {
         </div>
         <div className='row container button-container'>
           <div className='col s4 m4' style={{ paddingLeft: 'auto' }}>
-            <a className="btn-floating btn-large waves-effect waves-light red" onClick={this.HandleBackClick}><i className="material-icons">arrow_back</i></a>
+            <a className="btn-floating btn-large waves-light red" onClick={this.HandleBackClick}><i className="material-icons">arrow_back</i></a>
+          </div>
+          <div className='col s4 m4' style={{display:this.state.play_arrow}}>
+            <a className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.startAssistant}>play_arrow</i></a>
+          </div>
+          <div className='col s4 m4' style={{display:this.state.pause}}>
+            <a className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.stopAssistant}>pause</i></a>
           </div>
           <div className='col s4 m4'>
-            <a className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">play_arrow</i></a>
-          </div>
-          <div className='col s4 m4'>
-            <a className="btn-floating btn-large waves-effect waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></a>
+            <a className="btn-floating btn-large waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></a>
           </div>
         </div>
       </div>
