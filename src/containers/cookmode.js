@@ -23,12 +23,12 @@ class Cookmode extends Component {
       artyomIsReading: false,
       steps: ['boil five cups of water for 15 minutes', 'dice tomaotes', 'add pasta to boiling water and cover the pot', 'drain pasta and save half a cup of pasta water', 'Rinse and Repeat'], // for testing purposes
       currentStepIndex: 0,
-      stepsLength: 0,
+      stepsLength: 5,
       play_arrow:'block',
       pause:'none'
     }
 
-    let CommandsManager = new ArtyomCommandsManager(Jarvis, this.state);
+    let CommandsManager = new ArtyomCommandsManager(Jarvis, this.state, this.UpdateStepIndex);
     CommandsManager.loadCommands();
   }
 
@@ -46,7 +46,7 @@ class Cookmode extends Component {
       // Display loaded commands in the console
       console.log(Jarvis.getAvailableCommands());
 
-      Jarvis.say("Welcome there, how are you?");
+      Jarvis.say("Welcome to Cook With Me");
 
       _this.setState({
         artyomActive: true, play_arrow: 'none', pause: 'block'
@@ -73,6 +73,10 @@ class Cookmode extends Component {
         artyomActive: false
       });
     });
+  }
+
+  UpdateStepIndex = (updatedStepIndex) => {
+    this.setState({currentStepIndex: updatedStepIndex})
   }
 
 
