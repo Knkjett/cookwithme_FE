@@ -3,9 +3,9 @@ import './cookmode.css'
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import Axios from 'axios';
 import Artyom from 'artyom.js';
-import ArtyomCommandsManager from '../components/ArtyomCommands';
+//import ArtyomCommandsManager from '../components/ArtyomCommands';
 
-const Jarvis = new Artyom();
+let Jarvis = new Artyom();
 
 
 class Cookmode extends Component {
@@ -15,21 +15,98 @@ class Cookmode extends Component {
     // Add `this` context to the handler functions
     this.startAssistant = this.startAssistant.bind(this);
     this.stopAssistant = this.stopAssistant.bind(this);
-    // this.speakText = this.speakText.bind(this);
-
+    this.loadCommands = this.loadCommands.bind(this)
+    
+    this.jarvis = null
     this.state = {
-      artyomActive: false,
-      textareaValue: "",
-      artyomIsReading: false,
-      steps: ['boil five cups of water for 15 minutes', 'dice tomaotes', 'add pasta to boiling water and cover the pot', 'drain pasta and save half a cup of pasta water', 'Rinse and Repeat'], // for testing purposes
+      steps: ['boil five cups of water for 15 minutes', 'dice tomatoes', 'add pasta to boiling water and cover the pot', 'drain pasta and save half a cup of pasta water', 'Rinse and Repeat'], // for testing purposes
       currentStepIndex: 0,
       stepsLength: 5,
       play_arrow:'block',
       pause:'none'
     }
 
-    let CommandsManager = new ArtyomCommandsManager(Jarvis, this.state, this.UpdateStepIndex);
-    CommandsManager.loadCommands();
+    
+  }
+
+  loadCommands() {
+    const {currentStepIndex,steps,stepsLength} = this.state
+    return Jarvis.addCommands([
+      {
+        indexes: ['start', 'star', 'tar', 'tart', 'art'],
+        action: (i) => {
+          Jarvis.say(steps[currentStepIndex], {
+            onEnd() {
+              // Abort the speech recognition when artyom stops talking !
+              // Then, the command won't be triggered when artyom says hello !
+              Jarvis.ArtyomWebkitSpeechRecognition.abort();
+            }
+          });
+
+        }
+      },
+      {
+        indexes: ['previous', 'back', 'past', 'ack', 'prev'],
+        action: () => {
+          if (currentStepIndex - 1 >= 0) {
+            this.setState({currentStepIndex:currentStepIndex - 1},()=>{
+              Jarvis.say(steps[this.state.currentStepIndex], {
+                onEnd() {
+                  // Abort the speech recognition when artyom stops talking !
+                  // Then, the command won't be triggered when artyom says hello !
+                  Jarvis.ArtyomWebkitSpeechRecognition.abort();
+                }
+              })
+              Jarvis.emptyCommands();
+              this.loadCommands()
+              console.log(this.state)
+            })
+            
+          }
+          else {
+            console.log('updated state is: ', this.state)
+            Jarvis.say('There is no previous step', {
+              onEnd() {
+                // Abort the speech recognition when artyom stops talking !
+                // Then, the command won't be triggered when artyom says hello !
+                Jarvis.ArtyomWebkitSpeechRecognition.abort();
+              }
+            })
+          }
+        }
+      },
+      {
+        indexes: ['next', 'text'],
+        action: () => {
+          if(currentStepIndex < stepsLength) {
+            this.setState({currentStepIndex:currentStepIndex + 1},()=>{
+              Jarvis.say(steps[this.state.currentStepIndex], {
+                onEnd() {
+                  // Abort the speech recognition when artyom stops talking !
+                  // Then, the command won't be triggered when artyom says hello !
+                  Jarvis.ArtyomWebkitSpeechRecognition.abort();
+                }
+              })
+              Jarvis.emptyCommands();
+              this.loadCommands()
+              console.log(this.state)
+            })
+            
+            
+          }
+          else {
+            console.log('updated state is: ', this.state)
+            Jarvis.say('There is no next step', {
+              onEnd() {
+                // Abort the speech recognition when artyom stops talking !
+                // Then, the command won't be triggered when artyom says hello !
+                Jarvis.ArtyomWebkitSpeechRecognition.abort();
+              }
+            })
+          }
+        }
+      }
+    ])
   }
 
   startAssistant() {
@@ -41,15 +118,15 @@ class Cookmode extends Component {
       continuous: true,
       soundex: true,
       listen: true,
-      speed: 0.9
+      speed: 0.8
     }).then(() => {
       // Display loaded commands in the console
-      console.log(Jarvis.getAvailableCommands());
+      //console.log(Jarvis.getAvailableCommands());
 
-      Jarvis.say("Welcome to Cook With Me");
+      //Jarvis.say("Welcome to Cook With Me");
 
       _this.setState({
-        artyomActive: true, play_arrow: 'none', pause: 'block'
+        play_arrow: 'none', pause: 'block'
       });
     }).catch((err) => {
       console.error("Oopsy daisy, this shouldn't happen !", err);
@@ -58,25 +135,17 @@ class Cookmode extends Component {
 
   stopAssistant() {
     let _this = this;
-
     Jarvis.fatality().then(() => {
       console.log("Jarvis has been succesfully stopped");
-
+      
       _this.setState({
-        artyomActive: false, play_arrow: 'block', pause: 'none'
+        play_arrow: 'block', pause: 'none'
       });
 
     }).catch((err) => {
       console.error("Oopsy daisy, this shouldn't happen neither!", err);
 
-      _this.setState({
-        artyomActive: false
-      });
     });
-  }
-
-  UpdateStepIndex = (updatedStepIndex) => {
-    this.setState({currentStepIndex: updatedStepIndex})
   }
 
 
@@ -86,25 +155,28 @@ class Cookmode extends Component {
     // const { ingredients, steps } = this.props.location.cook  //object with two arrays
     const { steps } = this.state;
     this.setState({ stepsLength: steps.length - 1 })
+    this.loadCommands()
   }
 
   HandleBackClick = (e) => {
     const { currentStepIndex } = this.state;
-
     if (currentStepIndex - 1 < 0) alert('This is the first step!')
-    else this.setState({ currentStepIndex: currentStepIndex - 1 });
+    else this.setState({ currentStepIndex: currentStepIndex - 1 },()=>{
+      console.log('back click',this.state)
+      Jarvis.emptyCommands();
+      this.loadCommands()
+    });
   }
 
   HandleForwardClick = (e) => {
     const { currentStepIndex, stepsLength } = this.state;
 
     if (currentStepIndex + 1 > stepsLength) alert("You're finished cooking!")
-    else this.setState({ currentStepIndex: currentStepIndex + 1 });
-  }
-
-  HandlePlayClick = (e) => {
-    const {play_arrow} = this.state;
-    this.setState({play_arrow: 'none'})
+    else this.setState({ currentStepIndex: currentStepIndex + 1 },()=>{
+      Jarvis.emptyCommands();
+      this.loadCommands()
+      console.log('forward click',this.state)
+    });
   }
 
 
