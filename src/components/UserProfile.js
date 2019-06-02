@@ -16,6 +16,7 @@ export default class UserProfile extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0,0);
     // Carousel Initialization
     let elems = document.querySelectorAll('.carousel');
     Materialize.Carousel.init(elems, { duration: '200' });
@@ -53,14 +54,14 @@ export default class UserProfile extends Component {
   render() {
     return (<>
       <div className='background'>
-        {/* Styling for Mobile */}
+        {/* -------------------------- Styling for Mobile App ----------------------------*/}
         <div className="show-on-small hide-on-med-and-up" style={{ backgroundColor: 'orange' }}>
           <h3 style={{ marginTop: '0px', textAlign: 'center', paddingTop: '150px' }}>Welcome back, User!</h3>
           <ul className="collapsible" style={{ marginTop: '125px' }}>
             <li>
               <div className="collapsible-header">Grocery List</div>
               <div className="collapsible-body">
-                <div className="card grocery-container">
+                <div className="card">
                   <div className="card-action white-text blue-grey">
                     <span className="card-title">Grocery List</span>
                   </div>
@@ -238,103 +239,13 @@ export default class UserProfile extends Component {
           </ul>
         </div>
 
-
-        {/* Styling for Web App */}
+        {/* -------------------------- Styling for Web App ----------------------------*/}
         <div className="show-on-large hide-on-small-only">
+          <h1 style={{ marginTop: '0px', textAlign: 'center', paddingTop: '50px' }}>Welcome back, User!</h1>
+            {/* FAVORTITES */}
             <div className="row">
-              <div className="col s12 m5 top-col">
-                {/* Grocery List Card */}
-                <div className="card grocery-container" style={{ width: '550px' }}>
-                  <div className="card-action white-text blue-grey">
-                    <span className="card-title">Grocery List</span>
-                  </div>
-                  <div className="card-content grocery-list">
-                    <this.ListItem />
-                  </div>
-                  <div className="card-action">
-                    <a className="btn-floating btn-small waves-effect waves-light red" href='/'><i className="material-icons">add</i></a>
-                    <span>Add To List</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col s12 m6 top-col">
-                <h5>Recently Viewed:</h5>
-                {/* RECENTLY VIEWED CAROUSEL */}
-                <div class="carousel">
-                  <div class="carousel-item">
-                    <div class="card sticky-action">
-                      <div class="card-image ">
-                        <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg?h=350" alt='food-pic' />
-                        <span class="card-title">Recipe Name</span>
-                      </div>
-                      <div class="card-content">
-                        <p>This is a content.</p>
-                      </div>
-                      <div class="card-action">
-                        <a href="#">This is a link</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="card-image">
-                        <img src="https://images.pexels.com/photos/160933/girl-rabbit-friendship-love-160933.jpeg?h=350&auto=compress&cs=tinysrgb" />
-                        <span class="card-title">
-                          This is a Title
-                        </span>
-                      </div>
-                      <span class="card-content">
-                        This is a content
-                      </span>
-                      <div class="card-action">
-                        <a href="#">This is a link</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="card-image">
-                        <img src="https://images.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg?h=350&auto=compress&cs=tinysrgb" />
-                        <span class="card-title">
-                          This is a Title
-                          </span>
-                      </div>
-                      <span class="card-content">
-                        This is a content
-                        </span>
-                      <div class="card-action">
-                        <a href="#">This is a link</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="card-image">
-                        <img src="https://images.pexels.com/photos/573299/pexels-photo-573299.jpeg?h=350&auto=compress&cs=tinysrgb" />
-                        <span class="card-title">
-                          This is a Title
-                            </span>
-                      </div>
-                      <span class="card-content">
-                        This is a content
-                          </span>
-                      <div class="card-action">
-                        <a href="#">This is a link</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
             <h5>Your Favorites:</h5>
-            <div className="row userSlider" style={{ display: 'inline-flex', width: '100vw', overflow: 'scroll' }}>
+            <div className="row userSlider" style={{ display: 'inline-flex', width: '80%', overflow: 'scroll' }}>
               <div className="col s6 card small card-container">
                 <div className="card-image">
                   <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
@@ -342,9 +253,6 @@ export default class UserProfile extends Component {
                 </div>
                 <div className="card-content">
                   <p>Quick blurb about this recipe, maybe.</p>
-                </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
                 </div>
               </div>
               <div className="col s6 card small card-container">
@@ -355,8 +263,14 @@ export default class UserProfile extends Component {
                 <div className="card-content">
                   <p>Quick blurb about this recipe, maybe.</p>
                 </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
+              </div>
+              <div className="col s6 card small card-container">
+                <div className="card-image">
+                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
+                  <span className="card-title">Recipe Name</span>
+                </div>
+                <div className="card-content">
+                  <p>Quick blurb about this recipe, maybe.</p>
                 </div>
               </div>
               <div className="col s6 card small card-container">
@@ -367,9 +281,6 @@ export default class UserProfile extends Component {
                 <div className="card-content">
                   <p>Quick blurb about this recipe, maybe.</p>
                 </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
-                </div>
               </div>
               <div className="col s6 card small card-container">
                 <div className="card-image">
@@ -379,9 +290,6 @@ export default class UserProfile extends Component {
                 <div className="card-content">
                   <p>Quick blurb about this recipe, maybe.</p>
                 </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
-                </div>
               </div>
               <div className="col s6 card small card-container">
                 <div className="card-image">
@@ -390,81 +298,151 @@ export default class UserProfile extends Component {
                 </div>
                 <div className="card-content">
                   <p>Quick blurb about this recipe, maybe.</p>
-                </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
-                </div>
-              </div>
-              <div className="col s6 card small card-container">
-                <div className="card-image">
-                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
-                  <span className="card-title">Recipe Name</span>
-                </div>
-                <div className="card-content">
-                  <p>Quick blurb about this recipe, maybe.</p>
-                </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
                 </div>
               </div>
             </div>
+            {/* GROCERY LIST CARD */}
+            <div className="card grocery-container">
+              <div className="card-action white-text blue-grey">
+                <span className="card-title">Grocery List</span>
+              </div>
+              <div className="card-content grocery-list">
+                <this.ListItem />
+              </div>
+              <div className="card-action">
+                <a className="btn-floating btn-small waves-effect waves-light red" href='/'><i className="material-icons">add</i></a>
+                <span>Add To List</span>
+              </div>
+            </div>
+            {/* YOUR RECIPES  */}
+            <div className="row" style={{ display: 'inline-flex', width: '80%', overflow: 'scroll' }}>
             <h5>Your Recipes:</h5>
-            <div>
-              <a href='/#/create' className="waves-effect waves-light btn-large">Create Recipe</a>
+              <div className="col s6 card small card-container">
+                <div className="card-image">
+                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
+                  <span className="card-title">Card Title</span>
+                </div>
+                <div className="card-content">
+                  <p>Quick blurb about this recipe, maybe.</p>
+                </div>
+                <div className="card-action">
+                  <a href="/#">This is a link</a>
+                </div>
+              </div>
+              <div className="col s6 card small card-container">
+                <div className="card-image">
+                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
+                  <span className="card-title">Card Title</span>
+                </div>
+                <div className="card-content">
+                  <p>Quick blurb about this recipe, maybe.</p>
+                </div>
+                <div className="card-action">
+                  <a href="/#">This is a link</a>
+                </div>
+              </div>
+              <div className="col s6 card small card-container">
+                <div className="card-image">
+                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
+                  <span className="card-title">Card Title</span>
+                </div>
+                <div className="card-content">
+                  <p>Quick blurb about this recipe, maybe.</p>
+                </div>
+                <div className="card-action">
+                  <a href="/#">This is a link</a>
+                </div>
+              </div>
+              <div className="col s6 card small card-container">
+                <div className="card-image">
+                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
+                  <span className="card-title">Card Title</span>
+                </div>
+                <div className="card-content">
+                  <p>Quick blurb about this recipe, maybe.</p>
+                </div>
+                <div className="card-action">
+                  <a href="/#">This is a link</a>
+                </div>
+              </div>
             </div>
-            <div className="row" style={{ display: 'inline-flex', width: '100vw', overflow: 'scroll' }}>
-              <div className="col s6 card small card-container">
-                <div className="card-image">
-                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
-                  <span className="card-title">Card Title</span>
+            <div className="col s12 m5 top-col">
+            </div>
+            <div className="col s12 m6 top-col">
+            </div>
+          </div>
+          <div className='createRecipe-container'>
+            <a href='/#/create' className="waves-effect waves-light btn-large">Create Recipe</a>
+          </div>
+          {/* RECENTLY VIEWED CAROUSEL */}
+          <h5>Recently Viewed:</h5>
+          <div class="carousel">
+            <div class="carousel-item">
+              <div class="card sticky-action">
+                <div class="card-image ">
+                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg?h=350" alt='food-pic' />
+                  <span class="card-title">Recipe Name</span>
                 </div>
-                <div className="card-content">
-                  <p>Quick blurb about this recipe, maybe.</p>
+                <div class="card-content">
+                  <p>This is a content.</p>
                 </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
-                </div>
-              </div>
-              <div className="col s6 card small card-container">
-                <div className="card-image">
-                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
-                  <span className="card-title">Card Title</span>
-                </div>
-                <div className="card-content">
-                  <p>Quick blurb about this recipe, maybe.</p>
-                </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
-                </div>
-              </div>
-              <div className="col s6 card small card-container">
-                <div className="card-image">
-                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
-                  <span className="card-title">Card Title</span>
-                </div>
-                <div className="card-content">
-                  <p>Quick blurb about this recipe, maybe.</p>
-                </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
+                <div class="card-action">
+                  <a href="#">This is a link</a>
                 </div>
               </div>
-              <div className="col s6 card small card-container">
-                <div className="card-image">
-                  <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
-                  <span className="card-title">Card Title</span>
+            </div>
+            <div class="carousel-item">
+              <div class="card">
+                <div class="card-image">
+                  <img src="https://images.pexels.com/photos/160933/girl-rabbit-friendship-love-160933.jpeg?h=350&auto=compress&cs=tinysrgb" alt='food-pic' />
+                  <span class="card-title">
+                    This is a Title
+                        </span>
                 </div>
-                <div className="card-content">
-                  <p>Quick blurb about this recipe, maybe.</p>
+                <span class="card-content">
+                  This is a content
+                      </span>
+                <div class="card-action">
+                  <a href="#">This is a link</a>
                 </div>
-                <div className="card-action">
-                  <a href="/#">This is a link</a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="card">
+                <div class="card-image">
+                  <img src="https://images.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg?h=350&auto=compress&cs=tinysrgb" alt='food-pic' />
+                  <span class="card-title">
+                    This is a Title
+                          </span>
+                </div>
+                <span class="card-content">
+                  This is a content
+                        </span>
+                <div class="card-action">
+                  <a href="#">This is a link</a>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="card">
+                <div class="card-image">
+                  <img src="https://images.pexels.com/photos/573299/pexels-photo-573299.jpeg?h=350&auto=compress&cs=tinysrgb" alt='food-pic' />
+                  <span class="card-title">
+                    This is a Title
+                            </span>
+                </div>
+                <span class="card-content">
+                  This is a content
+                          </span>
+                <div class="card-action">
+                  <a href="#">This is a link</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </>
-      )
-    }
+    )
+  }
 }
