@@ -16,7 +16,7 @@ export default class RecipePage extends React.Component {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
     // console.log(this.props.location.state)
     let title = this.props.location.pathname.split('/recipepage/')[1]
-    if (this.props.location.state){
+    if (!this.props.location.state){
       // checkRecipe(url)
     }
     else{
@@ -71,8 +71,12 @@ export default class RecipePage extends React.Component {
  } 
  
  render() {
-  if(!this.state.ingredients || !this.state.steps){
-    return(<h1 style={{marginTop:'0px', paddingTop:'150px', height:'calc(100vh - 150px)'}} onClick={this.handleOnClick}>Loading</h1>);
+   const { ingredients, steps} = this.state
+  //  const { source_img} = this.props.location.state
+  if(!ingredients || !steps){
+    return( <div className='progress'>
+    <h1 style={{marginTop:'0px', paddingTop:'150px', height:'calc(100vh - 150px)', width: '60%'}} className="determinate" onClick={this.handleOnClick}>Loading</h1>
+    </div>);
   } 
   else {
     return(<React.Fragment>
@@ -82,38 +86,35 @@ export default class RecipePage extends React.Component {
           <div className="card-panel grey">
             <form action="#">
               <h5>Ingredients</h5>
-              <p>
-                <label for="chk">
-                  <input type="checkbox" id="chk" />
-                  <span className="white-text">1lbs salmon</span>
-                </label>
-              </p>
-              <p>
-                <label for="chk">
-                  <input type="checkbox" id="chk" />
-                  <span className="white-text">1 lemon</span>
-                </label>
-              </p>
-              <p>
-                <label for="chk">
-                  <input type="checkbox" id="chk" />
-                  <span className="white-text">pepper</span>
-                </label>
-              </p>
-              <p>
-                <label for="chk-demo4">
-                  <input type="checkbox" id="chk-demo4" />
-                  <span className="white-text">1 slice onion</span>
-                </label>
-              </p>
+              {
+               ingredients.map((ingred,i)=>{
+                 return(
+                   <React.Fragment>
+                     <p>
+                  <label for="chk">
+                    <input type="checkbox" id="chk" />
+                    <span className="white-text">{ingred}</span>
+                  </label>
+                </p>
+                   </React.Fragment>
+                 ); 
+                })
+              }
             </form>
           </div>
           <div className="card-panel grey">
-            <span className="white-text">Preheat oven to 350°.
-            1.Line a large rimmed baking sheet with foil and grease with cooking spray. To the center of the foil, lay lemon slices in an even layer.
-            2. Season both sides of the salmon with salt and pepper and place on top of lemon slices.
-            3. In a small bowl, whisk together butter, honey, garlic, thyme, and oregano. Pour over salmon then fold up foil around the salmon. Bake until the salmon is cooked through, about 25 minutes. Switch the oven to broil, and broil for 2 minutes, or until the butter mixture has thickened.
-            4. Garnish with parsley before serving.
+            <span className="white-text">
+            {
+              steps.map((steps,i)=>{
+                return(
+                  <React.Fragment>
+                    <li>
+                      {steps}
+                    </li>
+                  </React.Fragment>
+                );
+              })
+            }
         </span>
           </div>
         </div>
