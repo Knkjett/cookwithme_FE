@@ -33,7 +33,7 @@ class Offline extends Component {
           <span className='flow-text'>Mobile </span>
           <span className='flow-text flavorText'>Friendly</span>
           <span className='flow-text'> Design</span>
-          <h5>Test</h5>
+          
         </div>
       </div>
     </div>

@@ -26,11 +26,14 @@
     border: 1px solid #EFF3F6;
     border-radius: 25px;
   }
-
-  .mobileLogo {
-    background-color: white;
-    border-radius: 0 0 25px 0;
-  }
+  @media (max-width: 575.98px) { 
+    .mobileLogo{
+      background-color: white;
+      border-radius: 0 0 25px 0;
+      max-height: 75px !important;
+    }
+   }
+  
 
 }
 

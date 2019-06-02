@@ -1,6 +1,7 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
 import {checkRecipe, getFood2Fork, postRecipes} from '../../services/services';
+import { Link } from 'react-router-dom'
 
 
 export default class RecipePage extends React.Component {
@@ -16,10 +17,12 @@ export default class RecipePage extends React.Component {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
     // console.log(this.props.location.state)
     let title = this.props.location.pathname.split('/recipepage/')[1]
-    if (this.props.location.state){
+    if (!this.props.location.state){
+      // console.log("HERE2")
       // checkRecipe(url)
     }
     else{
+      console.log("HERE")
     // let {publisher, url, source_img} = this.props.location.state
     let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
     let publisher = "http://foodnetwork.com"
@@ -116,6 +119,11 @@ export default class RecipePage extends React.Component {
             4. Garnish with parsley before serving.
         </span>
           </div>
+          <Link to={{ 
+                    pathname: `/cookmode/`, 
+                    cook: { ingredients : this.state.ingredients, steps: this.state.steps } 
+                  }}> <div className='btn'>Cook Now
+                </div> </Link>
         </div>
       </div>
     </React.Fragment>
