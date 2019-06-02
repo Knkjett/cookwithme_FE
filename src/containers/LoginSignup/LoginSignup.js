@@ -62,7 +62,6 @@ export default class LoginSignup extends React.Component {
         const { email, password } = this.state;
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((res) => {
-                console.log('this handle submit', res)
             })
             .catch(err => {
                 const { message } = err;
@@ -74,7 +73,6 @@ export default class LoginSignup extends React.Component {
         const { regEmail, regPassword } = this.state;
         firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
             .then((res) => {
-                console.log('Returns:', res);
             })
             .catch(err => {
                 const { message } = err;
@@ -130,14 +128,14 @@ export default class LoginSignup extends React.Component {
 
                                                         </div>
                                                         <div className='input-field' >
-                                                            <input id='password' type='password' className='validate' name='regPassword' value={regPassword} onChange={this.handleChange} />
-                                                            <label htmlFor='password'>Password</label>
+                                                            <input id='regPassword' type='password' className='validate' name='regPassword' value={regPassword} onChange={this.handleChange} />
+                                                            <label htmlFor='regPassword'>Password</label>
                                                         </div>
-                                                        <div className='input-field' >
+                                                        {/* <div className='input-field' >
                                                             <input id='password' type='password' className='validate' name='confirm password' />
                                                             <label htmlFor='password'>Confirm Password</label>
-                                                        </div>
-                                                        <button className='btn  waves-light' type='submit' name='action'>Submit
+                                                        </div> */}
+                                                        <button className='btn  waves-light' type='submit' name='action' onClick={this.handleRegSubmit}>Submit
                                  <i className='material-icons right'>send</i>
                                                         </button>
                                                     </div>
