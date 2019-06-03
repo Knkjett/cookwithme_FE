@@ -25,3 +25,13 @@
         padding-top: 10%;
     }
 }
+
+.divElement{
+    position: absolute;
+    top: 28%;
+    left: 25%;
+    margin-top: -50px;
+    margin-left: -50px;
+    
+
+}

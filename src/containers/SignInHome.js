@@ -8,7 +8,7 @@ import M from 'materialize-css';
 
 class SignInHome extends Component{
     state = {
-        recipes:[],
+        recipes:null,
         buttonActive:'disabled',
         favs:[],
     }
@@ -33,7 +33,8 @@ class SignInHome extends Component{
             <><AuthContext.Consumer>
                 {
                     user => {
-                        return (<div className='signInHomePageBG'>
+                        if(this.state.recipes === null) return <img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
+                        else return (<div className='signInHomePageBG'>
                         <div className=" webContainer " >
                         <div className="row" style={{marginBottom:'0px'}}>
                             {this.state.recipes.map((obj,i)=>{
@@ -86,28 +87,14 @@ class SignInHome extends Component{
         </div>
       </form>
     </div>
-                  {/* <div class="input-field">
-          <input id="search" type="search" required style={{background:'bisque',width:'400px'}} />
-          <label class="label-icon" for="search"></label>
-          
-        </div> */}
+                  
         </li>
               
             </ul>
           </div>
           
           
-          <nav>
-    <div class="nav-wrapper">
-      <form>
-        <div class="input-field">
-          <input id="search" type="search" required/>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-    </div>
-  </nav>
+       
           </>
           
     )
