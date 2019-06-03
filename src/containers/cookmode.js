@@ -55,7 +55,7 @@ class Cookmode extends Component {
     const {currentStepIndex,steps,stepsLength} = this.state
     return Jarvis.addCommands([
       {
-        indexes: ['start', 'star', 'tar', 'tart', 'art'],
+        indexes: ['start', 'star', 'tar', 'tart', 'art','repeat'],
         action: (i) => {
           Jarvis.say(steps[currentStepIndex], {
             onEnd() {
@@ -140,7 +140,7 @@ class Cookmode extends Component {
       continuous: true,
       soundex: true,
       listen: true,
-      speed: 0.8
+      speed: 1
     }).then(() => {
       // Display loaded commands in the console
       //console.log(Jarvis.getAvailableCommands());
@@ -220,10 +220,10 @@ class Cookmode extends Component {
               </span>
             </div>
           </div>
-          <div className="col s12 m4">
-            <ul className="collapsible" data-collapsible="accordion">
+          <div className="col s12 m4" style={{width:'50%'}}>
+            <ul className="collapsible" data-collapsible="accordion" >
               <li>
-                <div className="collapsible-header">
+                <div className="collapsible-header" style={{opacity:0.6}}>
                   <i className="material-icons">dehaze</i>Ingredients</div>
                 <div className="collapsible-body">
                   <ul style={{backgroundColor:'white'}}>
