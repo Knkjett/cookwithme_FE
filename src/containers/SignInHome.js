@@ -13,6 +13,7 @@ class SignInHome extends Component{
         favs:[],
     }
     componentDidMount(){
+
         defaultRecipes().then(recipes=>{
             let favs = Array(recipes.length).fill(0,0)
             this.setState({recipes:recipes,favs:favs})
