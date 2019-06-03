@@ -9,6 +9,11 @@
 .bannerContainer {
   height: 100vh;
 }
+.bgDisplay{
+  padding: 50px 0;
+  background: url('https://ak2.picdn.net/shutterstock/videos/12864692/thumb/1.jpg');
+  background-size: cover;
+}
 
 .bannerText {
   padding-left: 20px;

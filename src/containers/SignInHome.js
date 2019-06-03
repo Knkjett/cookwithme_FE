@@ -8,7 +8,7 @@ class SignInHome extends Component{
         recipes:[]
     }
     componentDidMount(){
-        axios.get('https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca')
+        axios.get('https://www.food2fork.com/api/search?key=0a689ee4c676e04aaae774935df0e3d8')
         .then(res=>{
             //console.log(res.data)
             let recipes_arr = res.data.recipes.filter(e=>{
@@ -21,7 +21,7 @@ class SignInHome extends Component{
     render(){
         return <>
         <div className='signInHomePageBG'>
-            <div className="container webContainer " >
+            <div className="container webContainer" >
             <div className="row" style={{marginBottom:'0px'}}>
                 {this.state.recipes.map((obj,i)=>{
                     console.log(obj)

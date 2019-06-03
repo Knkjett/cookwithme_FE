@@ -1,3 +1,7 @@
+.signInHomePageBG{
+    height: calc(100vh - 64px)
+}
+
 /* For width 400px and larger: */
 @media only screen and (min-width: 600px) {
     .signInHomePageBG { 
