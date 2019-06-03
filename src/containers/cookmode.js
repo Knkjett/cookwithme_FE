@@ -19,9 +19,14 @@ class Cookmode extends Component {
     
     this.jarvis = null
     this.state = {
-      steps: ['boil five cups of water for 15 minutes', 'dice tomatoes', 'add pasta to boiling water and cover the pot', 'drain pasta and save half a cup of pasta water', 'Rinse and Repeat'], // for testing purposes
+      steps: ['Preheat oven to 375 degrees. Mix cumin, chili pepper, garlic powder, and salt. Drizzle 1 tablespoon olive oil on chicken breasts, then sprinkle a small amount of spice mix on both sides. Set aside the rest of the spice mix.',
+       'Place chicken breasts on a baking sheet. Bake for 20 to 25 minutes, or until chicken is done. Use two forks to shred chicken. Set aside. ',
+        'Heat 1 tablespoon olive oil in a pot over medium high heat. Add onions, red pepper, green pepper, and minced garlic. Stir and begin cooking, then add the rest of the spice mix. Stir to combine, then add shredded chicken and stir.', 
+        'Pour in Rotel, chicken stock, tomato paste, water, and black beans. Bring to a boil, then reduce heat to a simmer. Simmer for 45 minutes, uncovered. ', 
+        'Mix cornmeal with a small amount of water. Pour into the soup, then simmer for an additional 30 minutes. Check seasonings, adding more if needed---add more chili powder if it needs more spice, and be sure not to undersalt. Turn off heat and allow to sit for 15 to 20 minutes before serving. Five minutes before serving, gently stir in tortilla strips. ',
+      'Ladle into bowls, then top with sour cream, diced red onion, diced avocado, pico de gallo, and grated cheese, if you have it! (The garnishes really make the soup delicious.)'], // for testing purposes
       currentStepIndex: 0,
-      stepsLength: 5,
+      stepsLength: 6,
       play_arrow:'block',
       pause:'none'
     }
@@ -33,7 +38,7 @@ class Cookmode extends Component {
     const {currentStepIndex,steps,stepsLength} = this.state
     return Jarvis.addCommands([
       {
-        indexes: ['start', 'star', 'tar', 'tart', 'art'],
+        indexes: ['start', 'star', 'tar', 'tart', 'art','repeat'],
         action: (i) => {
           Jarvis.say(steps[currentStepIndex], {
             onEnd() {
@@ -118,7 +123,7 @@ class Cookmode extends Component {
       continuous: true,
       soundex: true,
       listen: true,
-      speed: 0.8
+      speed: 1
     }).then(() => {
       // Display loaded commands in the console
       //console.log(Jarvis.getAvailableCommands());
@@ -183,8 +188,8 @@ class Cookmode extends Component {
   render() {
     const { steps, currentStepIndex } = this.state;
     return <>
-      <div className='cookBG'>
-        <div className="row container">
+      <div className='cookBG' style={{position:'relative'}}>
+        <div className="container idk">
           <div className="col s12 m8">
             <div className="card-panel white opacitywebmobile" style={{ maxHeight: '500px', overflow: 'scroll' }}>
               <span className="black-text fontwebmobile" style={{ fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif', opacity: 1 }}>
@@ -192,17 +197,17 @@ class Cookmode extends Component {
               </span>
             </div>
           </div>
-          <div className="col s12 m4">
-            <ul className="collapsible" data-collapsible="accordion">
+          <div className="col s12 m4" style={{width:'50%'}}>
+            <ul className="collapsible" data-collapsible="accordion" >
               <li>
-                <div className="collapsible-header">
+                <div className="collapsible-header" style={{opacity:0.6}}>
                   <i className="material-icons">dehaze</i>Ingredients</div>
-                <div className="collapsible-body">
+                <div className="collapsible-body" style={{opacity:1}}>
                   <ul>
-                    <li>2 medium sweet potatoes</li>
-                    <li>1 1/2 to 2 tablespoons extra-virgin olive oil</li>
-                    <li>1/2 teaspoon cumin</li>
-                    <li>1/2 teaspoon smoked hot paprika (or chipotle powder)</li>
+                    <li className='list'>2 medium sweet potatoes</li>
+                    <li className='list'>1 1/2 to 2 tablespoons extra-virgin olive oil</li>
+                    <li className='list'>1/2 teaspoon cumin</li>
+                    <li className='list'>1/2 teaspoon smoked hot paprika (or chipotle powder)</li>
                   </ul>
                 </div>
               </li>
