@@ -9,6 +9,11 @@
 .bannerContainer {
   height: 100vh;
 }
+.bgDisplay{
+  padding: 50px 0;
+  background: url('https://ak2.picdn.net/shutterstock/videos/12864692/thumb/1.jpg');
+  background-size: cover;
+}
 
 .bannerText {
   padding-left: 20px;
@@ -26,11 +31,14 @@
     border: 1px solid #EFF3F6;
     border-radius: 25px;
   }
-
-  .mobileLogo {
-    background-color: white;
-    border-radius: 0 0 25px 0;
-  }
+  @media (max-width: 575.98px) { 
+    .mobileLogo{
+      background-color: white;
+      border-radius: 0 0 25px 0;
+      max-height: 75px !important;
+    }
+   }
+  
 
 }
 

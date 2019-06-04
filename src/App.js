@@ -4,8 +4,6 @@ import axios from 'axios';
 
 //=====Container
 import Navbar from './components/Logo'
-import Home from './containers/Landing'
-import SignInHome from './containers/SignInHome'
 import Cookmode from './containers/cookmode'
 import CreateRecipe from './containers/CreateRecipe/Create'
 import RecipePage from './containers/RecipePage/RecipePage'
@@ -56,9 +54,8 @@ class App extends Component {
           <Route path='/' component={Navbar} />
           <Route path='/' component={Member} />
           <Switch>
-            <Route path='/' exact component={ Landing} />
+            <Route path='/' exact component={ Landing} /> 
             <Route path='/login' exact component={LoginSignup} />
-
             <Route path='/create' exact component={CreateRecipe} />
             <Route path='/recipepage/:id' exact component={RecipePage} />
             <Route path='/userprofile' exact component={UserProfile} />

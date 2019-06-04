@@ -1,27 +1,29 @@
 /* For width 400px and larger: */
 @media only screen and (min-width: 600px) {
-    .signInHomePageBG { 
-        background-image: url('../assets/carrots-food-fresh-616401.jpg'); 
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+    
 }
 @media only screen and (max-width: 500px) {
-    .signInHomePageBG {
-        background-image: url('https://images.unsplash.com/photo-1514516870926-20598973e480?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=411&h=731&fit=crop&ixid=eyJhcHBfaWQiOjF9');
-        background-repeat: repeat;
-        
-    }
+    
 }
 
 @media only screen and (min-width: 600px) {
-    .webContainer{
+    .containerPadding{
         padding-top: 10vh;
     }
 }
 
 @media only screen and (max-width: 500px) {
-    .webContainer{
-        padding-top: 10%;
+    .containerPadding{
+        padding-top: 10vh;
     }
+}
+
+.divElement{
+    position: absolute;
+    top: 28%;
+    left: 25%;
+    margin-top: -50px;
+    margin-left: -50px;
+    
+
 }

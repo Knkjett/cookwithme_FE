@@ -3,6 +3,7 @@ import './cookmode.css'
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import Axios from 'axios';
 import Artyom from 'artyom.js';
+import {Redirect} from 'react-router-dom'
 //import ArtyomCommandsManager from '../components/ArtyomCommands';
 
 let Jarvis = new Artyom();
@@ -19,21 +20,42 @@ class Cookmode extends Component {
     
     this.jarvis = null
     this.state = {
-      steps: ['boil five cups of water for 15 minutes', 'dice tomatoes', 'add pasta to boiling water and cover the pot', 'drain pasta and save half a cup of pasta water', 'Rinse and Repeat'], // for testing purposes
+      redirect: false,
+      ingredients: [],
+      steps: [], // for testing purposes
       currentStepIndex: 0,
-      stepsLength: 5,
+      stepsLength: 0,
       play_arrow:'block',
       pause:'none'
     }
-
-    
+  }
+  componentWillMount = () =>{
+    if(this.props.location.cook){
+      let mySteps = this.props.location.cook.steps
+      this.setState({
+        steps: mySteps,
+        stepsLength: mySteps.length,
+        ingredients: this.props.location.cook.ingredients
+      })
+    }
+    else{
+     this.setState({
+       redirect: true
+     })
+    }
   }
 
+  letRedirect = () =>{
+    if(this.state.redirect){
+      return <Redirect to='/' />
+    }
+    else{return<></>}
+  }
   loadCommands() {
     const {currentStepIndex,steps,stepsLength} = this.state
     return Jarvis.addCommands([
       {
-        indexes: ['start', 'star', 'tar', 'tart', 'art'],
+        indexes: ['start', 'star', 'tar', 'tart', 'art','repeat'],
         action: (i) => {
           Jarvis.say(steps[currentStepIndex], {
             onEnd() {
@@ -118,7 +140,7 @@ class Cookmode extends Component {
       continuous: true,
       soundex: true,
       listen: true,
-      speed: 0.8
+      speed: 1
     }).then(() => {
       // Display loaded commands in the console
       //console.log(Jarvis.getAvailableCommands());
@@ -179,10 +201,16 @@ class Cookmode extends Component {
     });
   }
 
+  ListIngredients = () =>{
+    return this.state.ingredients.map((e,i)=>{
+      return <li key={i}>{e}</li>
+    })
+  }
 
   render() {
     const { steps, currentStepIndex } = this.state;
     return <>
+    <this.letRedirect />
       <div className='cookBG'>
         <div className="row container">
           <div className="col s12 m8">
@@ -192,17 +220,14 @@ class Cookmode extends Component {
               </span>
             </div>
           </div>
-          <div className="col s12 m4">
-            <ul className="collapsible" data-collapsible="accordion">
+          <div className="col s12 m4" style={{width:'50%'}}>
+            <ul className="collapsible" data-collapsible="accordion" >
               <li>
-                <div className="collapsible-header">
+                <div className="collapsible-header" style={{opacity:0.6}}>
                   <i className="material-icons">dehaze</i>Ingredients</div>
                 <div className="collapsible-body">
-                  <ul>
-                    <li>2 medium sweet potatoes</li>
-                    <li>1 1/2 to 2 tablespoons extra-virgin olive oil</li>
-                    <li>1/2 teaspoon cumin</li>
-                    <li>1/2 teaspoon smoked hot paprika (or chipotle powder)</li>
+                  <ul style={{backgroundColor:'white'}}>
+                    <this.ListIngredients />
                   </ul>
                 </div>
               </li>
