@@ -35,7 +35,8 @@ class SignInHome extends Component {
             <><AuthContext.Consumer>
                 {
                     user => {
-                        if (this.state.recipes === null) return <img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
+
+                        if (this.state.recipes === null) return <img {{height:'calc(100vh - 70px)', width:'100%'}} src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
                         else return (<><div>
                             <div className="containerPadding" >
                                 <div className="row" style={{ marginBottom: '0px' }}>
@@ -104,9 +105,6 @@ class SignInHome extends Component {
 
                 }
             </AuthContext.Consumer>
-
-
-
 
             </>
 

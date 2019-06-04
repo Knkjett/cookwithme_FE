@@ -94,6 +94,8 @@ class MobilePhone extends Component {
   }
   Home = () => {
     return (<>
+
+      <Logo />
       <div className='mobileBG'>
         <div className="container">
           <div className="row" style={{ marginBottom: '0px', overflow: 'scroll', maxHeight: '650px', marginTop: '120px' }}>
@@ -118,18 +120,44 @@ class MobilePhone extends Component {
       </div>
     </>)
   }
+  handleBack = () => {
+    this.setState({
+      page: 'home',
+      current: null
+    })
+  }
   SliderDemo = () => {
     if (this.state.page === 'home') {
       return <this.Home />
     }
     if (this.state.page === 'recipe') {
-      return(<ul>
-        {
-          this.state.recipes[this.state.current].ingredients.map((e, i) => {
-            return <li key={i}>{e}</li>
-          })
-        }
-      </ul>)
+      return (
+        <div className='mobileBG'>
+          <button onClick={this.handleBack} style={{ marginTop: '50px' }}>Back</button>
+          <div className="container">
+            <img src={this.state.recipes[this.state.current].image_url} alt='recipe' style={{height:'175px'}}/>
+            <h5>Ingredients</h5>
+            <ul className='collection recipeInfo'>
+              {
+                this.state.recipes[this.state.current].ingredients.map((e, i) => {
+                  return <li className='collection-item' key={i}>{e}</li>
+                })
+              }
+            </ul>
+            <h5>Steps</h5>
+            <ul className='collection recipeInfo'>
+              {
+                this.state.recipes[this.state.current].steps.map((e, i) => {
+                  return <li className='collection-item' key={i}>{e}</li>
+                })
+              }
+            </ul>
+            <button class="btn" type="submit" name="action">Cook
+    <i class="material-icons right">send</i>
+  </button>
+          </div>
+          </div>
+      )
 
     }
     else {
@@ -154,7 +182,6 @@ class MobilePhone extends Component {
       </div>
       <div className='inner-shadow'></div>
       <div className='screen' >
-        <Logo />
         <this.SliderDemo />
       </div>
     </div>)
