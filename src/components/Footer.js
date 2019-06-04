@@ -9,7 +9,7 @@ class Footer extends Component {
   }
   render() {
     return (<>
-      <nav className='footer' style={{zIndex:'2'}}>
+      <nav className='footer' style={{position:'absolute',zIndex:'2'}}>
         <div className='nav-wrapper' >
           <button data-target='mobile-demo' style={{ padding: '0', border: 'none', background: 'none' }} className='sidenav-trigger hide-on-large-only'><i className='material-icons'>menu</i></button>
           <Link to='/' className='brand-logo'>CookWithMe</Link>
