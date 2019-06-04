@@ -14,7 +14,6 @@ class SignInHome extends Component {
         favs: [],
     }
     componentDidMount() {
-
         defaultRecipes().then(recipes => {
             let favs = Array(recipes.length).fill(0, 0)
             this.setState({ recipes: recipes, favs: favs })
@@ -36,7 +35,8 @@ class SignInHome extends Component {
             <><AuthContext.Consumer>
                 {
                     user => {
-                        if (this.state.recipes === null) return <img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
+
+                        if (this.state.recipes === null) return <img style={{height:'calc(100vh - 70px)'}} src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
                         else return (<><div>
                             <div className="containerPadding" >
                                 <div className="row" style={{ marginBottom: '0px' }}>
@@ -44,6 +44,7 @@ class SignInHome extends Component {
                                 <div class="card no-shadows">
                                     <div className="card-content" style={{ height: '336.17px', textAlign: 'center',background:'white', position:'relative' }}>
                                         <span className="welcomeText">Welcome to Cook With Me</span>
+
                                     </div>
                                 </div>
                                 </div>
@@ -78,15 +79,15 @@ class SignInHome extends Component {
                                 </div>
                             </div>
                         </div>
-                            <div class="fixed-action-btn click-to-toggle">
-                                <a class="btn-floating btn-large red">
-                                    <i class="large material-icons">mode_edit</i>
+                            <div className="fixed-action-btn click-to-toggle">
+                                <a className="btn-floating btn-large red">
+                                    <i className="large material-icons">mode_edit</i>
                                 </a>
                                 <ul>
                                     <li>
-                                        <div class="nav-wrapper">
+                                        <div className="nav-wrapper">
                                             <form>
-                                                <div class="input-field">
+                                                <div className="input-field">
                                                     <input id="search" type="search" required style={{ background: 'bisque', width: '300px', height: '50px' }} />
 
 
@@ -105,9 +106,6 @@ class SignInHome extends Component {
 
                 }
             </AuthContext.Consumer>
-
-
-
 
             </>
 

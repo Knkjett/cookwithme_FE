@@ -38,8 +38,6 @@ export default class RecipePage extends React.Component {
           })
           .then(()=>{
             if(this.state.steps && this.state.ingredients){
-              console.log('stes', this.state.steps)
-              console.log('ingredi' , this.state.ingredients)
               postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
             }
           })
@@ -51,15 +49,12 @@ export default class RecipePage extends React.Component {
           })
           .then(()=>{
             if(this.state.steps && this.state.ingredients){
-              console.log('stes', this.state.steps)
-              console.log('ingredi' , this.state.ingredients)
               postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
             }
           })
         }
         else {
-          this.setState({ingredients: res[0].ingredients, steps: res[0].steps})
-           console.log('has data', res)
+          this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
         }
       })
       
@@ -77,9 +72,13 @@ export default class RecipePage extends React.Component {
    const { ingredients, steps} = this.state
   //  const { source_img} = this.props.location.state
   if(!ingredients || !steps){
-    return( <div className='progress'>
-    <h1 style={{marginTop:'0px', paddingTop:'150px', height:'calc(100vh - 150px)', width: '60%'}} className="determinate" onClick={this.handleOnClick}>Loading</h1>
-    </div>);
+    return( 
+    <div style={{height:'calc(100vh - 70px)'}}>
+    <div className='progress' style={{top:'50%'}}>
+    <h1 style={{ paddingTop:'150px', height:'calc(100vh - 150px)', width: '60%'}} className="indeterminate" onClick={this.handleOnClick}>Loading</h1>
+    </div>
+    </div>
+    );
   } 
   else {
     return(<React.Fragment>
