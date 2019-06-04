@@ -30,13 +30,13 @@ class SignInHome extends Component {
         favs[i] = favs[i] === 0 ? 1 : 0
         this.setState({ favs: favs })
     }
-    render() {
+    render() {  
         return (
             <><AuthContext.Consumer>
                 {
                     user => {
-
-                        if (this.state.recipes === null) return <img style={{height:'calc(100vh - 70px)'}} src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
+                        
+                        if (this.state.recipes === null) return <div style={{textAlign:'center',height:'92vh'}}><img class='responsive-img' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' /></div>
                         else return (<><div>
                             <div className="containerPadding" >
                                 <div className="row" style={{ marginBottom: '0px' }}>
