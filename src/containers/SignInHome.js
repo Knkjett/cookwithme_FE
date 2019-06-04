@@ -34,10 +34,10 @@ class SignInHome extends Component{
             <><AuthContext.Consumer>
                 {
                     user => {
-                        if(this.state.recipes === null) return <img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
+                        if(this.state.recipes === null) return (<div><img style={{height:'calc(100vh - 70px)', width:'100%'}} src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif'/></div>)
                         else return (<div className='signInHomePageBG'>
-                        <div className=" webContainer " >
-                        <div className="row" style={{marginBottom:'0px'}}>
+                        <div className=' webContainer ' >
+                        <div className='row' style={{marginBottom:'0px'}}>
                             {this.state.recipes.map((obj,i)=>{
                                 let classStr = null
                                 const font = {fontFamily:'Futura',fontSize: '20px',fontWeight:300}
@@ -46,21 +46,21 @@ class SignInHome extends Component{
                                 if(this.state.favs[i] ===  0) classStr = 'btn-floating disabled halfway-fab waves-light red'
                                 if(this.state.favs[i] === 1) classStr = 'btn-floating halfway-fab waves-light red'
                                 //console.log(classStr)
-                                return <div className="col s12 m3">
-                                    <div className="card">
-                                        <div className="card-image">
+                                return <div className='col s12 m3'>
+                                    <div className='card'>
+                                        <div className='card-image'>
                                         
                                             <img onClick={()=>this.toggleFav(i,user)} style={{height:'236.17px'}} src={obj.image_url} />
                                             
                                             <a className={classStr}><i 
-                                                    className="material-icons">add</i></a>
+                                                    className='material-icons'>add</i></a>
                                         </div>
-                                        <div className="card-content" style={{height:'100px',textAlign:'center'}}>
+                                        <div className='card-content' style={{height:'100px',textAlign:'center'}}>
                                         <Link to={{ 
                                             pathname: `/recipepage/${obj.title}`, 
                                             state: { url: obj.source_url, publisher: obj.publisher_url, source_img: obj.image_url } 
                                         }}>
-                                            <span className="card-title" style={font}>{obj.title}</span>
+                                            <span className='card-title' style={font}>{obj.title}</span>
                                             </Link>
                                         </div>
                                     </div>
@@ -73,16 +73,16 @@ class SignInHome extends Component{
                     }
                 }
             </AuthContext.Consumer>
-            <div class="fixed-action-btn click-to-toggle">
-            <a class="btn-floating btn-large red">
-              <i class="large material-icons">mode_edit</i>
+            <div className='fixed-action-btn click-to-toggle'>
+            <a className='btn-floating btn-large red'>
+              <i className='large material-icons'>mode_edit</i>
             </a>
             <ul>
               <li>
-              <div class="nav-wrapper">
+              <div className='nav-wrapper'>
       <form>
-        <div class="input-field">
-          <input id="search" type="search" required style={{background:'bisque',width:'300px',height:'50px'}}/>
+        <div className='input-field'>
+          <input id='search' type='search' required style={{background:'bisque',width:'300px',height:'50px'}}/>
           
           
         </div>

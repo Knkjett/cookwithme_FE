@@ -58,7 +58,7 @@ export default class RecipePage extends React.Component {
           })
         }
         else {
-          this.setState({ingredients: res[0].ingredients, steps: res[0].steps})
+          this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
            console.log('has data', res)
         }
       })
