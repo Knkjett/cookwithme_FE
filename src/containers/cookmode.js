@@ -211,16 +211,16 @@ class Cookmode extends Component {
     const { steps, currentStepIndex } = this.state;
     return <>
     <this.letRedirect />
-      <div className='cookBG'>
-        <div className="row container">
-          <div className="col s12 m8">
+      <div className='cookBG middle'>
+        <div className="row container ">
+          <div className="">
             <div className="card-panel white opacitywebmobile" style={{ maxHeight: '500px', overflow: 'scroll' }}>
               <span className="black-text fontwebmobile" style={{ fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif', opacity: 1 }}>
                 {steps[currentStepIndex]}
               </span>
             </div>
           </div>
-          <div className="col s12 m4" style={{width:'50%'}}>
+          <div className="" style={{width:'50%'}}>
             <ul className="collapsible" data-collapsible="accordion" >
               <li>
                 <div className="collapsible-header" style={{opacity:0.6}}>
