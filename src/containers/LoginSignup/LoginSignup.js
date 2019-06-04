@@ -4,8 +4,8 @@ import '../LoginSignup/loginsignup.css'
 import firebase from '../../firebase';
 import $ from 'jquery';
 import AuthContext from '../../contexts/auth';
-import Materialize from 'materialize-css'
-
+import Materialize from 'materialize-css';
+import axios from 'axios';
 
 
 export default class LoginSignup extends React.Component {
@@ -19,7 +19,9 @@ export default class LoginSignup extends React.Component {
         }
     }
     componentDidMount = () => {
-
+      if(!this.state.regPassword !== this.state.regPassword){
+         console.log('sorry password does not match')
+      }
         //--- JQUERY FOR ROTATING CARDS 
         $(document).ready(function () {
             $('#bt').click(function () {
@@ -28,10 +30,8 @@ export default class LoginSignup extends React.Component {
                 }
                 if ($('.rotateb').length > 0) {
                     $('#iwp').removeClass('rotateb');
-
                 }
                 $('#iwp').addClass('rotate');
-
             });
             $('#bt2').click(function () {
 
@@ -47,33 +47,38 @@ export default class LoginSignup extends React.Component {
     }
 
     handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-        console.log('this is handle change', e)
-        
+        this.setState({ [e.target.name]: e.target.value }); 
     }
-
-    // regHandleChange = (e) => {
-    //     this.setState({ [e.target.regname]: e.target.regvalue });
-    //     console.log('this is reg handle change', e)
-    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
         const { email, password } = this.state;
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((res) => {
+
             })
             .catch(err => {
                 const { message } = err;
                 Materialize.toast({html: message})
             })
     }
+
     handleRegSubmit = (e) => {
         e.preventDefault();
         const { regEmail, regPassword } = this.state;
         firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
-            .then((res) => {
-            })
+           .then(res=>{
+              // console.log(res.user.uid)
+                axios.post('http://localhost:5001/users/', {
+                    email:regEmail,
+                    token: res.user.uid
+                    
+               })
+               .then(id=>{
+                   console.log(this.props)
+                   this.props.handleId(id)
+               })
+           })
             .catch(err => {
                 const { message } = err;
                 console.log(this.setState)
@@ -131,10 +136,10 @@ export default class LoginSignup extends React.Component {
                                                             <input id='regPassword' type='password' className='validate' name='regPassword' value={regPassword} onChange={this.handleChange} />
                                                             <label htmlFor='regPassword'>Password</label>
                                                         </div>
-                                                        {/* <div className='input-field' >
-                                                            <input id='password' type='password' className='validate' name='confirm password' />
-                                                            <label htmlFor='password'>Confirm Password</label>
-                                                        </div> */}
+                                                        <div className='input-field' >
+                                                            <input id='regPassword' type='password' className='validate' name='confirmPassword' />
+                                                            <label htmlFor='regPassword'>Confirm Password</label>
+                                                        </div>
                                                         <button className='btn  waves-light' type='submit' name='action' onClick={this.handleRegSubmit}>Submit
                                  <i className='material-icons right'>send</i>
                                                         </button>

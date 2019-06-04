@@ -16,11 +16,12 @@ export default class Logout extends React.Component {
         <div class="card-panel grey lighten-5 z-depth-1" style={{margin:'0px'}}>
           <div class="row valign-wrapper">
             <div class="col s2">
-              <img src={require('../../assets/baker.png')}  alt="" class="circle responsive-img"/> 
+              <img src={require('../../assets/baker.png')}  alt="" class="circle responsive-img "/> 
             </div>
             <div class="col s10">
-              <span class="black-text">
-                You are logged out
+              <span class="black-text center">
+                <h4>Come back again it's food o'clock!</h4>
+                <p>You are successfully logged out</p>
               </span>
             </div>
           </div>
