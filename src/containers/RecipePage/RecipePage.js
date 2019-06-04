@@ -38,8 +38,6 @@ export default class RecipePage extends React.Component {
           })
           .then(()=>{
             if(this.state.steps && this.state.ingredients){
-              console.log('stes', this.state.steps)
-              console.log('ingredi' , this.state.ingredients)
               postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
             }
           })
@@ -51,15 +49,12 @@ export default class RecipePage extends React.Component {
           })
           .then(()=>{
             if(this.state.steps && this.state.ingredients){
-              console.log('stes', this.state.steps)
-              console.log('ingredi' , this.state.ingredients)
               postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
             }
           })
         }
         else {
           this.setState({ingredients: res[0].ingredients, steps: res[0].steps})
-           console.log('has data', res)
         }
       })
       

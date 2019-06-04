@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 //=====Container
 import Navbar from './components/Logo'
@@ -25,12 +26,16 @@ const Err = () => {
 class App extends Component {
   state = {
     user: null,
+    email: null
   }
-  
+
+
   componentDidMount = () => {
     this.unsubscribe = firebase.auth().onAuthStateChanged(user =>{
       if(user) {
-        this.setState({user});
+        this.setState({user, email: user.email}, ()=>{
+          console.log(this.state)
+        });
       }
       else {
         this.setState({user: null})
