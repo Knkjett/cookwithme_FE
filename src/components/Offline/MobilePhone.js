@@ -133,8 +133,8 @@ class MobilePhone extends Component {
     if (this.state.page === 'recipe') {
       return (
         <div className='mobileBG'>
-          <button onClick={this.handleBack} style={{ marginTop: '50px' }}>Back</button>
-          <div className="container">
+          <button  class="btn" onClick={this.handleBack} style={{ marginTop: '50px' }}>Back</button>
+          <div className="container" style={{paddingTop:'5px'}}>
             <img src={this.state.recipes[this.state.current].image_url} alt='recipe' style={{height:'175px'}}/>
             <h5>Ingredients</h5>
             <ul className='collection recipeInfo'>
