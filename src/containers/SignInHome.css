@@ -1,20 +1,40 @@
-/* For width 400px and larger: */
-@media only screen and (min-width: 600px) {
-    
-}
-@media only screen and (max-width: 500px) {
-    
-}
-
 @media only screen and (min-width: 600px) {
     .containerPadding{
         padding-top: 10vh;
     }
+    .textSize{
+        font-size: 1.3vw;
+    }
+
+    .welcomeText{
+        font-size: 2.3vw;
+        font-family: Futura;
+        font-weight:300;
+        position: absolute;
+        top: 109px;
+        left: 4px;
+        color:red;
+    }
+
+    
 }
 
 @media only screen and (max-width: 500px) {
     .containerPadding{
         padding-top: 10vh;
+    }
+    .textSize{
+        font-size: 6.3vw;
+    }
+    .welcomeText{
+        font-size: 5.3vw;
+        font-family: Futura;
+        font-weight:300;
+        position: absolute;
+        top: 141px;
+        left: 22px;
+        color:red;
+        font-size:32px;
     }
 }
 
@@ -26,4 +46,8 @@
     margin-left: -50px;
     
 
+}
+
+.no-shadows {
+    box-shadow: none!important;
 }

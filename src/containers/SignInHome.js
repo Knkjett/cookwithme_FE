@@ -41,21 +41,21 @@ class SignInHome extends Component {
                             <div className="containerPadding" >
                                 <div className="row" style={{ marginBottom: '0px' }}>
                                 <div class="col s12 m3" >
-                                <div class="card blue-grey darken-1">
-                                    <div className="card-content" style={{ height: '336.17px', textAlign: 'center',background:'#ee5a5a', position:'relative' }}>
-                                        <span className="card-title" style={{ fontFamily: 'Futura', fontSize: '1.3vw', fontWeight: 300,position:"absolute",top:20 }}>Welcome to Cook With Me</span>
+                                <div class="card no-shadows">
+                                    <div className="card-content" style={{ height: '336.17px', textAlign: 'center',background:'white', position:'relative' }}>
+                                        <span className="welcomeText">Welcome to Cook With Me</span>
                                     </div>
                                 </div>
                                 </div>
                                     {this.state.recipes.map((obj, i) => {
                                         let classStr = null
-                                        const font = { fontFamily: 'Futura', fontSize: '1.3vw', fontWeight: 300 }
+                                        // const font = { fontFamily: 'Futura', fontSize: '1.3vw', fontWeight: 300 }
 
                                         if (this.state.favs[i] === 0) classStr = 'btn-floating disabled halfway-fab waves-light red'
                                         if (this.state.favs[i] === 1) classStr = 'btn-floating halfway-fab waves-light red'
                                         //console.log(classStr)
                                         return <div className="col s12 m3">
-                                            <div className="card">
+                                            <div className="card no-shadows">
                                                 <div className="card-image">
 
                                                     <img onClick={() => this.toggleFav(i, user)} style={{ height: '236.17px' }} src={obj.image_url} />
@@ -68,7 +68,7 @@ class SignInHome extends Component {
                                                         pathname: `/recipepage/${obj.title}`,
                                                         state: { url: obj.source_url, publisher: obj.publisher_url, source_img: obj.image_url }
                                                     }}>
-                                                        <span className="card-title" style={font}>{obj.title}</span>
+                                                        <span className="textSize">{obj.title}</span>
                                                     </Link>
                                                 </div>
                                             </div>
