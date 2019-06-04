@@ -16,6 +16,10 @@
         color:red;
     }
 
+    .loading{
+        height:calc(100vh - 70px)
+    }
+
     
 }
 
@@ -35,6 +39,10 @@
         left: 22px;
         color:red;
         font-size:32px;
+    }
+
+    .loading{
+        height:calc(100vh - 70px)
     }
 }
 
