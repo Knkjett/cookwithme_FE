@@ -36,12 +36,12 @@ class SignInHome extends Component {
                 {
                     user => {
 
-                        if (this.state.recipes === null) return <img {{height:'calc(100vh - 70px)', width:'100%'}} src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
+                        if (this.state.recipes === null) return <img style={{height:'calc(100vh - 70px)'}} src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
                         else return (<><div>
                             <div className="containerPadding" >
                                 <div className="row" style={{ marginBottom: '0px' }}>
-                                <div class="col s12 m3" >
-                                <div class="card blue-grey darken-1">
+                                <div className="col s12 m3" >
+                                <div className="card blue-grey darken-1">
                                     <div className="card-content" style={{ height: '336.17px', textAlign: 'center',background:'#ee5a5a', position:'relative' }}>
                                         <span className="card-title" style={{ fontFamily: 'Futura', fontSize: '1.3vw', fontWeight: 300,position:"absolute",top:20 }}>Welcome to Cook With Me</span>
                                     </div>
@@ -78,15 +78,15 @@ class SignInHome extends Component {
                                 </div>
                             </div>
                         </div>
-                            <div class="fixed-action-btn click-to-toggle">
-                                <a class="btn-floating btn-large red">
-                                    <i class="large material-icons">mode_edit</i>
+                            <div className="fixed-action-btn click-to-toggle">
+                                <a className="btn-floating btn-large red">
+                                    <i className="large material-icons">mode_edit</i>
                                 </a>
                                 <ul>
                                     <li>
-                                        <div class="nav-wrapper">
+                                        <div className="nav-wrapper">
                                             <form>
-                                                <div class="input-field">
+                                                <div className="input-field">
                                                     <input id="search" type="search" required style={{ background: 'bisque', width: '300px', height: '50px' }} />
 
 

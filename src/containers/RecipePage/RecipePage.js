@@ -72,9 +72,13 @@ export default class RecipePage extends React.Component {
    const { ingredients, steps} = this.state
   //  const { source_img} = this.props.location.state
   if(!ingredients || !steps){
-    return( <div className='progress'>
-    <h1 style={{marginTop:'0px', paddingTop:'150px', height:'calc(100vh - 150px)', width: '60%'}} className="determinate" onClick={this.handleOnClick}>Loading</h1>
-    </div>);
+    return( 
+    <div style={{height:'calc(100vh - 70px)'}}>
+    <div className='progress' style={{top:'50%'}}>
+    <h1 style={{ paddingTop:'150px', height:'calc(100vh - 150px)', width: '60%'}} className="indeterminate" onClick={this.handleOnClick}>Loading</h1>
+    </div>
+    </div>
+    );
   } 
   else {
     return(<React.Fragment>
