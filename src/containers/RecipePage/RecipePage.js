@@ -33,6 +33,7 @@ export default class RecipePage extends React.Component {
                 this.setState({
                   ingredients: res,
                   source_img: source_img
+
                 })
               })
               .then(() => {
