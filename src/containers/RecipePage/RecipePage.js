@@ -1,6 +1,7 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
 import {checkRecipe, getFood2Fork, postRecipes} from '../../services/services';
+import { Link } from 'react-router-dom'
 
 
 export default class RecipePage extends React.Component {
@@ -20,23 +21,23 @@ export default class RecipePage extends React.Component {
       // checkRecipe(url)
     }
     else{
-    // let {publisher, url, source_img} = this.props.location.state
-    let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
-    let publisher = "http://foodnetwork.com"
-   let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
+      console.log("HERE")
+    let {publisher, url, source_img} = this.props.location.state
+  //   let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
+  //   let publisher = "http://foodnetwork.com"
+  //  let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
       checkRecipe(url)
       .then((res)=> {
         if(!res){
           ingredientScrape(publisher,url)
           .then((res)=>{
             this.setState({
-              ingredients : res
+              ingredients : res,
+              source_img : source_img
             })
           })
           .then(()=>{
             if(this.state.steps && this.state.ingredients){
-              console.log('stes', this.state.steps)
-              console.log('ingredi' , this.state.ingredients)
               postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
             }
           })
@@ -48,15 +49,12 @@ export default class RecipePage extends React.Component {
           })
           .then(()=>{
             if(this.state.steps && this.state.ingredients){
-              console.log('stes', this.state.steps)
-              console.log('ingredi' , this.state.ingredients)
               postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
             }
           })
         }
         else {
-          this.setState({ingredients: res[0].ingredients, steps: res[0].steps})
-           console.log('has data', res)
+          this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
         }
       })
       
@@ -74,14 +72,18 @@ export default class RecipePage extends React.Component {
    const { ingredients, steps} = this.state
   //  const { source_img} = this.props.location.state
   if(!ingredients || !steps){
-    return( <div className='progress'>
-    <h1 style={{marginTop:'0px', paddingTop:'150px', height:'calc(100vh - 150px)', width: '60%'}} className="determinate" onClick={this.handleOnClick}>Loading</h1>
-    </div>);
+    return( 
+    <div style={{height:'calc(100vh - 70px)'}}>
+    <div className='progress' style={{top:'50%'}}>
+    <h1 style={{ paddingTop:'150px', height:'calc(100vh - 150px)', width: '60%'}} className="indeterminate" onClick={this.handleOnClick}>Loading</h1>
+    </div>
+    </div>
+    );
   } 
   else {
     return(<React.Fragment>
       <div className="row">
-        <img className="col s12 m7 materialboxed hoverable" src={require('../../assets/fish.jpg')} alt='' />
+        <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' />
         <div className="col s12 m5">
           <div className="card-panel grey">
             <form action="#">
@@ -117,6 +119,11 @@ export default class RecipePage extends React.Component {
             }
         </span>
           </div>
+          <Link to={{ 
+                    pathname: `/cookmode/`, 
+                    cook: { ingredients : this.state.ingredients, steps: this.state.steps } 
+                  }}> <div className='btn'>Cook Now
+                </div> </Link>
         </div>
       </div>
     </React.Fragment>

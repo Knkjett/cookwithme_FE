@@ -33,8 +33,24 @@ const getFood2Fork = async(query) => {
       .then((res)=>{
         return res.data;
       })));
-   }
+}
+
+const defaultRecipes = () =>{
+  let recipes_arr = null
+  return axios.get('https://www.food2fork.com/api/search?key=100badb571d2bc0c4ab6c3f6545f843f&q=chicken')
+        .then(res=>{
+            console.log(res.data)
+            recipes_arr = res.data.recipes.filter(e=>{
+                return e.publisher ==='Closet Cooking' || e.publisher === "The Pioneer Woman" || e.publisher === 'All Recipes'
+            })
+            recipes_arr.splice(2,1)
+            recipes_arr.splice(8,1)
+            return recipes_arr.slice(0,15)
+            
+            })
+            
+        }
    
    
 
-export {postRecipes ,checkRecipe,getFood2Fork}
+export {postRecipes ,checkRecipe,getFood2Fork,defaultRecipes}

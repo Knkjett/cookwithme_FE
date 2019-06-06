@@ -17,11 +17,20 @@
         bottom: 60px;
         left: 22%
     }
+
+    .middle{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display:flex;
+        height:92vh;
+    }
 }
 @media only screen and (max-width: 500px) {
     .cookBG {
         background-image: url('https://images.unsplash.com/photo-1514516870926-20598973e480?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=411&h=731&fit=crop&ixid=eyJhcHBfaWQiOjF9');
         background-repeat: repeat;
+        height: 92vh;
         
     }
     .fontwebmobile{
@@ -30,4 +39,25 @@
     .opacitywebmobile{
         opacity: .7
     }
+    .middle{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display:flex;
+        height:92vh;
+    }
+}
+
+.idk{
+    position: absolute;
+    top: 50%;  /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%); /* This is a shorthand of
+                                         translateX(-50%) and translateY(-50%) */
+}
+
+.list{
+    font-family:'Futura';
+    font-size: '20px'
 }
