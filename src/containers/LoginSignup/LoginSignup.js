@@ -15,13 +15,11 @@ export default class LoginSignup extends React.Component {
             email: '',
             password: '',
             regEmail: '',
-            regPassword: ''
+            regPassword: '',
+            confirmPassword: '',
         }
     }
     componentDidMount = () => {
-      if(!this.state.regPassword !== this.state.regPassword){
-         console.log('sorry password does not match')
-      }
         //--- JQUERY FOR ROTATING CARDS 
         $(document).ready(function () {
             $('#bt').click(function () {
@@ -44,6 +42,7 @@ export default class LoginSignup extends React.Component {
                 $('#iwp').addClass('rotateb');
             });
         });
+           
     }
 
     handleChange = (e) => {
@@ -65,30 +64,34 @@ export default class LoginSignup extends React.Component {
 
     handleRegSubmit = (e) => {
         e.preventDefault();
-        const { regEmail, regPassword } = this.state;
-        firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
-           .then(res=>{
-              // console.log(res.user.uid)
-                axios.post('http://localhost:5001/users/', {
-                    email:regEmail,
-                    token: res.user.uid
-                    
-               })
-               .then(id=>{
-                   console.log(this.props)
-                   this.props.handleId(id)
-               })
-           })
-            .catch(err => {
-                const { message } = err;
-                console.log(this.setState)
-                Materialize.toast({html: message})
+        const { regEmail, regPassword, confirmPassword } = this.state;
+        if(confirmPassword !== regPassword){
+            Materialize.toast({html: 'password did not match'})
+        } else {
+            firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
+            .then(res=>{
+                 axios.post('http://localhost:5001/users/', {
+                     email:regEmail,
+                     token: res.user.uid
+                     
+                })
+                // .then(id=>{
+                //     console.log(this.props)
+                //     this.props.handleId(id).bind(this)
+                // })
             })
+             .catch(err => {
+                 const { message } = err;
+                 console.log(this.setState)
+                 Materialize.toast({html: message})
+             })
+        }
+         
     }
 
     render() {
 
-        const { email, password, regEmail, regPassword } = this.state;
+        const { email, password, regEmail, regPassword, confirmPassword } = this.state;
         const displayForm =
             <React.Fragment>
                 <div style={{ height: 'calc(100vh - 64px)' }}>
@@ -137,8 +140,8 @@ export default class LoginSignup extends React.Component {
                                                             <label htmlFor='regPassword'>Password</label>
                                                         </div>
                                                         <div className='input-field' >
-                                                            <input id='regPassword' type='password' className='validate' name='confirmPassword' />
-                                                            <label htmlFor='regPassword'>Confirm Password</label>
+                                                            <input id='confirmPassword' type='password' className='validate' name='confirmPassword' value={confirmPassword}  onChange={this.handleChange} />
+                                                            <label htmlFor='confirmPassword'>Confirm Password</label>
                                                         </div>
                                                         <button className='btn  waves-light' type='submit' name='action' onClick={this.handleRegSubmit}>Submit
                                  <i className='material-icons right'>send</i>
