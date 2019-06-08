@@ -1,7 +1,7 @@
 .mobileBG{
-  background: url('../../assets/mobileDemo.png') fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background: url('../../assets/mobileDemo.png') !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important; */
 }
 .recipeInfo{
   background-color: lightblue;
