@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import './create.css'
 import preview from '../../assets/PhotoPlaceholder.png'
-import { postRecipes } from '../../services/services'
+import { postRecipes, getUser } from '../../services/services'
 import firebase from 'firebase';
+import AuthContext from '../../contexts/auth'
+import { Redirect } from 'react-router-dom'
+import M from 'materialize-css'
 
 class Create extends Component {
   constructor(props) {
@@ -17,11 +20,16 @@ class Create extends Component {
       stepsArray: null,
       source_url: null,
       users_id: null,
+      Redirect: false
     }
   }
-
-  componentDidMount = () => {
-    // PULL USER ID
+  handleRedirect = () =>{
+    if(this.state.Redirect){
+      return <Redirect to='/' />
+    }
+    else{
+      return <></>
+    }
   }
   handleInput = (e) => {
     this.setState({
@@ -123,6 +131,73 @@ class Create extends Component {
       })
     }
   }
+  demoIngred = (e) => {
+    console.log(this.state.user)
+    e.preventDefault();
+    let ingred = ['Kosher salt',
+      '8 cups finely shredded green cabbage (from a 1 1/2-pound head)',
+      '1 cup distilled white vinegar',
+      '1 tablespoon sugar',
+      '2 tablespoons yellow mustard seeds',
+      'Vegetable oil for frying',
+      '5 large shallots, very thinly sliced crosswise and separated into rings',
+      '1/4 cup Wondra flour',
+      '1 1/2 pounds ground beef chuck, preferably 85 percent lean',
+      '1 teaspoon onion powder',
+      '1 teaspoon garlic powder',
+      '1 teaspoon sweet smoked paprika',
+      '1 tablespoon Worcestershire sauce',
+      'Freshly ground pepper 6 ounces extra-sharp cheddar, shredded',
+      '2 cups baby arugula',
+      '4 brioche buns, split and toasted']
+    let i = 0;
+    let addIngred = setInterval(() => {
+      let arr = []
+      if (!this.state.ingredientsArray) {
+        arr = [];
+      }
+      else {
+        arr = this.state.ingredientsArray
+      }
+      arr.push(ingred[i])
+      this.setState({
+        ingredients: '',
+        ingredientsArray: arr
+      })
+      i++;
+      if (i > ingred.length - 1) {
+        clearTimeout(addIngred);
+      }
+    }, 300)
+  }
+  demoSteps = (e) => {
+    e.preventDefault();
+    let steps = ['In a large bowl, toss 1 tablespoon of kosher salt with the cabbage and massage it until it softens and releases its liquid, about 4 minutes. Drain the cabbage in a colander and rinse it.',
+      'Wipe out the bowl. Add the vinegar, sugar, mustard seeds, 1 cup of water and 1 tablespoon of salt. Add the cabbage to the vinegar mixture, toss to coat and place a plate on top to keep it submerged. Let stand at room temperature for 2 hours.',
+      'Meanwhile, in a large saucepan, heat 1 1/2 inches of vegetable oil to 325°. In a medium bowl, toss the shallots with the Wondra flour. Fry the shallots all at once, stirring gently, until golden, about 7 minutes. Using a slotted spoon, transfer the shallots to a paper towel–lined plate to drain. Season the shallots with salt. Reserve the cooking oil.',
+      'In a medium bowl, combine the ground beef with the onion powder, garlic powder, smoked paprika, Worcestershire sauce and 2 teaspoons each of kosher salt and ground pepper. Knead gently until thoroughly mixed. Form the beef into eight 4-inch patties. Press the shredded cheese into four 2 1/2-inch disks. Sandwich the cheese disks between the patties. Pinch the edges together to seal.',
+      'Heat a grill pan or griddle. Brush the burgers with some of the shallot cooking oil and cook over moderate heat until browned on the bottom, about 3 minutes. Flip the burgers, invert a large heatproof bowl over them and cook until medium within and the cheese is melted, about 3 minutes longer.',
+      'Mound the arugula on the bun bottoms and top with the burgers. Drain the pickled cabbage and mound some of it on the burgers; reserve the rest of the pickled cabbage for another use. Top with the fried shallots and the bun tops and serve.']
+    let i = 0;
+    let addStep = setInterval(() => {
+      let arr = []
+      if (!this.state.stepsArray) {
+        arr = [];
+      }
+      else {
+        arr = this.state.stepsArray
+      }
+      arr.push(steps[i])
+      this.setState({
+        steps: '',
+        stepsArray: arr
+      })
+      i++;
+      if (i > steps.length - 1) {
+        clearTimeout(addStep);
+      }
+    }, 300)
+  }
   IngredContainer = () => {
     return (
       <div className='container'>
@@ -131,18 +206,19 @@ class Create extends Component {
           <div className='col m10'>
             <form>
               <div className='row' style={{ margin: '0px' }}>
-                <div className='input-field col m10' >
+                <div className='input-field col m10'>
                   <input type='text' name='ingredients' className='validate' value={this.state.ingredients} onChange={this.handleInput} />
                 </div>
                 <div className='col m2'>
                   <button className='btn waves-light orange lighten-2 valign-wrapper' type='submit' name='action' onClick={this.handleAddIngred}>Add</button>
+                  <button className='btn waves-light orange lighten-2 valign-wrapper' type='submit' name='action' onClick={this.demoIngred} style={{ marginTop: '5px' }}>Demo</button>
                 </div>
               </div>
             </form>
             <div className='row' style={{ margin: '0px' }}>
-              <ul className='list'>
+              <ol className='list'>
                 <this.ListIngredients />
-              </ul>
+              </ol>
             </div>
           </div>
         </div>
@@ -156,19 +232,20 @@ class Create extends Component {
           <h4 style={{ marginTop: '0px' }}>Steps</h4>
           <div className='col m10'>
             <form>
-              <div className='row'>
+              <div className='row' style={{ margin: '0px' }}>
                 <div className='input-field col m10' style={{ marginTop: '0px' }}>
                   <input type='text' name='steps' className='validate' value={this.state.steps} onChange={this.handleInput} />
                 </div>
                 <div className='col m2'>
                   <button className='btn waves-light orange lighten-2 valign-wrapper' type='submit' name='action' onClick={this.handleAddSteps}>Add</button>
+                  <button className='btn waves-light orange lighten-2 valign-wrapper' type='submit' name='action' onClick={this.demoSteps} style={{ marginTop: '5px' }}>Demo</button>
                 </div>
               </div>
             </form>
             <div className='row'>
-              <ul className='list'>
+              <ol className='list'>
                 <this.ListSteps />
-              </ul>
+              </ol>
             </div>
           </div>
         </div>
@@ -194,9 +271,9 @@ class Create extends Component {
   }
   handleCreate = async (e) => {
     e.preventDefault();
-    let { users_id, title, source_url, ingredientsArray, stepsArray, file } = this.state
+    let {users_id, title, source_url, ingredientsArray, stepsArray, file } = this.state
     if (!title || !source_url || !ingredientsArray || !stepsArray || !file) {
-      console.log("EMPTY")
+      M.toast({html: 'Please fill out all forms.'})
     }
     const root = firebase.storage().ref();
     const newImage = root.child(`${users_id}/${file.name}`);
@@ -204,8 +281,10 @@ class Create extends Component {
       const snapshot = await newImage.put(this.state.file);
       const url = await snapshot.ref.getDownloadURL();
       postRecipes(users_id, title, url, source_url, ingredientsArray, stepsArray)
-        .then((res) => {
-
+        .then(() => {
+          this.setState({
+            Redirect : true
+          })
         })
     }
     catch (err) {
@@ -216,9 +295,21 @@ class Create extends Component {
     e.preventDefault()
     this.setState({ title: e.target.value })
   }
-  render() {
+  handleUser = (props) =>{
+    console.log(props.user)
+    getUser(props.user.email)
+    .then((res)=>{
+      console.log(res)
+      this.setState({
+        users_id: res
+      })
+    })
+    return <></>
+  }
+  LoggedIn = (props) => {
     return (
       <div className='counterTop'>
+      <this.handleUser user={props.user}/>
         <div className='container ' style={{ paddingTop: '50px' }}>
           <div className='row'>
             <div className='col s11 m5 l5 leftBind center-align'>
@@ -244,6 +335,29 @@ class Create extends Component {
           </div>
         </div>
       </div>
+    )
+  }
+  render() {
+    return (<>
+      <AuthContext.Consumer>
+        {
+          user => {
+            if (user) {
+              return (
+                <>
+                  <this.handleRedirect />
+                  <this.LoggedIn user={user}/>
+                </>
+              )
+            } else {
+              return (<>
+                <Redirect to='/' />
+              </>)
+            }
+          }
+        }
+      </AuthContext.Consumer>
+    </>
     )
   }
 }
