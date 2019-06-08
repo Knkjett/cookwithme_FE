@@ -1,6 +1,6 @@
 @media only screen and (min-width: 600px) {
     .cookBG { 
-        background-image: url('../assets/carrots-food-fresh-616401.jpg'); 
+        background-image: url('../assets/carrots-food.jpg'); 
         background-repeat: no-repeat;
         background-size: cover;
         height: 92vh;
@@ -12,13 +12,8 @@
     .opacitywebmobile{
         opacity: .5
     }
-    .button-container {
-        position: absolute;
-        bottom: 60px;
-        left: 22%
-    }
 
-    .middle{
+    .contentmiddle{
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -39,7 +34,7 @@
     .opacitywebmobile{
         opacity: .7
     }
-    .middle{
+    .contentmiddle{
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -48,16 +43,9 @@
     }
 }
 
-.idk{
-    position: absolute;
-    top: 50%;  /* position the top  edge of the element at the middle of the parent */
-    left: 50%; /* position the left edge of the element at the middle of the parent */
-
-    transform: translate(-50%, -50%); /* This is a shorthand of
-                                         translateX(-50%) and translateY(-50%) */
+.ingredient-scroll{
+    overflow: scroll;
+    max-height: 200px;
 }
 
-.list{
-    font-family:'Futura';
-    font-size: '20px'
-}
+
