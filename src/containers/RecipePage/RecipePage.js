@@ -1,6 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {checkRecipe, getFood2Fork, postRecipes} from '../../services/services';
+import {findRecipe, checkRecipe, getFood2Fork, postRecipes} from '../../services/services';
 import { Link } from 'react-router-dom'
 
 
@@ -18,10 +18,12 @@ export default class RecipePage extends React.Component {
     // console.log(this.props.location.state)
     let title = this.props.location.pathname.split('/recipepage/')[1]
     if (!this.props.location.state){
-      // checkRecipe(url)
+      findRecipe(title)
+      .then((res)=>{
+        this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
+      })
     }
     else{
-      console.log("HERE")
     let {publisher, url, source_img} = this.props.location.state
   //   let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
   //   let publisher = "http://foodnetwork.com"

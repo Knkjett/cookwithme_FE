@@ -1,9 +1,12 @@
 import axios from 'axios'
+// const allrecipe = 'https://cookwithme.herokuapp.com/webscrape/allrecipe'
+// const network = 'https://cookwithme.herokuapp.com/webscrape/foodnetwork'
+// const closet = 'https://cookwithme.herokuapp.com/webscrape/closetcooking'
+// const pioneer = 'https://cookwithme.herokuapp.com/webscrape/pioneerwoman'
 const allrecipe = 'http://localhost:5001/webscrape/allrecipe'
 const network = 'http://localhost:5001/webscrape/foodnetwork'
 const closet = 'http://localhost:5001/webscrape/closetcooking'
 const pioneer = 'http://localhost:5001/webscrape/pioneerwoman'
-
 const allrecipeIngred = (sourceurl) => {
   return (axios({
     method: 'post',

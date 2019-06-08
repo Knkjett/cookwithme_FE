@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './SignInHome.css';
-import axios from 'axios';
 import { defaultRecipes } from '../services/services'
 import AuthContext from '../contexts/auth'
 import M from 'materialize-css';
@@ -54,7 +53,7 @@ class SignInHome extends Component {
                                         if (this.state.favs[i] === 0) classStr = 'btn-floating disabled halfway-fab waves-light red'
                                         if (this.state.favs[i] === 1) classStr = 'btn-floating halfway-fab waves-light red'
                                         //console.log(classStr)
-                                        return <div className="col s12 m3">
+                                        return <div className="col s12 m3" key={i}>
                                             <div className="card">
                                                 <div className="card-image">
 
