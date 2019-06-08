@@ -28,6 +28,8 @@ const getFood2Fork = async(query) => {
       method:'get',
       // baseURL: 'https://www.food2fork.com/api/search?key=0a689ee4c676e04aaae774935df0e3d8',
         // baseURL: 'https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca',
+        // baseURL: 'https://www.food2fork.com/api/search?key=a8839d03739298aec777e6819a1184c8',
+        // baseURL: 'https://www.food2fork.com/api/search?key=100badb571d2bc0c4ab6c3f6545f843f&q=chicken'
       q: query
     })
       .then((res)=>{
@@ -37,7 +39,7 @@ const getFood2Fork = async(query) => {
 
 const defaultRecipes = () =>{
   let recipes_arr = null
-  return axios.get('https://www.food2fork.com/api/search?key=100badb571d2bc0c4ab6c3f6545f843f&q=chicken')
+  return axios.get('https://www.food2fork.com/api/search?key=a8839d03739298aec777e6819a1184c8')
         .then(res=>{
             console.log(res.data)
             recipes_arr = res.data.recipes.filter(e=>{

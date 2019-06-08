@@ -9,10 +9,9 @@ export default class UserProfile extends Component {
     super(props)
 
     this.state = {
-      user: null,
       favorites: [],
       yourRecipes: [],
-      // recentlyViewed: [], --> Need Local Storage?
+      recentlyViewed: [],
     }
   }
 
