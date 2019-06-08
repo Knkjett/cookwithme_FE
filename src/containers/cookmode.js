@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './cookmode.css'
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
-import Axios from 'axios';
 import Artyom from 'artyom.js';
 import {Redirect} from 'react-router-dom'
-//import ArtyomCommandsManager from '../components/ArtyomCommands';
+
 
 let Jarvis = new Artyom();
 
@@ -211,22 +210,22 @@ class Cookmode extends Component {
     const { steps, currentStepIndex } = this.state;
     return <>
     <this.letRedirect />
-      <div className='cookBG'>
-        <div className="row container">
-          <div className="col s12 m8">
-            <div className="card-panel white opacitywebmobile" style={{ maxHeight: '500px', overflow: 'scroll' }}>
+      <div className='cookBG contentmiddle'>
+        <div className="row container ">
+          <div className="">
+            <div className="card-panel white opacitywebmobile" style={{ maxHeight: '500px', overflow: 'scroll',borderRadius:'38px' }}>
               <span className="black-text fontwebmobile" style={{ fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif', opacity: 1 }}>
                 {steps[currentStepIndex]}
               </span>
             </div>
           </div>
-          <div className="col s12 m4" style={{width:'50%'}}>
-            <ul className="collapsible" data-collapsible="accordion" >
+          <div className="" style={{width:'50%'}}>
+            <ul className="collapsible" data-collapsible="accordion"  >
               <li>
                 <div className="collapsible-header" style={{opacity:0.6}}>
                   <i className="material-icons">dehaze</i>Ingredients</div>
-                <div className="collapsible-body">
-                  <ul style={{backgroundColor:'white'}}>
+                <div className="collapsible-body ingredient-scroll" >
+                  <ul style={{backgroundColor:'white',opacity:0.7}}>
                     <this.ListIngredients />
                   </ul>
                 </div>
@@ -234,7 +233,7 @@ class Cookmode extends Component {
             </ul>
           </div>
         </div>
-        <div className='row container button-container'>
+        <div className='row container' style={{textAlign:'center'}}>
           <div className='col s4 m4' style={{ paddingLeft: 'auto' }}>
             <a className="btn-floating btn-large waves-light red" onClick={this.HandleBackClick}><i className="material-icons">arrow_back</i></a>
           </div>
