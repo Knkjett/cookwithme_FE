@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import {ingredientScrape,stepScrape} from '../services/webscrape'
 import './SignInHome.css';
-import { defaultRecipes } from '../services/services'
+import { checkRecipe, defaultRecipes } from '../services/services'
 import AuthContext from '../contexts/auth'
+import EmailContext from '../contexts/email'
 import M from 'materialize-css';
 
 class SignInHome extends Component {
+    static contextType = EmailContext;
     state = {
         recipes: null,
         buttonActive: 'disabled',
-        favs: [],
         instance:null
     }
     componentDidMount() {
@@ -24,11 +27,6 @@ class SignInHome extends Component {
         });
     }
 
-    toggleFav(i) {
-        const { favs } = this.state
-        favs[i] = favs[i] === 0 ? 1 : 0
-        this.setState({ favs: favs })
-    }
 
     render() {  
         return <>
@@ -51,25 +49,24 @@ class SignInHome extends Component {
                                 </div>
                                 </div>
                                     {this.state.recipes.map((obj, i) => {
-                                        let favbutton = null
-                                        if (this.state.favs[i] === 0) favbutton = 'btn-floating disabled halfway-fab waves-light red'
-                                        if (this.state.favs[i] === 1) favbutton = 'btn-floating halfway-fab waves-light red'
+                        
                                         
                                         return <div className="col s12 m3">
-                                            <div className="card no-shadows">
-                                                <div className="card-image">
-                                                    <img alt='' onClick={() => this.toggleFav(i, user)} style={{ height: '236.17px' }} src={obj.image_url} />
-                                                    <a href='#' className={favbutton}><i className="material-icons">add</i></a>
-                                                </div>
-                                                <div className="card-content" style={{ height: '100px', textAlign: 'center',background:'whitesmoke' }}>
-                                                    <Link to={{
+                                            <Link to={{
                                                         pathname: `/recipepage/${obj.title}`,
                                                         state: { url: obj.source_url, publisher: obj.publisher_url, source_img : obj.image_url }
                                                     }}>
+                                            <div className="card no-shadows">
+                                                <div className="card-image">
+                                                    <img alt='' style={{ height: '236.17px' }} src={obj.image_url} />
+                                                </div>
+                                                <div className="card-content" style={{ height: '100px', textAlign: 'center',background:'whitesmoke' }}>
+                                                    
                                                         <span className="textSize">{obj.title}</span>
-                                                    </Link>
+                                                    
                                                 </div>
                                             </div>
+                                            </Link>
                                         </div>
 
                                     })}
