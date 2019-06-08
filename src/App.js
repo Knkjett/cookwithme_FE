@@ -17,6 +17,7 @@ import Logout from './containers/Logout/Logout';
 //====Context
 import firebase from './firebase';
 import AuthContext from './contexts/auth';
+import EmailContext from './contexts/email'
 
 const Err = () => {
   return (<>
@@ -51,6 +52,7 @@ class App extends Component {
    return( <>
  <HashRouter>
  <AuthContext.Provider value={this.state.user}>
+ <EmailContext.Provider value={this.state.email}>
           <Route path='/' component={Navbar} />
           <Route path='/' component={Member} />
           <Switch>
@@ -64,6 +66,7 @@ class App extends Component {
             <Route component={Err} />
           </Switch>
           <Route path='/' component={Footer} />
+          </EmailContext.Provider>
           </AuthContext.Provider>
       </HashRouter>
     </>);
