@@ -3,7 +3,7 @@ import axios from 'axios';
 // const recipebaseURL = 'https://cookwithme.herokuapp.com/recipes'
 // const usersbaseURL = 'https://cookwithme.herokuapp.com/users'
 const usersbaseURL = 'http://localhost:5001/users'
-const recipebaseURL = 'http://localhost:5001/recipes'
+const recipebaseURL = 'http://localhost:5001/recipes' 
 const checkRecipe = async (url) => {
   return (await (axios({
     method: 'post',
@@ -75,8 +75,15 @@ const defaultRecipes = () => {
             })
             
         }
-   
+ 
+const createUser = (email, token) => {
+  return (axios({
+    method: 'post',
+    baseURL: `${usersbaseURL}/`,
+    data: { email, token}
+  }))
+}
    
 
-export {getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes}
+export {getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes, createUser}
 
