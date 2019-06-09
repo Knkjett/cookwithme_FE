@@ -141,7 +141,7 @@ export default class RecipePage extends React.Component {
                     return (
                       <React.Fragment>
                         <p>
-                        <span className="black-text">{ingred}</span>
+                        <span className="white-text">{ingred}</span>
                           
                         </p>
                       </React.Fragment>
