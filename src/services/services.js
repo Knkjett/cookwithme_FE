@@ -62,7 +62,7 @@ const getFood2Fork = async(query) => {
 
 const defaultRecipes = () => {
   let recipes_arr = null
-  return axios.get('https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca&q=chicken')
+  return axios.get('https://www.food2fork.com/api/search?key=9e56004d7a3bc861088111ea75a9a429&q=chicken')
         .then(res=>{
             console.log(res.data)
             recipes_arr = res.data.recipes.filter(e=>{

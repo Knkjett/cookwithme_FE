@@ -126,14 +126,17 @@ export default class RecipePage extends React.Component {
     }
     else {
       return (<React.Fragment>
-        <div className="row">
+        <div className="row" style={{height:'91vh'}}>
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
                 <img src={this.state.source_img} />
-                <span className="card-title">{title}</span>
+                
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
+              </div>
+              <div class="card-content">
+                <span className="card-title">{title}</span>
               </div>
             </div>
           </div>
