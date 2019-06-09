@@ -5,8 +5,8 @@ import firebase from '../../firebase';
 import $ from 'jquery';
 import AuthContext from '../../contexts/auth';
 import Materialize from 'materialize-css';
-import axios from 'axios';
-
+//import axios from 'axios';
+import {createUser} from '../../services/services';
 
 export default class LoginSignup extends React.Component {
     constructor(props) {
@@ -69,16 +69,14 @@ export default class LoginSignup extends React.Component {
             Materialize.toast({html: 'password did not match'})
         } else {
             firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
-            .then(res=>{
-                 axios.post('http://localhost:5001/users/', {
-                     email:regEmail,
-                     token: res.user.uid
-                     
+            .then(res=> {
+                console.log(res)
+                createUser(regEmail , res.user.uid, {
+                //  axios.post('http://localhost:5001/users/', {
+                //      email:regEmail,
+                //      token: res.user.uid
+    
                 })
-                // .then(id=>{
-                //     console.log(this.props)
-                //     this.props.handleId(id).bind(this)
-                // })
             })
              .catch(err => {
                  const { message } = err;
