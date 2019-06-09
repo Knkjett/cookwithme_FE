@@ -3,6 +3,18 @@
   background-repeat: no-repeat !important;
   background-size: cover !important; */
 }
+.bubble{
+  border-radius: 25px;
+  text-align: center;
+  padding: 1px 0px;
+  border: 1px solid black;
+}
+.grayBubble{
+  background-color: #E6E5EA;
+}
+.blueBubble{
+  background-color: #188ED8;
+}
 .recipeInfo{
   background-color: lightblue;
   border-radius: 25px;

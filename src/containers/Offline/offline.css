@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+body{
+  font-family: 'Lato', sans-serif;
+}
+
 .banner {
   background: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=931&q=80') no-repeat;
   background-size: cover;
@@ -38,8 +43,6 @@
       max-height: 75px !important;
     }
    }
-  
-
 }
 
 .flavorText {
@@ -91,9 +94,4 @@
   overflow: hidden;
   position: relative;
   width: 350px;
-}
-
-
-.searchBar:hover{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

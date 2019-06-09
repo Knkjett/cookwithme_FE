@@ -165,7 +165,7 @@ class Create extends Component {
         ingredientsArray: arr
       })
       i++;
-      if (i > ingred.length - 1) {
+      if (i > ingred.length-1) {
         clearTimeout(addIngred);
       }
     }, 300)
@@ -297,6 +297,7 @@ class Create extends Component {
   }
   handleUser = (props) =>{
     console.log(props.user)
+    if(!this.state.users_id){
     getUser(props.user.email)
     .then((res)=>{
       console.log(res)
@@ -304,6 +305,7 @@ class Create extends Component {
         users_id: res
       })
     })
+  }
     return <></>
   }
   LoggedIn = (props) => {
