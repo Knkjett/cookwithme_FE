@@ -78,5 +78,5 @@ const defaultRecipes = () => {
    
    
 
-export {postRecipes ,checkRecipe,getFood2Fork,defaultRecipes}
+export {getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes}
 
