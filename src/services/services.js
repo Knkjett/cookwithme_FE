@@ -16,8 +16,8 @@ const checkRecipe = async (url) => {
 }
 const findRecipe = async (title) => {
   return (await (axios({
-    method: 'get',
-    baseURL: `${recipebaseURL}/check`,
+    method: 'post',
+    baseURL: `${recipebaseURL}/find`,
     data: { title }
   })
     .then((res) => {

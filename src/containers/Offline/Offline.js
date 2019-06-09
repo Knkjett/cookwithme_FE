@@ -8,15 +8,65 @@ class Offline extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipes: [1, 2, 3, 4, 5, 6, 7]
+      recipes: [
+        {
+        image_url: "http://static.food2fork.com/Bacon2BWrapped2BJalapeno2BPopper2BStuffed2BChicken2B5002B5909939b0e65.jpg",
+        publisher_url: 'http://closetcooking.com',
+        source_url: 'http://www.closetcooking.com/2012/11/bacon-wrapped-jalapeno-popper-stuffed.html',
+        title:'Bacon Wrapped Jalapeno Popper Stuffed Chicken',
+      },
+      {
+        image_url: "https://images.media-allrecipes.com/userphotos/560x315/4521371.jpg",
+        publisher_url: 'http://allrecipes.com',
+        source_url: 'www.allrecipes.com/recipe/256653/on-the-farm-scrambled-eggs/',
+        title: 'On-the-Farm Scrambled Eggs'
+      },
+      {
+        image_url:'http://static.food2fork.com/Buffalo2BChicken2BChowder2B5002B0075c131caa8.jpg',
+        publisher_url:'http://closetcooking.com',
+        source_url:'http://www.closetcooking.com/2011/11/buffalo-chicken-chowder.html',
+        title:'Buffalo Chicken Chowder'
+      },
+      {
+        image_url: 'https://images.media-allrecipes.com/userphotos/720x405/2606852.jpg',
+        publisher_url: 'http://allrecipes.com',
+        source_url: 'www.allrecipes.com/recipe/229960/shrimp-scampi-with-pasta/',
+        title: 'Shrimp Scampi with Pasta'
+      },
+      {
+        image_url: 'http://static.food2fork.com/4515542dbb.jpg',
+        publisher_url:'http://allrecipes.com',
+        source_url: 'http://allrecipes.com/Recipe/Zesty-Slow-Cooker-Chicken-Barbecue/Detail.aspx',
+        title: 'Zesty Slow Cooker Chicken Barbeque',
+      },
+      {
+        image_url: 'http://static.food2fork.com/roastchicken2feab.jpg',
+        publisher_url: "http://thepioneerwoman.com",
+        source_url: "http://thepioneerwoman.com/cooking/2012/08/roast-chicken/",
+        title: "Roast Chicken"
+      },
+      {
+        image_url: "http://static.food2fork.com/cajun0676.jpg",
+        publisher_url: "http://thepioneerwoman.com",
+        source_url: "http://thepioneerwoman.com/cooking/2011/09/cajun-chicken-pasta/",
+        title: "Cajun Chicken Pasta"
+      },
+      {
+        image_url: "http://static.food2fork.com/4024225151_5f477f16caabf9.jpg",
+        publisher_url: "http://thepioneerwoman.com",
+        source_url: "http://thepioneerwoman.com/cooking/2009/10/chicken-parmigiana/",
+        title: "Chicken Parmigiana"
+      }
+    ]
     }
   }
+  
 
   Recipes = () => {
     return this.state.recipes.map((e, i) => {
       return (
         <div className='foodContainer' key={i}>
-          <ExampleRecipe />
+          <ExampleRecipe ele={e}/>
         </div>
       )
     })
@@ -88,15 +138,9 @@ class Offline extends Component {
         </div>
       </div>
       <this.PhonePreview />
-      <form>
-        <div className='container'>
-          <div className='row lighten-3 orange searchBar' style={{ borderRadius: '25px', paddingLeft: '25px', paddingRight: '25px' }}>
-            <div className='col s12 m12' >
-              <input style={{ borderBottom: '0' }} />
-            </div>
-          </div>
-        </div>
-      </form>
+      <div className='orange lighten-3' style={{textAlign: 'center'}}>
+        <h3>Wide selection of Recipes</h3>
+      </div>
       <div className='foodSlider' >
         <this.Recipes />
       </div>
