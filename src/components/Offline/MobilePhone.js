@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import './mobilePhone.css'
 import Logo from '../Logo'
+import Cook from './Cook'
 
 class MobilePhone extends Component {
-  state = {
+ state = {
     recipes: [
       {
         image_url: 'https://thepioneerwoman.com/wp-content/uploads/2018/11/dsc_2678.jpg?w=1000',
@@ -75,41 +76,63 @@ class MobilePhone extends Component {
         ],
         steps: [
           'Set the Instant to “Saute” and allow to warm. ',
-          'Season roast generously with salt and pepper. When Instant Pot says "Hot," add in olive oil and sear roast until browned on all sides. Remove to a clean plate. ',
+          'Season roast generously with salt and pepper. When Instant Pot says "Hot, " add in olive oil and sear roast until browned on all sides. Remove to a clean plate. ',
           'Add in onions and carrots and cook for an additional 3-4 minutes, stirring occasionally. Deglaze with red wine, scraping the bottom of the pot to get all of the delicious bits. Add in the beef stock, rosemary, thyme and the beef. ',
-          'Lock the lid into place, place vent to sealing, push "Manual," and set time to 60 minutes. The Instant Pot will release some steam as it comes up to pressure, then it will seal automatically. ',
+          'Lock the lid into place, place vent to sealing, push "Manual, " and set time to 60 minutes. The Instant Pot will release some steam as it comes up to pressure, then it will seal automatically. ',
           'When the cooking time is done, allow the Instant Pot to naturally vent for at least 10 minutes, 20 is better. Using a wooden spoon, carefully push the valve open to release the rest of the pressure. Remove lid. ',
           'Skim a much fat off the top of the liquid as you can before disturbing the roast. Remove the roast to a cutting board and with two forks shred roast. Serve alongside carrots and onions, topped with the pan juices. Serve with mashed potatoes.'
+        ]
+      },
+      {
+        image_url: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/5/8/1/FN_Scott-Conant-Grilled-Chicken_s4x3.jpg.rend.hgtvcom.826.620.suffix/1371616224156.jpeg',
+        title: 'Grilled Chicken with Charred Lemon and Heirloom Tomatoes',
+        ingredients: [
+          '1 1/4 cups extra-virgin olive oil, plus more for brushing',
+          '1 tablespoon Worcestershire sauce',
+          '1 to 2 pinches crushed red pepper flakes',
+          '2 medium onions, sliced into 1/2-inch-thick rounds',
+          '2 bunches scallions, roots trimmed',
+          '1 lemon, sliced',
+          '2 whole chickens, 2 1/2 to 3 pounds each, cut into 8 pieces',
+          'Salt and freshly ground black pepper',
+          'Salt and freshly ground black pepper ',
+          '1/2 cup chopped fresh parsley',
+          '1 tablespoon red wine vinegar',
+          '2 to 3 anchovies, well rinsed, finely chopped, optional',
+          '4 to 6 slices ciabatta bread',
+          '6 to 8 medium very ripe heirloom tomatoes or juicy beefsteak tomatoes, cut into wedges'
+        ],
+        steps: [
+          'Combine 1 cup of the olive oil, the Worcestershire, red pepper flakes, onions, scallions and lemons in a large bowl or large zip-top bag. Add the chicken pieces and toss to coat. Marinate in the refrigerator for at least a few hours.',
+          'Prepare the coals on an outdoor grill to medium hot or heat a gas grill. If using coals, bank them to one side of the grill so that one side is hot and the other less so. ',
+          'Remove the chicken and vegetables from the marinade and transfer to 2 baking sheets. Discard the marinade. Sprinkle the chicken pieces well with salt and pepper and then place the chicken, onions, scallions and lemons onto the grill. You may lose some scallions or lemons, but hopefully most wont fall through the grates! ',
+          'Put the cover on the grill to increase the heat and cook the hell out of the chicken. The grill will smoke like crazy, but try to resist opening the lid for 7 minutes or so. Open the lid, flip the chicken and continue cooking, mostly covered, until the chicken is cooked through, about 35 minutes total. If the chicken, lemon and onions are getting too charred, reduce the heat or move them to a cooler part of the grill, flipping as needed. Remove from the grill and let rest for 5 to 10 minutes before serving.',
+          'Meanwhile, mix together the remaining 1/4 cup olive oil, the parsley, vinegar and anchovies, if using. ',
+          'To serve, brush the bread with olive oil and grill on both sides. Divide the chicken, lemon, scallions and onions among serving plates. Place the tomato wedges alongside and drizzle with the vinaigrette. Serve with the grilled bread.'
         ]
       }
     ],
     page: 'home',
-    current: null
-  }
-  handleClick = e => {
-    this.setState({
-      page: `recipe`,
-      current: e.target.id
-    })
-  }
+    current: null,
+    currStep: 0,
+}
   Home = () => {
     return (<>
-
       <Logo />
-      <div className='mobileBG'>
-        <div className="container">
-          <div className="row" style={{ marginBottom: '0px', overflow: 'scroll', maxHeight: '650px', marginTop: '120px' }}>
+      <div>
+        <div className='container'>
+          <div className='row' style={{ marginBottom: '0px', overflow: 'scroll', maxHeight: '650px', marginTop: '120px' }}>
             {this.state.recipes.map((obj, i) => {
               return (
-                <div className="col s12 m12" key={i}>
-                  <div className="card" style={{ margin: '10px' }}>
-                    <div className="card-image" id={i} onClick={this.handleClick}>
-                      <img style={{ height: '281.17px' }} id={i} src={obj.image_url} />
-                      <a className="btn-floating halfway-fab waves-light red"><i
-                        className="material-icons">add</i></a>
+                <div className='col s12 m12' key={i}>
+                  <div className='card z-depth-3' style={{ margin: '10px' }}>
+                    <div className='card-image' id={i} onClick={this.handleClick}>
+                      <img style={{ height: '281.17px' }} id={i} src={obj.image_url} alt='Food Cover'/>
+                      <button className='btn-floating halfway-fab waves-light red'><i
+                        className='material-icons'>add</i></button>
                     </div>
-                    <div className="card-content" style={{ height: '100px' }}>
-                      <span className="card-title" style={{ fontSize: '18px' }}>{obj.title}</span>
+                    <div className='card-content' style={{ height: '100px' }}>
+                      <span className='card-title truncate' style={{ fontSize: '18px' }}>{obj.title}</span>
                     </div>
                   </div>
                 </div>
@@ -120,10 +143,55 @@ class MobilePhone extends Component {
       </div>
     </>)
   }
+  Recipe = () => {
+    return (<>
+      <div>
+        <button className='btn' onClick={this.handleBack} style={{ marginTop: '50px' }}>Back</button>
+        <div className='container' style={{ paddingTop: '5px' }}>
+          <img src={this.state.recipes[this.state.current].image_url} alt='recipe' style={{ height: '175px' }} />
+          <h5>Ingredients</h5>
+          <ul className='collection recipeInfo'>
+            {
+              this.state.recipes[this.state.current].ingredients.map((e, i) => {
+                return <li className='collection-item' key={i}>{e}</li>
+              })
+            }
+          </ul>
+          <h5>Steps</h5>
+          <ul className='collection recipeInfo'>
+            {
+              this.state.recipes[this.state.current].steps.map((e, i) => {
+                return <li className='collection-item' key={i}>{e}</li>
+              })
+            }
+          </ul>
+          <button className='btn' type='submit' name='action' onClick={this.handleCook}>Cook
+    <i className='material-icons right'>send</i>
+          </button>
+        </div>
+      </div>
+    </>)
+  }
   handleBack = () => {
     this.setState({
       page: 'home',
       current: null
+    })
+  }
+  handleCook = () => {
+    this.setState({
+      page: 'cook'
+    })
+  }
+  handleCookBack = () =>{
+    this.setState({
+      page: 'recipe',
+    })
+  }
+  handleClick = e => {
+    this.setState({
+      page: 'recipe',
+      current: e.target.id
     })
   }
   SliderDemo = () => {
@@ -131,34 +199,10 @@ class MobilePhone extends Component {
       return <this.Home />
     }
     if (this.state.page === 'recipe') {
-      return (
-        <div className='mobileBG'>
-          <button  class="btn" onClick={this.handleBack} style={{ marginTop: '50px' }}>Back</button>
-          <div className="container" style={{paddingTop:'5px'}}>
-            <img src={this.state.recipes[this.state.current].image_url} alt='recipe' style={{height:'175px'}}/>
-            <h5>Ingredients</h5>
-            <ul className='collection recipeInfo'>
-              {
-                this.state.recipes[this.state.current].ingredients.map((e, i) => {
-                  return <li className='collection-item' key={i}>{e}</li>
-                })
-              }
-            </ul>
-            <h5>Steps</h5>
-            <ul className='collection recipeInfo'>
-              {
-                this.state.recipes[this.state.current].steps.map((e, i) => {
-                  return <li className='collection-item' key={i}>{e}</li>
-                })
-              }
-            </ul>
-            <button class="btn" type="submit" name="action">Cook
-    <i class="material-icons right">send</i>
-  </button>
-          </div>
-          </div>
-      )
-
+      return <this.Recipe />
+    }
+    if (this.state.page === 'cook') {
+      return <Cook steps={this.state.recipes[this.state.current].steps} handleCookBack={this.handleCookBack} ingredients={this.state.recipes[this.state.current].ingredients} currStep={this.state.currStep}/>
     }
     else {
       return <></>
@@ -181,7 +225,7 @@ class MobilePhone extends Component {
         <div className='shadow shadow--bl'></div>
       </div>
       <div className='inner-shadow'></div>
-      <div className='screen' >
+      <div className='screen mobileBG' >
         <this.SliderDemo />
       </div>
     </div>)

@@ -1,25 +1,25 @@
 .leftBind{
   padding: 0px !important;
   background: url('../../assets/LeftBind.jpg') no-repeat;
-  height: -moz-available;          
-  height: -webkit-fill-available;  
-  height: fill-available;
+  height: stretch;          
+  height: stretch;  
+  height: stretch;
   background-size: cover;
 }
 .rightBind{
   padding: 0px !important;
   background: url('../../assets/RightBind.jpg') no-repeat;
-  height: -moz-available;          
-  height: -webkit-fill-available;  
-  height: fill-available;
+  height: stretch;          
+  height: stretch;  
+  height: stretch;
   background-size: cover;
 }
 .spine{
   padding: 0px !important;
   background: url('../../assets/Spine.jpg') no-repeat;
-  height: -moz-available;          
-  height: -webkit-fill-available;  
-  height: fill-available;
+  height: stretch;          
+  height: stretch;  
+  height: stretch;
   background-size: cover;
 }
 .counterTop{
