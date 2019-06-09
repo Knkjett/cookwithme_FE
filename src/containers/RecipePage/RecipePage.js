@@ -95,13 +95,6 @@ export default class RecipePage extends React.Component {
     }
   }
 
-  handleOnClick = () => {
-    getFood2Fork('chicken')
-      .then((res) => {
-        console.log(res)
-      })
-  }
-
   toggleFav = () =>{
     if(this.state.favorite === 'btn-floating disabled halfway-fab red'){
       postFav(this.state.users_id,this.state.recipe_id)
@@ -116,12 +109,11 @@ export default class RecipePage extends React.Component {
       .then(()=>this.setState({favorite:'btn-floating disabled halfway-fab red'}))
     }
   }
-
   render() {
     const { title,ingredients, steps } = this.state
     console.log('render title',title)
     if (!ingredients || !steps) {
-      return (<img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='' onClick={this.handleOnClick}/>);
+      return (<div style={{textAlign:'center',height:'92vh'}}><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
        // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {

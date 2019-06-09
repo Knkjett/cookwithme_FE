@@ -97,7 +97,7 @@ class Cookmode extends Component {
         }
       },
       {
-        indexes: ['next', 'text'],
+        indexes: ['next', 'text', 'test'],
         action: () => {
           if(currentStepIndex < stepsLength) {
             this.setState({currentStepIndex:currentStepIndex + 1},()=>{
