@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
-import {ingredientScrape,stepScrape} from '../services/webscrape'
 import './SignInHome.css';
-import { checkRecipe, defaultRecipes } from '../services/services'
+import {getFood2Fork ,checkRecipe, defaultRecipes } from '../services/services'
 import AuthContext from '../contexts/auth'
 import EmailContext from '../contexts/email'
 import M from 'materialize-css';
@@ -13,7 +11,8 @@ class SignInHome extends Component {
     state = {
         recipes: null,
         buttonActive: 'disabled',
-        instance:null
+        instance:null,
+        search: ''
     }
     componentDidMount() {
         defaultRecipes().then(recipes => {
@@ -25,6 +24,20 @@ class SignInHome extends Component {
             direction: 'left',
             hoverEnabled: false
         });
+    }
+    handleSearch = (e) =>{
+        e.preventDefault()
+        getFood2Fork(this.state.search)
+        .then((recipes)=>{
+            console.log(recipes)
+            let favs = Array(recipes.length).fill(0, 0)
+            this.setState({ recipes: recipes, favs: favs })
+        })
+    }
+    handleChange = (e)=>{
+        this.setState({
+            search: e.currentTarget.value
+        })
     }
 
 
@@ -85,7 +98,10 @@ class SignInHome extends Component {
                                     <li><div className="nav-wrapper">
                                         <form>
                                             <div className="input-field">
-                                                <input id="search" type="search" required style={{ background: 'aliceblue', width: '300px', height: '50px' }} />
+                                                <input id="search" type="search" required style={{ background: 'aliceblue', width: '300px', height: '50px' }} value={this.state.search} onChange={this.handleChange} />
+                                                <button className='btn  waves-light' type='submit' name='action' onClick={this.handleSearch}>Search
+                                 <i className='material-icons right'>send</i>
+                                                        </button>
                                             </div>
                                         </form>
                                     </div></li>

@@ -119,17 +119,16 @@ startAssistant() {
     listen: true,
     speed: 1
   }).then(() => {
-    // Display loaded commands in the console
-    //// console.log(Jarvis.getAvailableCommands());
-
-    //Jarvis.say("Welcome to Cook With Me");
-
     _this.setState({
       play_arrow: 'none', pause: 'block'
     });
   }).catch((err) => {
     console.error("Oopsy daisy, this shouldn't happen !", err);
   });
+}
+
+componentWillUnmount = () =>{
+    this.stopAssistant()
 }
 
 stopAssistant() {
@@ -153,16 +152,6 @@ stopAssistant() {
       return <li key={i}>{e}</li>
     })
   }
-  // stopAssistant = () =>{
-  //   this.setState({
-  //     play_arrow: 'block', pause: 'none'
-  //   });
-  // }
-  // startAssistant = () =>{
-  //   this.setState({
-  //     play_arrow: 'none', pause: 'block'
-  //   });
-  // }
   HandleForwardClick = () => {
     const { currStep, stepsLength } = this.state;
     if (currStep + 1 > stepsLength) alert("You're finished cooking!")
