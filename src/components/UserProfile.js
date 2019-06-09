@@ -28,43 +28,55 @@ export default class UserProfile extends Component {
     let elems2 = document.querySelectorAll('.collapsible');
     Materialize.Collapsible.init(elems2, { accordion: true });
 
-    // Get user object from our DB
-    // const {email} = this.props.location.email;
-
-
     // Get favorites by user
-    Axios.get(`http://localhost:5001/favorites/users/3`)
-      .then(res => {
-        let recipeArr = [];
-        // const {favorites} = this.state;
-        for (let i = 0; i < res.data.length; i++) {
-          let recipeID = res.data[i].recipe_id
-          // Get the recipe object for each
-          Axios.get(`http://localhost:5001/recipes/${recipeID}`)
-            .then(recipe => {
-              // console.log('recipe data: ', recipe.data)
-              recipeArr.push(recipe.data)
-              // console.log('recipeArr: ', recipeArr)
-              return recipeArr
-            })
-            .catch(err => console.log(err))
-        }
-        console.log('recipeArr: ', recipeArr)
-        this.setState({ favorites: recipeArr })
-      })
-      .catch(err => console.log(err))
+    this.GetFavorites()
+    // Axios.get(`http://localhost:5001/favorites/users/3`)
+    //   .then(res => {
+    //     let recipeArr = [];
+    //     // const {favorites} = this.state;
+    //     for (let i = 0; i < res.data.length; i++) {
+    //       let recipeID = res.data[i].recipe_id
+    //       // Get the recipe object for each
+    //       Axios.get(`http://localhost:5001/recipes/${recipeID}`)
+    //         .then(recipe => {
+    //           // console.log('recipe data: ', recipe.data)
+    //           recipeArr.push(recipe.data)
+    //           // console.log('recipeArr: ', recipeArr)
+    //           return recipeArr
+    //         })
+    //         .catch(err => console.log(err))
+    //     }
+    //     console.log('recipeArr: ', recipeArr)
+    //     this.setState({ favorites: recipeArr })
+    //   })
+    //   .catch(err => console.log(err))
 
     // Get User Created Reicipes
 
   }
 
-  // GetFavorites = () => {
-  //   // const users_id = 3;
-  //   Axios.get(`http://localhost:5001/favorites/users/3`)
-  //     .then(res => {
-  //       console.log('data is: ', res.data)
-  //     })
-  // }
+  GetFavorites = () => {
+    Axios.get(`http://localhost:5001/favorites/users/3`)
+    .then(res => {
+      let recipeArr = [];
+      // const {favorites} = this.state;
+      for (let i = 0; i < res.data.length; i++) {
+        let recipeID = res.data[i].recipe_id
+        // Get the recipe object for each
+        Axios.get(`http://localhost:5001/recipes/${recipeID}`)
+          .then(recipe => {
+            // console.log('recipe data: ', recipe.data)
+            recipeArr.push(recipe.data)
+            // console.log('recipeArr: ', recipeArr)
+            return recipeArr
+          })
+          .catch(err => console.log(err))
+      }
+      console.log('recipeArr: ', recipeArr)
+      this.setState({ favorites: recipeArr })
+    })
+    .catch(err => console.log(err))
+  }
 
   ListFavorites = () => {
     const { favorites } = this.state;
@@ -105,10 +117,10 @@ export default class UserProfile extends Component {
     if (!yourRecipes) return <></>
     return (
       <>
-        {/* MOBILE APP */}
         {
           favorites.map((e, i) => {
             return (<>
+              {/* MOBILE APP */}
               <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container" key={i}>
                 <div className="card-image">
                   <img src={e.source_img} alt='food pic' />
@@ -133,8 +145,6 @@ export default class UserProfile extends Component {
       </>
     )
   }
-
-
 
 
   render() {
@@ -186,7 +196,6 @@ export default class UserProfile extends Component {
                             <div className="col s6 card small card-container">
                               <div className="card-image">
                                 <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
-
                               </div>
                               <div className="card-content">
                                 <p>Quick blurb about this recipe, maybe.</p>
