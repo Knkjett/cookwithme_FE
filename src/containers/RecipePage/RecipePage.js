@@ -26,11 +26,17 @@ export default class RecipePage extends React.Component {
     // console.log(this.props.location.state)
     getUser(this.context)
     .then(res=>this.setState({users_id:res.id}))
+    
     let title = this.props.location.pathname.split('/recipepage/')[1]
     this.setState({title})
+    
     if (!this.props.location.state){
       findRecipe(title)
       .then((res)=>{
+        Axios.get(`http://localhost:5001/favorites/${this.state.users_id}/favID/${res[0].id}`)
+        .then(res=>{
+          if(res) this.setState({favorite:'btn-floating halfway-fab red'})
+        })
         this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
       })
     }
