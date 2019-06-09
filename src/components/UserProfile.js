@@ -9,6 +9,7 @@ export default class UserProfile extends Component {
     super(props)
 
     this.state = {
+      userObj: {},
       favorites: [],
       yourRecipes: [],
       recentlyViewed: [],
@@ -26,6 +27,10 @@ export default class UserProfile extends Component {
     // Collapsible Initialization
     let elems2 = document.querySelectorAll('.collapsible');
     Materialize.Collapsible.init(elems2, { accordion: true });
+
+    // Get user object from our DB
+    // const {email} = this.state;
+
 
     // Get favorites by user
     Axios.get(`http://localhost:5001/favorites/users/3`)
@@ -103,7 +108,8 @@ export default class UserProfile extends Component {
               )
             }
             else {
-              console.log('user is: ', user.email)
+              console.log('user is: ', user)
+              console.log('state is: ', this.state)
               return (
                 <div className='background'>
                   {/* -------------------------- Styling for Mobile App ----------------------------*/}
