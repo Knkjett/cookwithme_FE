@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../contexts/auth';
-// let handleModal = () =>{
-//   console.log('test')
-//   return <Login />
-// }
+import '../components/member.css';
+
 class Member extends Component {
   render(){
   return (<>
@@ -15,9 +13,9 @@ class Member extends Component {
               return (
                 <>
               <Link to='/userprofile'>
-                  <button style={{position:'fixed',right: '8vw', top:'2vh'}} className="btn-floating btn-large waves-light red"><i className="material-icons">person</i></button>
+                  <button className="btn-floating btn-large waves-light red memberStyle"><i className="material-icons">person</i></button>
                   </Link>
-                  <Link to='/logout'> <button style={{position:'fixed',right: '2vw', top:'2vh'}} className="btn-floating btn-large waves-light red"><i className="material-icons">exit_to_app</i></button></Link>
+                  <Link to='/logout'> <button className="btn-floating btn-large waves-light red exitStyle"><i className="material-icons">exit_to_app</i></button></Link>
                 </>
               )
             } else {

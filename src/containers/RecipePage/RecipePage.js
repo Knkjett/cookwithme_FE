@@ -101,11 +101,8 @@ export default class RecipePage extends React.Component {
 
   toggleFav = () =>{
     if(this.state.favorite === 'btn-floating disabled halfway-fab red'){
-      console.log('jjj',this.context)
       getUser(this.context)
       .then(res=>{
-        //console.log(res.id)
-        //console.log(this.state.recipe_id)
         return Axios.post('http://localhost:5001/favorites',{
           users_id:res.id,
           recipe_id:this.state.recipe_id
