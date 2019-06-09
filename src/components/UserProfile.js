@@ -29,14 +29,30 @@ export default class UserProfile extends Component {
     Materialize.Collapsible.init(elems2, { accordion: true });
 
     // Get user object from our DB
-    // const {email} = this.state;
+    // const {email} = this.props.location.email;
 
 
     // Get favorites by user
     Axios.get(`http://localhost:5001/favorites/users/3`)
       .then(res => {
-        console.log('data is: ', res.data[0].recipe_id)
+        let recipeArr = [];
+        // const {favorites} = this.state;
+        for (let i = 0; i < res.data.length; i++) {
+          let recipeID = res.data[i].recipe_id
+          // Get the recipe object for each
+          Axios.get(`http://localhost:5001/recipes/${recipeID}`)
+            .then(recipe => {
+              // console.log('recipe data: ', recipe.data)
+              recipeArr.push(recipe.data)
+              // console.log('recipeArr: ', recipeArr)
+              return recipeArr
+            })
+            .catch(err => console.log(err))
+        }
+        console.log('recipeArr: ', recipeArr)
+        this.setState({ favorites: recipeArr })
       })
+      .catch(err => console.log(err))
 
     // Get User Created Reicipes
 
@@ -56,39 +72,65 @@ export default class UserProfile extends Component {
     return (
       <>
         {/* MOBILE APP */}
-        <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container">
-          <div className="card-image">
-            <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
-          </div>
-          <div className="card-content" >
-            <p>Recipe Name</p>
-          </div>
-        </div>
-        {/* WEB APP */}
-        <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container">
-          <div className="card-image">
-            <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' style={{ height: '180px', }} />
-          </div>
-          <div className="card-content" style={{ height: '75px', textAlign: 'center', background: 'whitesmoke' }}>
-            <p>Recipe Name</p>
-          </div>
-        </div>
+        {
+          favorites.map((e, i) => {
+            return (<>
+              <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container" key={i}>
+                <div className="card-image">
+                  <img src={e.source_img} alt='food pic' />
+                </div>
+                <div className="card-content" >
+                  <p>{e.title}</p>
+                </div>
+              </div>
+              {/* Web App  */}
+              <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" >
+                <div className="card-image">
+                  <img src={e.source_img} alt='food pic' style={{ height: '180px', }} />
+                </div>
+                <div className="card-content" style={{ height: '75px', textAlign: 'center', background: 'whitesmoke' }}>
+                  <p>{e.title}</p>
+                </div>
+              </div>
+            </>
+            )
+          })
+        }
       </>
     )
   }
 
   ListYourRecipes = () => {
-    const { yourRecipes } = this.state;
+    const { favorites, yourRecipes } = this.state;
     if (!yourRecipes) return <></>
     return (
-      <div className="col s12 m3 card no-shadows card-container">
-        <div className="card-image">
-          <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' style={{ height: '236.17px', }} />
-        </div>
-        <div className="card-content">
-          <p>Recipe Name</p>
-        </div>
-      </div>
+      <>
+        {/* MOBILE APP */}
+        {
+          favorites.map((e, i) => {
+            return (<>
+              <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container" key={i}>
+                <div className="card-image">
+                  <img src={e.source_img} alt='food pic' />
+                </div>
+                <div className="card-content" >
+                  <p>{e.title}</p>
+                </div>
+              </div>
+              {/* Web App  */}
+              <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" >
+                <div className="card-image">
+                  <img src={e.source_img} alt='food pic' style={{ height: '180px', }} />
+                </div>
+                <div className="card-content" style={{ height: '75px', textAlign: 'center', background: 'whitesmoke' }}>
+                  <p>{e.title}</p>
+                </div>
+              </div>
+            </>
+            )
+          })
+        }
+      </>
     )
   }
 
@@ -96,20 +138,22 @@ export default class UserProfile extends Component {
 
 
   render() {
+    const { favorites } = this.state
+    // console.log('state is: ',this.state)
     return (<>
       <AuthContext.Consumer>
         {
           user => {
             if (!user) {
               return (
-                <div style={{height: '96vh'}}>
+                <div style={{ height: '96vh' }}>
                   <img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='loading' />);
                 </div>
               )
             }
             else {
-              console.log('user is: ', user)
-              console.log('state is: ', this.state)
+              // console.log('user is: ', user)
+              // console.log('state is: ', this.state)
               return (
                 <div className='background'>
                   {/* -------------------------- Styling for Mobile App ----------------------------*/}
