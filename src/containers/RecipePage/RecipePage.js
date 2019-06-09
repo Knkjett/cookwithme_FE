@@ -121,19 +121,19 @@ export default class RecipePage extends React.Component {
     const { title,ingredients, steps } = this.state
     console.log('render title',title)
     if (!ingredients || !steps) {
-      return (<img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='' onClick={this.handleOnClick}/>);
+      return (<img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='' onClick={this.handleOnClick}/>);
        // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {
       return (<React.Fragment>
         <div className="row">
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
-          <div class="col s12 m7">
-            <div class="card" style={{margin:0}}>
-              <div class="card-image" onClick={e=>this.toggleFav()}>
+          <div className="col s12 m7">
+            <div className="card" style={{margin:0}}>
+              <div className="card-image" onClick={e=>this.toggleFav()}>
                 <img src={this.state.source_img} />
-                <span class="card-title">{title}</span>
-                <a class={this.state.favorite} ><i class="material-icons">favorite</i></a>
+                <span className="card-title">{title}</span>
+                <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
             </div>
           </div>

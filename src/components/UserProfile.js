@@ -103,7 +103,7 @@ export default class UserProfile extends Component {
             if (!user) {
               return (
                 <div style={{height: '96vh'}}>
-                  <img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='loading' />);
+                  <img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='loading' />);
                 </div>
               )
             }
