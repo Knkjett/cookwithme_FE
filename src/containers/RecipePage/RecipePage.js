@@ -1,6 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
+import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
@@ -33,10 +33,11 @@ export default class RecipePage extends React.Component {
     if (!this.props.location.state){
       findRecipe(title)
       .then((res)=>{
-        Axios.get(`http://localhost:5001/favorites/${this.state.users_id}/favID/${res[0].id}`)
+        getIDfav(this.state.users_id,res[0].id)
         .then(res=>{
-          if(res) this.setState({favorite:'btn-floating halfway-fab red'})
+          if(res) this.setState({favorite:'btn-floating halfway-fab red',favid:res.data.id})
         })
+        
         this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
       })
     }
@@ -53,7 +54,6 @@ export default class RecipePage extends React.Component {
                 this.setState({
                   ingredients: res,
                   source_img: source_img
-
                 })
               })
               .then(() => {
@@ -82,9 +82,12 @@ export default class RecipePage extends React.Component {
           }
           else {
             this.setState({recipe_id:res[0].id, ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img })
-            Axios.get(`http://localhost:5001/favorites/${this.state.users_id}/favID/${res[0].id}`)
+            getIDfav(this.state.users_id,res[0].id)
             .then(res=>{
-              if(res) this.setState({favorite:'btn-floating halfway-fab red'})
+              if(res) {
+                //console.log(data)
+                this.setState({favorite:'btn-floating halfway-fab red',favid:res.data.id})
+              }
             })
           }
         })
@@ -101,20 +104,14 @@ export default class RecipePage extends React.Component {
 
   toggleFav = () =>{
     if(this.state.favorite === 'btn-floating disabled halfway-fab red'){
-      getUser(this.context)
+      postFav(this.state.users_id,this.state.recipe_id)
       .then(res=>{
-        return Axios.post('http://localhost:5001/favorites',{
-          users_id:res.id,
-          recipe_id:this.state.recipe_id
-        })
-      })
-      .then(fav=>{
-        console.log(fav.data.id)
-        this.setState({favorite:'btn-floating halfway-fab red',favid:fav.data.id})
+        console.log(res.id)
+        this.setState({favorite:'btn-floating halfway-fab red',favid:res.id})
       })
     }
     else{
-      console.log(this.state.favid)
+      //console.log(this.state.favid)
       Axios.delete(`http://localhost:5001/favorites/${this.state.favid}`)
       .then(()=>this.setState({favorite:'btn-floating disabled halfway-fab red'}))
     }
@@ -159,7 +156,7 @@ export default class RecipePage extends React.Component {
               </form>
             </div>
             <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'indianred' }}>
-              <span className="black-text">
+              <span className="white-text">
                 {
                   steps.map((steps, i) => {
                     return (

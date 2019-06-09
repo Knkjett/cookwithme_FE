@@ -62,7 +62,7 @@ const getFood2Fork = async(query) => {
 
 const defaultRecipes = () => {
   let recipes_arr = null
-  return axios.get('https://www.food2fork.com/api/search?key=a8839d03739298aec777e6819a1184c8')
+  return axios.get('https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca&q=chicken')
         .then(res=>{
             console.log(res.data)
             recipes_arr = res.data.recipes.filter(e=>{
@@ -73,9 +73,22 @@ const defaultRecipes = () => {
             return recipes_arr.slice(0,15)
             
             })
-            
-        }
- 
+}
+
+const getIDfav = (users_id,recipe_id) =>{
+  return axios.get(`http://localhost:5001/favorites/${users_id}/favID/${recipe_id}`)
+  .then(res=>res)
+}
+
+const postFav = (users_id,recipe_id) =>{
+  console.log(users_id,recipe_id)
+  return axios.post('http://localhost:5001/favorites',{
+          users_id:users_id,
+          recipe_id:recipe_id
+        })
+        .then(res=>res.data)
+}
+
 const createUser = (email, token) => {
   return (axios({
     method: 'post',
@@ -84,6 +97,8 @@ const createUser = (email, token) => {
   }))
 }
    
+   
 
-export {getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes, createUser}
+export {postFav,getIDfav,getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes,createUser}
+
 
