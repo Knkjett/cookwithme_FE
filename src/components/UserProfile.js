@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import '../components/UserProfile.css'
 import AuthContext from '../contexts/auth';
@@ -30,52 +31,51 @@ export default class UserProfile extends Component {
 
     // Get favorites by user
     this.GetFavorites()
-    // Axios.get(`http://localhost:5001/favorites/users/3`)
-    //   .then(res => {
-    //     let recipeArr = [];
-    //     // const {favorites} = this.state;
-    //     for (let i = 0; i < res.data.length; i++) {
-    //       let recipeID = res.data[i].recipe_id
-    //       // Get the recipe object for each
-    //       Axios.get(`http://localhost:5001/recipes/${recipeID}`)
-    //         .then(recipe => {
-    //           // console.log('recipe data: ', recipe.data)
-    //           recipeArr.push(recipe.data)
-    //           // console.log('recipeArr: ', recipeArr)
-    //           return recipeArr
-    //         })
-    //         .catch(err => console.log(err))
-    //     }
-    //     console.log('recipeArr: ', recipeArr)
-    //     this.setState({ favorites: recipeArr })
-    //   })
-    //   .catch(err => console.log(err))
 
     // Get User Created Reicipes
-
+    Axios.get(`http://localhost:5001/favorites/users/3`)
+      .then(res => {
+        let recipeArr = [];
+        // const {favorites} = this.state;
+        for (let i = 0; i < res.data.length; i++) {
+          let recipeID = res.data[i].recipe_id
+          // Get the recipe object for each
+          Axios.get(`http://localhost:5001/recipes/${recipeID}`)
+            .then(recipe => {
+              // console.log('recipe data: ', recipe.data)
+              recipeArr.push(recipe.data)
+              // console.log('recipeArr: ', recipeArr)
+              return recipeArr
+            })
+            .catch(err => console.log(err))
+        }
+        console.log('recipeArr: ', recipeArr)
+        this.setState({ favorites: recipeArr })
+      })
+      .catch(err => console.log(err))
   }
 
   GetFavorites = () => {
-    Axios.get(`http://localhost:5001/favorites/users/3`)
-    .then(res => {
-      let recipeArr = [];
-      // const {favorites} = this.state;
-      for (let i = 0; i < res.data.length; i++) {
-        let recipeID = res.data[i].recipe_id
-        // Get the recipe object for each
-        Axios.get(`http://localhost:5001/recipes/${recipeID}`)
-          .then(recipe => {
-            // console.log('recipe data: ', recipe.data)
-            recipeArr.push(recipe.data)
-            // console.log('recipeArr: ', recipeArr)
-            return recipeArr
-          })
-          .catch(err => console.log(err))
-      }
-      console.log('recipeArr: ', recipeArr)
-      this.setState({ favorites: recipeArr })
-    })
-    .catch(err => console.log(err))
+    Axios.get(`http://localhost:5001/favorites/users/2`)
+      .then(res => {
+        let recipeArr = [];
+        // const {favorites} = this.state;
+        for (let i = 0; i < res.data.length; i++) {
+          let recipeID = res.data[i].recipe_id
+          // Get the recipe object for each
+          Axios.get(`http://localhost:5001/recipes/${recipeID}`)
+            .then(recipe => {
+              // console.log('recipe data: ', recipe.data)
+              recipeArr.push(recipe.data)
+              // console.log('recipeArr: ', recipeArr)
+              return recipeArr
+            })
+            .catch(err => console.log(err))
+        }
+        console.log('recipeArr: ', recipeArr)
+        this.setState({ favorites: recipeArr })
+      })
+      .catch(err => console.log(err))
   }
 
   ListFavorites = () => {
@@ -87,23 +87,35 @@ export default class UserProfile extends Component {
         {
           favorites.map((e, i) => {
             return (<>
-              <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container" key={i}>
-                <div className="card-image">
-                  <img src={e.source_img} alt='food pic' />
+              {/* Mobile App  */}
+                <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container" key={i}>
+                <Link to={{
+                pathname: `/recipepage/${e.title}`,
+                state: { url: e.source_url, publisher: e.publisher_url, source_img: e.image_url }
+              }}>
+                  <div className="card-image">
+                    <img src={e.source_img} alt='food pic' />
+                  </div>
+                  <div className="card-content" >
+                    <p>{e.title}</p>
+                  </div>
+                  </Link>
                 </div>
-                <div className="card-content" >
-                  <p>{e.title}</p>
-                </div>
-              </div>
               {/* Web App  */}
-              <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" >
-                <div className="card-image">
-                  <img src={e.source_img} alt='food pic' style={{ height: '180px', }} />
+                <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" >
+                <Link to={{
+                pathname: `/recipepage/${e.title}`,
+                state: { url: e.source_url, publisher: e.publisher_url, source_img: e.image_url }
+              }}>
+                  <div className="card-image">
+                    <img src={e.source_img} alt='food pic' style={{ height: '180px', }} />
+                  </div>
+                  <div className="card-content" style={{ height: '75px', textAlign: 'center', background: 'whitesmoke' }}>
+                    <p>{e.title}</p>
+                  </div>
+                  </Link>
                 </div>
-                <div className="card-content" style={{ height: '75px', textAlign: 'center', background: 'whitesmoke' }}>
-                  <p>{e.title}</p>
-                </div>
-              </div>
+
             </>
             )
           })
