@@ -24,21 +24,17 @@ export default class RecipePage extends React.Component {
   }
   componentDidMount = (props) => {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
-    // console.log(this.props.location.state)
     
     let title = this.props.location.pathname.split('/recipepage/')[1]
     this.setState({title})
-    console.log('context1',this.context)
     getUser(this.context)
     .then(res=>{
-      console.log('res.......', res);
       this.setState({users_id:res.id});
-    }, ()=>console.log('state after get user...', this.state))
+    })
     if (!this.props.location.state){
       const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
       .then(res=>this.setState({recipe_id:res.id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img}))
-      //console.log(this.state.users_id,this.state.recipe_id)
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
       }
@@ -89,8 +85,6 @@ export default class RecipePage extends React.Component {
               })
           }
           else {
-            console.log('context2',this.context)
-            console.log(this.state)
             this.setState({recipe_id:res[0].id, ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img })
             getIDfav(this.state.users_id,res[0].id)
             .then(res=>{
@@ -114,7 +108,6 @@ export default class RecipePage extends React.Component {
       })
     }
     else{
-      //console.log(this.state.favid)
       Axios.delete(`http://localhost:5001/favorites/${this.state.favid}`)
       .then(()=>{
         this.setState({favorite:'btn-floating disabled halfway-fab red'})
@@ -124,7 +117,6 @@ export default class RecipePage extends React.Component {
   }
   render() {
     const { title,ingredients, steps } = this.state
-    console.log('render title',title)
     if (!ingredients || !steps) {
       return (<div style={{textAlign:'center',height:'92vh'}}><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
        // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);

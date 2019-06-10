@@ -80,12 +80,12 @@ class Cookmode extends Component {
               })
               Jarvis.emptyCommands();
               this.loadCommands()
-              console.log(this.state)
+              
             })
             
           }
           else {
-            console.log('updated state is: ', this.state)
+            
             Jarvis.say('There is no previous step', {
               onEnd() {
                 // Abort the speech recognition when artyom stops talking !
@@ -110,13 +110,13 @@ class Cookmode extends Component {
               })
               Jarvis.emptyCommands();
               this.loadCommands()
-              console.log(this.state)
+              
             })
             
             
           }
           else {
-            console.log('updated state is: ', this.state)
+            
             Jarvis.say('There is no next step', {
               onEnd() {
                 // Abort the speech recognition when artyom stops talking !
@@ -132,7 +132,7 @@ class Cookmode extends Component {
 
   startAssistant() {
     let _this = this;
-    console.log("Artyom succesfully started !");
+
     Jarvis.initialize({
       lang: "en-US",
       debug: true,
@@ -141,10 +141,6 @@ class Cookmode extends Component {
       listen: true,
       speed: 1
     }).then(() => {
-      // Display loaded commands in the console
-      //console.log(Jarvis.getAvailableCommands());
-
-      //Jarvis.say("Welcome to Cook With Me");
 
       _this.setState({
         play_arrow: 'none', pause: 'block'
@@ -157,7 +153,7 @@ class Cookmode extends Component {
   stopAssistant() {
     let _this = this;
     Jarvis.fatality().then(() => {
-      console.log("Jarvis has been succesfully stopped");
+      
       
       _this.setState({
         play_arrow: 'block', pause: 'none'
@@ -183,7 +179,7 @@ class Cookmode extends Component {
     const { currentStepIndex } = this.state;
     if (currentStepIndex - 1 < 0) alert('This is the first step!')
     else this.setState({ currentStepIndex: currentStepIndex - 1 },()=>{
-      console.log('back click',this.state)
+      
       Jarvis.emptyCommands();
       this.loadCommands()
     });
@@ -196,7 +192,7 @@ class Cookmode extends Component {
     else this.setState({ currentStepIndex: currentStepIndex + 1 },()=>{
       Jarvis.emptyCommands();
       this.loadCommands()
-      console.log('forward click',this.state)
+      
     });
   }
 
