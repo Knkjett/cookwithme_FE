@@ -69,7 +69,6 @@ const defaultRecipes = () => {
   let recipes_arr = null
   return axios.get('https://www.food2fork.com/api/search?key=fdc939e395b7b9dcffd93675a6e73dc1&q=chicken')
   .then(res=>{
-            console.log(res.data)
             recipes_arr = res.data.recipes.filter(e=>{
                 return e.publisher ==='Closet Cooking' || e.publisher === "The Pioneer Woman" || e.publisher === 'All Recipes'
             })
@@ -86,7 +85,6 @@ const getIDfav = (users_id,recipe_id) =>{
 }
 
 const postFav = (users_id,recipe_id) =>{
-  console.log(users_id,recipe_id)
   return axios.post('http://localhost:5001/favorites',{
           users_id:users_id,
           recipe_id:recipe_id
