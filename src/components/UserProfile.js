@@ -56,14 +56,14 @@ export default class UserProfile extends Component {
 
   GetFavorites = () => {
     const { users_id} = this.state;
-    Axios.get(`http://localhost:5001/favorites/users/${users_id}`)
+    Axios.get(`https://cookwithme.herokuapp.com/favorites/users/${users_id}`)
       .then(res => {
         let favesArr = [];
         // const {favorites} = this.state;
         for (let i = 0; i < res.data.length; i++) {
           let favesID = res.data[i].recipe_id
           // Get the recipe object for each
-          Axios.get(`http://localhost:5001/recipes/${favesID}`)
+          Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`)
             .then(recipe => {
               // console.log('recipe data: ', recipe.data)
               favesArr.push(recipe.data)
@@ -80,7 +80,7 @@ export default class UserProfile extends Component {
 
   GetYourRecipes = () => {
     const { users_id} = this.state;
-    Axios.get(`http://localhost:5001/recipes/users/${users_id}`)
+    Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id}`)
       .then(res => {
         console.log('recipe date: ', res.data)
         let recipeArr = [];
@@ -88,7 +88,7 @@ export default class UserProfile extends Component {
         for (let i = 0; i < res.data.length; i++) {
           let recipeID = res.data[i].id
           // Get the recipe object for each
-          Axios.get(`http://localhost:5001/recipes/${recipeID}`)
+          Axios.get(`https://cookwithme.herokuapp.com/recipes/${recipeID}`)
             .then(recipe => {
               // console.log('recipe data: ', recipe.data)
               recipeArr.push(recipe.data)

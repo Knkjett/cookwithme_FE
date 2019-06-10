@@ -1,9 +1,9 @@
 import axios from 'axios';
-
+import firebase from '../firebase'
 // const recipebaseURL = 'https://cookwithme.herokuapp.com/recipes'
 // const usersbaseURL = 'https://cookwithme.herokuapp.com/users'
-const usersbaseURL = 'http://localhost:5001/users'
-const recipebaseURL = 'http://localhost:5001/recipes' 
+const usersbaseURL = 'https://cookwithme.herokuapp.com/users'
+const recipebaseURL = 'https://cookwithme.herokuapp.com/recipes' 
 const checkRecipe = async (url) => {
   return (await (axios({
     method: 'post',
@@ -36,8 +36,8 @@ const postRecipes = (users_id = null, title, source_img, source_url = null, ingr
     }));
 }
 
-const getUser = (email) =>{
-  return (axios({
+const getUser = async(email) =>{
+  return await(axios({
     method: 'get',
     baseURL: `${usersbaseURL}/${email}`
   }))
@@ -67,9 +67,8 @@ const getFood2Fork = async(query) => {
 
 const defaultRecipes = () => {
   let recipes_arr = null
-  return axios.get('https://www.food2fork.com/api/search?key=0a689ee4c676e04aaae774935df0e3d8&q=chicken')
-        .then(res=>{
-            console.log(res.data)
+  return axios.get('https://www.food2fork.com/api/search?key=9e56004d7a3bc861088111ea75a9a429&q=chicken')
+  .then(res=>{
             recipes_arr = res.data.recipes.filter(e=>{
                 return e.publisher ==='Closet Cooking' || e.publisher === "The Pioneer Woman" || e.publisher === 'All Recipes'
             })
@@ -81,13 +80,12 @@ const defaultRecipes = () => {
 }
 
 const getIDfav = (users_id,recipe_id) =>{
-  return axios.get(`http://localhost:5001/favorites/${users_id}/favID/${recipe_id}`)
+  return axios.get(`https://cookwithme.herokuapp.com/favorites/${users_id}/favID/${recipe_id}`)
   .then(res=>res)
 }
 
 const postFav = (users_id,recipe_id) =>{
-  console.log(users_id,recipe_id)
-  return axios.post('http://localhost:5001/favorites',{
+  return axios.post('https://cookwithme.herokuapp.com/favorites',{
           users_id:users_id,
           recipe_id:recipe_id
         })
@@ -101,7 +99,8 @@ const createUser = (email, token) => {
     data: { email, token}
   }))
 }
-   
+
+
    
 
 export {postFav,getIDfav,getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes,createUser}
