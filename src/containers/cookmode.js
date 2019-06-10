@@ -231,16 +231,16 @@ class Cookmode extends Component {
         </div>
         <div className='row container' style={{textAlign:'center'}}>
           <div className='col s4 m4' style={{ paddingLeft: 'auto' }}>
-            <a className="btn-floating btn-large waves-light red" onClick={this.HandleBackClick}><i className="material-icons">arrow_back</i></a>
+            <a href='/' className="btn-floating btn-large waves-light red" onClick={this.HandleBackClick}><i className="material-icons">arrow_back</i></a>
           </div>
           <div className='col s4 m4' style={{display:this.state.play_arrow}}>
-            <a className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.startAssistant}>play_arrow</i></a>
+            <a href='/' className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.startAssistant}>play_arrow</i></a>
           </div>
           <div className='col s4 m4' style={{display:this.state.pause}}>
-            <a className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.stopAssistant}>pause</i></a>
+            <a href='/' className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.stopAssistant}>pause</i></a>
           </div>
           <div className='col s4 m4'>
-            <a className="btn-floating btn-large waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></a>
+            <a href='/' className="btn-floating btn-large waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></a>
           </div>
         </div>
         <Link to='/'><div><i class="medium material-icons">highlight_off</i></div></Link>

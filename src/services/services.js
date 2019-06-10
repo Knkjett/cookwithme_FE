@@ -1,5 +1,4 @@
 import axios from 'axios';
-import firebase from '../firebase'
 // const recipebaseURL = 'https://cookwithme.herokuapp.com/recipes'
 // const usersbaseURL = 'https://cookwithme.herokuapp.com/users'
 const usersbaseURL = 'http://localhost:5001/users'

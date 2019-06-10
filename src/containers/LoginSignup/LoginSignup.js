@@ -103,7 +103,7 @@ export default class LoginSignup extends React.Component {
                                                 <div className='card center-align mg front'>
                                                     <div className='card-content'>
                                                         <span className='card-title login-title'>Login</span>
-                                                        <a className='btn-floating halfway-fab waves-light red' id='bt'><i className='material-icons'>person_add</i></a>
+                                                        <a href='/' className='btn-floating halfway-fab waves-light red' id='bt'><i className='material-icons'>person_add</i></a>
                                                         <div className='input-field'>
                                                             <input id='email' type='email' className='validate' aria-describedby='emailHelp' name='email' value={email} onChange={this.handleChange} />
                                                             <label htmlFor='email'>Email</label>
@@ -127,7 +127,7 @@ export default class LoginSignup extends React.Component {
                                                 <div className='card center-align mg back'>
                                                     <div className='card-content '>
                                                         <span className='card-title login-title'>Registration</span>
-                                                        <a className='btn-floating halfway-fab  waves-light red' id='bt2'><i className='material-icons'>person</i></a>
+                                                        <a href='/' className='btn-floating halfway-fab  waves-light red' id='bt2'><i className='material-icons'>person</i></a>
                                                         <div className='input-field' >
                                                             <input id='regemail' type='email' className='validate' name='regEmail' value={regEmail} onChange={this.handleChange} />
                                                             <label htmlFor='regemail'>Email</label>
