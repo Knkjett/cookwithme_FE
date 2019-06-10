@@ -129,7 +129,7 @@ export default class RecipePage extends React.Component {
               <div className="card-image" onClick={e=>this.toggleFav()}>
                 <img src={this.state.source_img} style={{maxHeight: '500px'}} alt='' />
                 
-                <a href='/' className={this.state.favorite} ><i className="material-icons">favorite</i></a>
+                <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
               <div class="card-content">
                 <span className="card-title">{title}</span>
