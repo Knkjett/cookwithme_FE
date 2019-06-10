@@ -196,7 +196,7 @@ export default class UserProfile extends Component {
 
 
   render() {
-    const { favorites } = this.state
+    //const { favorites } = this.state
     // console.log('state is: ',this.state)
     return (<>
       <AuthContext.Consumer>

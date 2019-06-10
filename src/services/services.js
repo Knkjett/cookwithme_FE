@@ -1,5 +1,4 @@
 import axios from 'axios';
-import firebase from '../firebase'
 // const recipebaseURL = 'https://cookwithme.herokuapp.com/recipes'
 // const usersbaseURL = 'https://cookwithme.herokuapp.com/users'
 const usersbaseURL = 'https://cookwithme.herokuapp.com/users'
@@ -50,7 +49,7 @@ const getFood2Fork = async(query) => {
   let recipes_arr = null
     return(await(axios({
       method:'get',
-      baseURL: `https://www.food2fork.com/api/search?key=0a689ee4c676e04aaae774935df0e3d8&q=${query}`,
+      //baseURL: `https://www.food2fork.com/api/search?key=0a689ee4c676e04aaae774935df0e3d8&q=${query}`,
         // baseURL: `https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca&q=${query}`,
         // baseURL: `https://www.food2fork.com/api/search?key=a8839d03739298aec777e6819a1184c8&q=${query}`,
         // baseURL: `https://www.food2fork.com/api/search?key=100badb571d2bc0c4ab6c3f6545f843f&q=${query}`

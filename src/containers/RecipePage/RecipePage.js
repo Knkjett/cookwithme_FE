@@ -1,6 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
+import {postFav,getIDfav,findRecipe, checkRecipe,postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
@@ -119,7 +119,6 @@ export default class RecipePage extends React.Component {
     const { title,ingredients, steps } = this.state
     if (!ingredients || !steps) {
       return (<div style={{textAlign:'center',height:'92vh'}}><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
-       // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {
       return (<React.Fragment>
@@ -128,7 +127,7 @@ export default class RecipePage extends React.Component {
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
-                <img src={this.state.source_img} style={{maxHeight: '500px'}} />
+                <img src={this.state.source_img} style={{maxHeight: '500px'}} alt='' />
                 
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
