@@ -138,7 +138,7 @@ export default class RecipePage extends React.Component {
             </div>
           </div>
           <div className="col s12 m5">
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'indianred' }}>
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown' }}>
               <form action="#">
                 <h5>Ingredients</h5>
                 {
@@ -155,7 +155,7 @@ export default class RecipePage extends React.Component {
                 }
               </form>
             </div>
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'indianred' }}>
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown' }}>
               <span className="white-text">
                 {
                   steps.map((steps, i) => {
