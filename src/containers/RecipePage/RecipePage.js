@@ -108,7 +108,7 @@ export default class RecipePage extends React.Component {
       })
     }
     else{
-      Axios.delete(`http://localhost:5001/favorites/${this.state.favid}`)
+      Axios.delete(`https://cookwithme.herokuapp.com/favorites/${this.state.favid}`)
       .then(()=>{
         this.setState({favorite:'btn-floating disabled halfway-fab red'})
         window.localStorage.setItem('recipe',JSON.stringify({favid:null}))
