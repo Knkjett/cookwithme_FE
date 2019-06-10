@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './cookmode.css'
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import Artyom from 'artyom.js';
-import {Redirect} from 'react-router-dom'
+import {Redirect,Link} from 'react-router-dom'
 
 
 let Jarvis = new Artyom();
@@ -247,6 +247,7 @@ class Cookmode extends Component {
             <a className="btn-floating btn-large waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></a>
           </div>
         </div>
+        <Link to='/'><div><i class="medium material-icons">highlight_off</i></div></Link>
       </div>
     </>
   }
