@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import firebase from '../firebase'
 // const recipebaseURL = 'https://cookwithme.herokuapp.com/recipes'
 // const usersbaseURL = 'https://cookwithme.herokuapp.com/users'
 const usersbaseURL = 'http://localhost:5001/users'
@@ -36,8 +36,8 @@ const postRecipes = (users_id = null, title, source_img, source_url = null, ingr
     }));
 }
 
-const getUser = (email) =>{
-  return (axios({
+const getUser = async(email) =>{
+  return await(axios({
     method: 'get',
     baseURL: `${usersbaseURL}/${email}`
   }))
@@ -67,7 +67,7 @@ const getFood2Fork = async(query) => {
 
 const defaultRecipes = () => {
   let recipes_arr = null
-  return axios.get('https://www.food2fork.com/api/search?key=9e56004d7a3bc861088111ea75a9a429&q=chicken')
+  return axios.get('https://www.food2fork.com/api/search?key=fdc939e395b7b9dcffd93675a6e73dc1&q=chicken')
   .then(res=>{
             console.log(res.data)
             recipes_arr = res.data.recipes.filter(e=>{
@@ -101,7 +101,8 @@ const createUser = (email, token) => {
     data: { email, token}
   }))
 }
-   
+
+
    
 
 export {postFav,getIDfav,getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes,createUser}

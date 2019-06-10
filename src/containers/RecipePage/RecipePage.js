@@ -4,6 +4,7 @@ import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getU
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
+import firebase from '../../firebase'
 
 
 export default class RecipePage extends React.Component {
@@ -24,22 +25,29 @@ export default class RecipePage extends React.Component {
   componentDidMount = (props) => {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
     // console.log(this.props.location.state)
-    getUser(this.context)
-    .then(res=>this.setState({users_id:res.id}))
     
     let title = this.props.location.pathname.split('/recipepage/')[1]
     this.setState({title})
-    
+    console.log('context1',this.context)
+    getUser(this.context)
+    .then(res=>{
+      console.log('res.......', res);
+      this.setState({users_id:res.id});
+    }, ()=>console.log('state after get user...', this.state))
     if (!this.props.location.state){
+      const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
-      .then((res)=>{
-        getIDfav(this.state.users_id,res[0].id)
-        .then(res=>{
-          if(res) this.setState({favorite:'btn-floating halfway-fab red',favid:res.data.id})
-        })
-        
-        this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
+      .then(res=>this.setState({recipe_id:res.id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img}))
+      //console.log(this.state.users_id,this.state.recipe_id)
+      if(recipe_object.favid){
+        this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
+      }
+      firebase.auth().onAuthStateChanged(user=>{
+        getUser(user.email)
+        .then(res=>this.setState({users_id:res.id}))
       })
+      
+
     }
     else{
     let {publisher, url, source_img} = this.props.location.state
@@ -81,11 +89,13 @@ export default class RecipePage extends React.Component {
               })
           }
           else {
+            console.log('context2',this.context)
+            console.log(this.state)
             this.setState({recipe_id:res[0].id, ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img })
             getIDfav(this.state.users_id,res[0].id)
             .then(res=>{
               if(res) {
-                //console.log(data)
+                window.localStorage.setItem('recipe',JSON.stringify({favid:res.data.id}))
                 this.setState({favorite:'btn-floating halfway-fab red',favid:res.data.id})
               }
             })
@@ -99,14 +109,17 @@ export default class RecipePage extends React.Component {
     if(this.state.favorite === 'btn-floating disabled halfway-fab red'){
       postFav(this.state.users_id,this.state.recipe_id)
       .then(res=>{
-        console.log(res.id)
+        window.localStorage.setItem('recipe',JSON.stringify({favid:res.id}))
         this.setState({favorite:'btn-floating halfway-fab red',favid:res.id})
       })
     }
     else{
       //console.log(this.state.favid)
       Axios.delete(`http://localhost:5001/favorites/${this.state.favid}`)
-      .then(()=>this.setState({favorite:'btn-floating disabled halfway-fab red'}))
+      .then(()=>{
+        this.setState({favorite:'btn-floating disabled halfway-fab red'})
+        window.localStorage.setItem('recipe',JSON.stringify({favid:null}))
+      })
     }
   }
   render() {
@@ -123,7 +136,7 @@ export default class RecipePage extends React.Component {
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
-                <img src={this.state.source_img} />
+                <img src={this.state.source_img} style={{maxHeight: '500px'}} />
                 
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
