@@ -1,5 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
+import './RecipePage.css'
 import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
@@ -99,6 +100,10 @@ export default class RecipePage extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    this.unsubscribe()
+  }
+
   toggleFav = () =>{
     if(this.state.favorite === 'btn-floating disabled halfway-fab red'){
       postFav(this.state.users_id,this.state.recipe_id)
@@ -123,9 +128,9 @@ export default class RecipePage extends React.Component {
     }
     else {
       return (<React.Fragment>
-        <div className="row" style={{height:'91vh'}}>
+        <div className="row pageHeight" style={{paddingRight:'0.75rem !important'}}>
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
-          <div className="col s12 m7">
+          <div className="col s12 m7" style={{padding:0,paddingRight:'0.75rem !important'}}>
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
                 <img src={this.state.source_img} style={{maxHeight: '500px'}} />
@@ -138,7 +143,7 @@ export default class RecipePage extends React.Component {
             </div>
           </div>
           <div className="col s12 m5">
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown' }}>
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown',margin:0 }}>
               <form action="#">
                 <h5>Ingredients</h5>
                 {
