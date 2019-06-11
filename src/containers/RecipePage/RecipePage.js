@@ -101,7 +101,7 @@ export default class RecipePage extends React.Component {
   }
 
   componentWillUnmount(){
-    this.unsubscribe()
+    //this.unsubscribe()
   }
 
   toggleFav = () =>{

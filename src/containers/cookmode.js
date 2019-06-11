@@ -209,7 +209,7 @@ class Cookmode extends Component {
       <div className='cookBG contentmiddle'>
         <div className="row container " style={{marginTop: '25px'}}>
           <div className="">
-            <div className="card-panel white opacitywebmobile" style={{ maxHeight: '500px', overflow: 'scroll',borderRadius:'38px' }}>
+            <div className="card-panel white opacitywebmobile" style={{ maxHeight: '300px', overflow: 'scroll',borderRadius:'38px' }}>
               <span className="black-text fontwebmobile" style={{ fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif', opacity: 1 }}>
                 {steps[currentStepIndex]}
               </span>
