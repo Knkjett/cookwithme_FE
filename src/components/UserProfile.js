@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/services';
-import Materialize from 'materialize-css/dist/js/materialize.min.js';
-import '../components/UserProfile.css'
 import AuthContext from '../contexts/auth';
 import Axios from 'axios';
+import firebase from '../firebase';
+import Materialize from 'materialize-css/dist/js/materialize.min.js';
+import '../components/UserProfile.css'
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -30,11 +31,26 @@ export default class UserProfile extends Component {
     let elems2 = document.querySelectorAll('.collapsible');
     Materialize.Collapsible.init(elems2, { accordion: true });
   }
+
   componentDidMount = () => {
-    // this.handleUser();
-    this.GetFavorites();
-    this.GetYourRecipes();
-    // this.GetRecentlyViewed();
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        getUser(user.email)
+          .then((res) => {
+            console.log('user info from UP: ', res)
+            this.setState({
+              users_id: res.id
+            })
+          })
+      }
+      else {
+        this.setState({ user: null })
+        .then(() => {
+          this.GetFavorites();
+          this.GetYourRecipes();
+        })
+      }
+    })
   }
 
 
@@ -54,14 +70,14 @@ export default class UserProfile extends Component {
 
   GetFavorites = () => {
     const { users_id} = this.state;
-    Axios.get(`http://localhost:5001/favorites/users/${users_id}`)
+    Axios.get(`https://cookwithme.herokuapp.com/favorites/users/${users_id}`)
       .then(res => {
         let favesArr = [];
         // const {favorites} = this.state;
         for (let i = 0; i < res.data.length; i++) {
           let favesID = res.data[i].recipe_id
           // Get the recipe object for each
-          Axios.get(`http://localhost:5001/recipes/${favesID}`)
+          Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`)
             .then(recipe => {
               // console.log('recipe data: ', recipe.data)
               favesArr.push(recipe.data)
@@ -78,7 +94,7 @@ export default class UserProfile extends Component {
 
   GetYourRecipes = () => {
     const { users_id} = this.state;
-    Axios.get(`http://localhost:5001/recipes/users/${users_id}`)
+    Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id}`)
       .then(res => {
         console.log('recipe date: ', res.data)
         let recipeArr = [];
@@ -86,7 +102,7 @@ export default class UserProfile extends Component {
         for (let i = 0; i < res.data.length; i++) {
           let recipeID = res.data[i].id
           // Get the recipe object for each
-          Axios.get(`http://localhost:5001/recipes/${recipeID}`)
+          Axios.get(`https://cookwithme.herokuapp.com/recipes/${recipeID}`)
             .then(recipe => {
               // console.log('recipe data: ', recipe.data)
               recipeArr.push(recipe.data)
@@ -100,10 +116,6 @@ export default class UserProfile extends Component {
       })
       .catch(err => console.log(err))
   }
-
-  // GetRecentlyViewed = () => {
-
-  // }
 
   ListFavorites = () => {
     const { favorites } = this.state;
@@ -196,8 +208,8 @@ export default class UserProfile extends Component {
 
 
   render() {
-    const { favorites } = this.state
-    // console.log('state is: ',this.state)
+    //const { favorites } = this.state
+    console.log('state is: ',this.state)
     return (<>
       <AuthContext.Consumer>
         {
