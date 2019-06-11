@@ -1,6 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {postFav,getIDfav,findRecipe, checkRecipe,postRecipes,getUser} from '../../services/services';
+import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
@@ -38,7 +38,7 @@ export default class RecipePage extends React.Component {
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
       }
-      firebase.auth().onAuthStateChanged(user=>{
+      this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
         getUser(user.email)
         .then(res=>this.setState({users_id:res.id}))
       })
@@ -118,21 +118,21 @@ export default class RecipePage extends React.Component {
   render() {
     const { title,ingredients, steps } = this.state
     if (!ingredients || !steps) {
-      return (<div><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
-      // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
+      return (<div style={{textAlign:'center',height:'92vh'}}><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
+       // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {
       return (<React.Fragment>
-        <div className="row">
+        <div className="row" style={{height:'91vh'}}>
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
-                <img src={this.state.source_img} style={{maxHeight: '500px'}} alt='' />
+                <img src={this.state.source_img} style={{maxHeight: '500px'}} />
                 
-                <button className={this.state.favorite} ><i className="material-icons">favorite</i></button>
+                <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
-              <div className="card-content">
+              <div class="card-content">
                 <span className="card-title">{title}</span>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default class RecipePage extends React.Component {
                   ingredients.map((ingred, i) => {
                     return (
                       <React.Fragment>
-                        <p key={i}>
+                        <p>
                         <span className="white-text">{ingred}</span>
                           
                         </p>
@@ -161,7 +161,7 @@ export default class RecipePage extends React.Component {
                   steps.map((steps, i) => {
                     return (
                       <React.Fragment>
-                        <li key={i}>
+                        <li>
                           {steps}
                         </li>
                       </React.Fragment>
@@ -173,7 +173,7 @@ export default class RecipePage extends React.Component {
             <Link to={{
               pathname: `/cookmode/`,
               cook: { ingredients: this.state.ingredients, steps: this.state.steps }
-            }}> <div className='btn' style={{color:'white'}}>Cook Now
+            }}> <div className='btn' style={{color:'crimson'}}>Cook Now
                 </div> </Link>
                 
           </div>
