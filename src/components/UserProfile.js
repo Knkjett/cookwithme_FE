@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/services';
-import Materialize from 'materialize-css/dist/js/materialize.min.js';
-import '../components/UserProfile.css'
 import AuthContext from '../contexts/auth';
 import Axios from 'axios';
+import firebase from '../firebase';
+import Materialize from 'materialize-css/dist/js/materialize.min.js';
+import '../components/UserProfile.css'
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -30,11 +31,27 @@ export default class UserProfile extends Component {
     let elems2 = document.querySelectorAll('.collapsible');
     Materialize.Collapsible.init(elems2, { accordion: true });
   }
+
   componentDidMount = () => {
-    // this.handleUser();
-    // this.GetFavorites();
-    // this.GetYourRecipes();
-    // this.GetRecentlyViewed();
+
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        getUser(user.email)
+          .then((res) => {
+            console.log('user info from UP: ', res)
+            this.setState({
+              users_id: res.id
+            })
+          })
+      }
+      else {
+        this.setState({ user: null })
+        .then(() => {
+          this.GetFavorites();
+          this.GetYourRecipes();
+        })
+      }
+    })
   }
 
 
@@ -45,7 +62,7 @@ export default class UserProfile extends Component {
         .then((res) => {
           console.log('user info: ', res.id)
           this.setState({
-            users_id: res.id
+            users_id: res.id 
           })
           this.GetFavorites();
           this.GetYourRecipes();
@@ -102,10 +119,6 @@ export default class UserProfile extends Component {
       })
       .catch(err => console.log(err))
   }
-
-  // GetRecentlyViewed = () => {
-
-  // }
 
   ListFavorites = () => {
     const { favorites } = this.state;
