@@ -118,11 +118,12 @@ export default class RecipePage extends React.Component {
   render() {
     const { title,ingredients, steps } = this.state
     if (!ingredients || !steps) {
-      return (<div style={{textAlign:'center',height:'92vh'}}><img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
+      return (<div><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
+      // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {
       return (<React.Fragment>
-        <div className="row" style={{height:'91vh'}}>
+        <div className="row">
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
