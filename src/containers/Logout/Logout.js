@@ -14,7 +14,6 @@ export default class Logout extends React.Component {
     firebase.auth().signOut()
   }
   handleTimer = () =>{
-    let i = false
     setInterval(()=>{ 
      this.setState({redirect : true})
      }, 3000);

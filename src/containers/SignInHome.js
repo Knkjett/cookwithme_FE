@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './SignInHome.css';
-import {getFood2Fork ,checkRecipe, defaultRecipes } from '../services/services'
+import {getFood2Fork,defaultRecipes } from '../services/services'
 import AuthContext from '../contexts/auth'
 import EmailContext from '../contexts/email'
 import M from 'materialize-css';
@@ -46,8 +46,6 @@ class SignInHome extends Component {
                 {
                     user => {
                         if (this.state.recipes === null) return <div><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>;
-    
-                        
                         else return <>
                             <div className="containerPadding">
                                 <div className="row" style={{ marginBottom: '0px' }}>
@@ -88,10 +86,11 @@ class SignInHome extends Component {
                     }
                 }
             </AuthContext.Consumer>
-            <div className="fixed-action-btn click-to-toggle direction-left">
-                                <a className="btn-floating btn-large red">
+
+            <div className="fixed-action-btn click-to-toggle  direction-left">
+                                <button className="btn-floating btn-large red">
                                     <i className="large material-icons">search</i>
-                                </a>
+                                </button>
                                 <ul>
                                     <li style={{right:'-50px', position:'relative', top:'-18px'}}><div className="nav-wrapper">
                                         <form>

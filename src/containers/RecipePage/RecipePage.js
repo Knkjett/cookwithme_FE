@@ -1,6 +1,6 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
+import {postFav,getIDfav,findRecipe, checkRecipe,postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
@@ -128,11 +128,11 @@ export default class RecipePage extends React.Component {
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
-                <img src={this.state.source_img} style={{maxHeight: '500px'}} />
+                <img src={this.state.source_img} style={{maxHeight: '500px'}} alt='' />
                 
-                <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
+                <button className={this.state.favorite} ><i className="material-icons">favorite</i></button>
               </div>
-              <div class="card-content">
+              <div className="card-content">
                 <span className="card-title">{title}</span>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default class RecipePage extends React.Component {
                   ingredients.map((ingred, i) => {
                     return (
                       <React.Fragment>
-                        <p>
+                        <p key={i}>
                         <span className="white-text">{ingred}</span>
                           
                         </p>
@@ -161,7 +161,7 @@ export default class RecipePage extends React.Component {
                   steps.map((steps, i) => {
                     return (
                       <React.Fragment>
-                        <li>
+                        <li key={i}>
                           {steps}
                         </li>
                       </React.Fragment>
@@ -173,7 +173,7 @@ export default class RecipePage extends React.Component {
             <Link to={{
               pathname: `/cookmode/`,
               cook: { ingredients: this.state.ingredients, steps: this.state.steps }
-            }}> <div className='btn' style={{color:'crimson'}}>Cook Now
+            }}> <div className='btn' style={{color:'white'}}>Cook Now
                 </div> </Link>
                 
           </div>
