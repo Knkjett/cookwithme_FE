@@ -132,7 +132,6 @@ class Create extends Component {
     }
   }
   demoIngred = (e) => {
-    console.log(this.state.user)
     e.preventDefault();
     let ingred = ['Kosher salt',
       '8 cups finely shredded green cabbage (from a 1 1/2-pound head)',
@@ -165,7 +164,7 @@ class Create extends Component {
         ingredientsArray: arr
       })
       i++;
-      if (i > ingred.length - 1) {
+      if (i > ingred.length-1) {
         clearTimeout(addIngred);
       }
     }, 300)
@@ -272,9 +271,10 @@ class Create extends Component {
   handleCreate = async (e) => {
     e.preventDefault();
     let {users_id, title, source_url, ingredientsArray, stepsArray, file } = this.state
-    if (!title || !source_url || !ingredientsArray || !stepsArray || !file) {
+    if (!title || !ingredientsArray || !stepsArray || !file) {
       M.toast({html: 'Please fill out all forms.'})
     }
+    else{
     const root = firebase.storage().ref();
     const newImage = root.child(`${users_id}/${file.name}`);
     try {
@@ -291,19 +291,20 @@ class Create extends Component {
       console.log(err)
     }
   }
+  }
   handleTitle = (e) => {
     e.preventDefault()
     this.setState({ title: e.target.value })
   }
   handleUser = (props) =>{
-    console.log(props.user)
+    if(!this.state.users_id){
     getUser(props.user.email)
     .then((res)=>{
-      console.log(res)
       this.setState({
-        users_id: res
+        users_id: res.id
       })
     })
+  }
     return <></>
   }
   LoggedIn = (props) => {

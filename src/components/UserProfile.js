@@ -209,7 +209,11 @@ export default class UserProfile extends Component {
 
   render() {
     //const { favorites } = this.state
+<<<<<<< HEAD
     console.log('state is: ',this.state)
+=======
+    // console.log('state is: ',this.state)
+>>>>>>> origin
     return (<>
       <AuthContext.Consumer>
         {

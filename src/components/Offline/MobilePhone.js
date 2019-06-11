@@ -4,7 +4,7 @@ import Logo from '../Logo'
 import Cook from './Cook'
 
 class MobilePhone extends Component {
- state = {
+  state = {
     recipes: [
       {
         image_url: 'https://thepioneerwoman.com/wp-content/uploads/2018/11/dsc_2678.jpg?w=1000',
@@ -115,7 +115,7 @@ class MobilePhone extends Component {
     page: 'home',
     current: null,
     currStep: 0,
-}
+  }
   Home = () => {
     return (<>
       <Logo />
@@ -127,7 +127,7 @@ class MobilePhone extends Component {
                 <div className='col s12 m12' key={i}>
                   <div className='card z-depth-3' style={{ margin: '10px' }}>
                     <div className='card-image' id={i} onClick={this.handleClick}>
-                      <img style={{ height: '281.17px' }} id={i} src={obj.image_url} alt='Food Cover'/>
+                      <img style={{ height: '281.17px' }} id={i} src={obj.image_url} alt='Food Cover' />
                       <button className='btn-floating halfway-fab waves-light red'><i
                         className='material-icons'>add</i></button>
                     </div>
@@ -148,7 +148,7 @@ class MobilePhone extends Component {
       <div>
         <button className='btn' onClick={this.handleBack} style={{ marginTop: '50px' }}>Back</button>
         <div className='container' style={{ paddingTop: '5px' }}>
-          <img src={this.state.recipes[this.state.current].image_url} alt='recipe' style={{ height: '175px' }} />
+          <img className= 'z-depth-3' src={this.state.recipes[this.state.current].image_url} alt='recipe' style={{ height: '175px' }} />
           <h5>Ingredients</h5>
           <ul className='collection recipeInfo'>
             {
@@ -183,7 +183,7 @@ class MobilePhone extends Component {
       page: 'cook'
     })
   }
-  handleCookBack = () =>{
+  handleCookBack = () => {
     this.setState({
       page: 'recipe',
     })
@@ -202,14 +202,14 @@ class MobilePhone extends Component {
       return <this.Recipe />
     }
     if (this.state.page === 'cook') {
-      return <Cook steps={this.state.recipes[this.state.current].steps} handleCookBack={this.handleCookBack} ingredients={this.state.recipes[this.state.current].ingredients} currStep={this.state.currStep}/>
+      return <Cook steps={this.state.recipes[this.state.current].steps} handleCookBack={this.handleCookBack} ingredients={this.state.recipes[this.state.current].ingredients} currStep={this.state.currStep} />
     }
     else {
       return <></>
     }
   }
   Phone = () => {
-    return (<div className='marvel-device iphone-x'>
+    return (<div className='marvel-device iphone-x' style={{ width: '100%' }}>
       <div className='notch'>
         <div className='camera'></div>
         <div className='speaker'></div>
@@ -230,15 +230,88 @@ class MobilePhone extends Component {
       </div>
     </div>)
   }
+  SpeechHome = () => {
+    return (<>
+      <div className='row'>
+        <div className='bubble grayBubble col m8'>
+          <p className='flow-text'>Choose from a wide selection of recipes right from your device!</p>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='bubble grayBubble col m8'>
+          <p className='flow-text'>Anywhere. Anytime. Get your desired recipe while on the move!</p>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='bubble blueBubble col offset-m4 m8'>
+          <p className='flow-text'>I'm Starved!</p>
+        </div>
+      </div>
+    </>)
+  }
+  SpeechRecipe = () =>{
+    return (<>
+      <div className='row'>
+        <div className='bubble grayBubble col m8'>
+          <p className='flow-text'>Preview the recipe's ingredients and steps with an easy to read minimalistic design!</p>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='bubble blueBubble col offset-m4 m8'>
+          <p className='flow-text'>Wow!</p>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='bubble grayBubble col m8'>
+          <p className='flow-text'>When you're ready. Press Cook to get things started with Arytom! Our Voice Assist!</p>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='bubble blueBubble col offset-m4 m8'>
+          <p className='flow-text'>All prepped! Lets get cooking!</p>
+        </div>
+      </div>
+    </>)
+  }
+  SpeechCook = () =>{
+    return(<>
+    <div className='row'>
+    <div className='bubble grayBubble col m8'>
+      <p className='flow-text'>Start cooking with voice command! Say: 'Start' to get started!</p>
+    </div>
+  </div>
+  <div className='row'>
+    <div className='bubble blueBubble col offset-m4 m8'>
+      <p className='flow-text'>Start!</p>
+    </div>
+  </div>
+  <div className='row'>
+    <div className='bubble grayBubble col m8'>
+      <p className='flow-text'>Say: 'Next' for next step and 'Previous' for previous step!</p>
+    </div>
+  </div>
+  </>)
+  }
   SpeechPreview = () => {
-    return <></>
+    if (this.state.page === 'home') {
+      return <this.SpeechHome />
+    }
+    if (this.state.page === 'recipe') {
+      return <this.SpeechRecipe />
+    }
+    if (this.state.page === 'cook') {
+      return <this.SpeechCook />
+    }
+    else {
+      return <></>
+    }
   }
   render() {
     return (<>
       <div className='col s12 m5'>
         <this.Phone />
       </div>
-      <div className='col s12 offset-m2 m5'>
+      <div className='col s12 offset-m1 m6'>
         <h4>Try Me!</h4>
         <span className='flow-text'>Mobile </span>
         <span className='flow-text flavorText'>Friendly</span>

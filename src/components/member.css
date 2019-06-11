@@ -1,0 +1,34 @@
+@media only screen and (min-width: 600px) {
+    .memberStyle {
+        position: fixed;
+        padding-top: 2vh;
+        right: 12vh;
+        top: 2vh;
+    }
+     
+    .exitStyle{
+        position:fixed;
+        padding-top: 2vh;
+        right:2vh;
+        top: 2vh;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+   .memberStyle {
+       position: fixed;
+       padding-top: 2vh;
+       right: 12vh;
+       top: 2vh;
+   }
+    .exitStyle{
+        position:fixed;
+        padding-top: 2vh;
+        right:2vh;
+        top: 2vh;
+    }
+
+    
+}
+

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
-import {ingredientScrape,stepScrape} from '../services/webscrape'
 import './SignInHome.css';
-import { checkRecipe, defaultRecipes } from '../services/services'
+import {getFood2Fork,defaultRecipes } from '../services/services'
 import AuthContext from '../contexts/auth'
 import EmailContext from '../contexts/email'
 import M from 'materialize-css';
@@ -13,7 +11,8 @@ class SignInHome extends Component {
     state = {
         recipes: null,
         buttonActive: 'disabled',
-        instance:null
+        instance:null,
+        search: ''
     }
     componentDidMount() {
         defaultRecipes().then(recipes => {
@@ -26,6 +25,19 @@ class SignInHome extends Component {
             hoverEnabled: false
         });
     }
+    handleSearch = (e) =>{
+        e.preventDefault()
+        getFood2Fork(this.state.search)
+        .then((recipes)=>{
+            let favs = Array(recipes.length).fill(0, 0)
+            this.setState({ recipes: recipes, favs: favs })
+        })
+    }
+    handleChange = (e)=>{
+        this.setState({
+            search: e.currentTarget.value
+        })
+    }
 
 
     render() {  
@@ -34,14 +46,14 @@ class SignInHome extends Component {
                 {
                     user => {
                         if (this.state.recipes === null) return <div style={{textAlign:'center',height:'92vh'}}>
-                            <img  class='responsive-img ' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' />
+                            <img className='responsive-img ' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif'  alt=''/>
                         </div>
                         
                         else return <>
                             <div className="containerPadding">
                                 <div className="row" style={{ marginBottom: '0px' }}>
-                                <div class="col s12 m3" >
-                                <div class="card no-shadows">
+                                <div className="col s12 m3" >
+                                <div className="card no-shadows">
                                     <div className="card-content" style={{ height: '336.17px', textAlign: 'center',background:'white', position:'relative' }}>
                                         <span className="welcomeText">Welcome to Cook With Me</span>
 
@@ -49,9 +61,7 @@ class SignInHome extends Component {
                                 </div>
                                 </div>
                                     {this.state.recipes.map((obj, i) => {
-                        
-                                        
-                                        return <div className="col s12 m3">
+                                        return <div className="col s12 m3" key={i}>
                                             <Link to={{
                                                         pathname: `/recipepage/${obj.title}`,
                                                         state: { url: obj.source_url, publisher: obj.publisher_url, source_img : obj.image_url }
@@ -78,14 +88,17 @@ class SignInHome extends Component {
                 }
             </AuthContext.Consumer>
             <div className="fixed-action-btn click-to-toggle">
-                                <a className="btn-floating btn-large red">
+                                <a href='##'className="btn-floating btn-large red">
                                     <i className="large material-icons">search</i>
                                 </a>
                                 <ul>
                                     <li><div className="nav-wrapper">
                                         <form>
                                             <div className="input-field">
-                                                <input id="search" type="search" required style={{ background: 'aliceblue', width: '300px', height: '50px' }} />
+                                                <input id="search" type="search" required style={{ background: 'aliceblue', width: '300px', height: '50px' }} value={this.state.search} onChange={this.handleChange} />
+                                                <button className='btn  waves-light' type='submit' name='action' onClick={this.handleSearch}>Search
+                                 <i className='material-icons right'>send</i>
+                                                        </button>
                                             </div>
                                         </form>
                                     </div></li>

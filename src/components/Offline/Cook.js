@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import './mobilePhone.css'
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
-
+import Artyom from 'artyom.js';
+let Jarvis = new Artyom();
 class Cook extends Component {
   constructor(props) {
     super(props)
+    this.startAssistant = this.startAssistant.bind(this);
+    this.stopAssistant = this.stopAssistant.bind(this);
+    this.loadCommands = this.loadCommands.bind(this)
+    
+    this.jarvis = null
   this.state = {
     currStep: 0,
     play_arrow:'block',
     pause:'none',
-    stepsLength: null
+    stepsLength: 0
   }
 }
 componentDidMount = () =>{
@@ -18,29 +24,151 @@ componentDidMount = () =>{
   this.setState({
     stepsLength: this.props.steps.length-1
   })
+  this.loadCommands()
 }
+loadCommands() {
+  
+  const {currStep} = this.state
+  const steps = this.props.steps
+  const stepsLength = steps.length-1
+  return Jarvis.addCommands([
+    {
+      indexes: ['start', 'star', 'tar', 'tart', 'art','repeat'],
+      action: (i) => {
+        Jarvis.say(steps[currStep], {
+          onEnd() {
+            // Abort the speech recognition when artyom stops talking !
+            // Then, the command won't be triggered when artyom says hello !
+            Jarvis.ArtyomWebkitSpeechRecognition.abort();
+          }
+        });
+
+      }
+    },
+    {
+      indexes: ['previous', 'back', 'past', 'ack', 'prev'],
+      action: () => {
+        if (currStep - 1 >= 0) {
+          this.setState({currStep:currStep - 1},()=>{
+            Jarvis.say(steps[this.state.currStep], {
+              onEnd() {
+                // Abort the speech recognition when artyom stops talking !
+                // Then, the command won't be triggered when artyom says hello !
+                Jarvis.ArtyomWebkitSpeechRecognition.abort();
+              }
+            })
+            Jarvis.emptyCommands();
+            this.loadCommands()
+            // console.log(this.state)
+          })
+          
+        }
+        else {
+          // console.log('updated state is: ', this.state)
+          Jarvis.say('There is no previous step', {
+            onEnd() {
+              // Abort the speech recognition when artyom stops talking !
+              // Then, the command won't be triggered when artyom says hello !
+              Jarvis.ArtyomWebkitSpeechRecognition.abort();
+            }
+          })
+        }
+      }
+    },
+    {
+      indexes: ['next', 'text', 'test'],
+      action: () => {
+        if(currStep < stepsLength) {
+          this.setState({currStep:currStep + 1},()=>{
+            Jarvis.say(steps[this.state.currStep], {
+              onEnd() {
+                // Abort the speech recognition when artyom stops talking !
+                // Then, the command won't be triggered when artyom says hello !
+                Jarvis.ArtyomWebkitSpeechRecognition.abort();
+              }
+            })
+            Jarvis.emptyCommands();
+            this.loadCommands()
+            // console.log(this.state)
+          })
+          
+          
+        }
+        else {
+          // console.log('updated state is: ', this.state)
+          Jarvis.say('There is no next step', {
+            onEnd() {
+              // Abort the speech recognition when artyom stops talking !
+              // Then, the command won't be triggered when artyom says hello !
+              Jarvis.ArtyomWebkitSpeechRecognition.abort();
+            }
+          })
+        }
+      }
+    }
+  ])
+}
+startAssistant() {
+  let _this = this;
+  // console.log("Artyom succesfully started !");
+  Jarvis.initialize({
+    lang: "en-US",
+    debug: true,
+    continuous: true,
+    soundex: true,
+    listen: true,
+    speed: 1
+  }).then(() => {
+    _this.setState({
+      play_arrow: 'none', pause: 'block'
+    });
+  }).catch((err) => {
+    console.error("Oopsy daisy, this shouldn't happen !", err);
+  });
+}
+
+componentWillUnmount = () =>{
+    this.stopAssistant()
+}
+
+stopAssistant() {
+  let _this = this;
+  Jarvis.fatality().then(() => {
+    // console.log("Jarvis has been succesfully stopped");
+    
+    _this.setState({
+      play_arrow: 'block', pause: 'none'
+    });
+
+  }).catch((err) => {
+    console.error("Oopsy daisy, this shouldn't happen neither!", err);
+
+  });
+}
+
+
   ListIngredients = () =>{
     return this.props.ingredients.map((e,i)=>{
       return <li key={i}>{e}</li>
     })
   }
-  stopAssistant = () =>{
-    this.setState({
-      play_arrow: 'block', pause: 'none'
-    });
-  }
-  startAssistant = () =>{
-    this.setState({
-      play_arrow: 'none', pause: 'block'
-    });
-  }
   HandleForwardClick = () => {
-  if (this.state.currStep + 1 > this.state.stepsLength) alert("You're finished cooking!")
-    else this.setState({currStep: this.state.currStep + 1 });
+    const { currStep, stepsLength } = this.state;
+    if (currStep + 1 > stepsLength) alert("You're finished cooking!")
+    else this.setState({ currStep: currStep + 1 },()=>{
+      Jarvis.emptyCommands();
+      this.loadCommands()
+      // console.log('forward click',this.state)
+    });
   }
   HandleBackClick = () => {
-    if (this.state.currStep - 1 < 0) alert("This is the first step!")
-      else this.setState({currStep: this.state.currStep - 1 });
+    const { currStep } = this.state;
+    if (currStep - 1 < 0) alert('This is the first step!')
+    else this.setState({ currStep: currStep - 1 },()=>{
+      // console.log('back click',this.state)
+      Jarvis.emptyCommands();
+      this.loadCommands()
+    });
     }
   Cook = () => {
     return (<>

@@ -1,9 +1,10 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
+import {postFav,getIDfav,findRecipe, checkRecipe,postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
+import firebase from '../../firebase'
 
 
 export default class RecipePage extends React.Component {
@@ -23,16 +24,26 @@ export default class RecipePage extends React.Component {
   }
   componentDidMount = (props) => {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
-    // console.log(this.props.location.state)
-    getUser(this.context)
-    .then(res=>this.setState({users_id:res.id}))
+    
     let title = this.props.location.pathname.split('/recipepage/')[1]
     this.setState({title})
+    getUser(this.context)
+    .then(res=>{
+      this.setState({users_id:res.id});
+    })
     if (!this.props.location.state){
+      const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
-      .then((res)=>{
-        this.setState({ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
+      .then(res=>this.setState({recipe_id:res.id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img}))
+      if(recipe_object.favid){
+        this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
+      }
+      firebase.auth().onAuthStateChanged(user=>{
+        getUser(user.email)
+        .then(res=>this.setState({users_id:res.id}))
       })
+      
+
     }
     else{
     let {publisher, url, source_img} = this.props.location.state
@@ -47,7 +58,6 @@ export default class RecipePage extends React.Component {
                 this.setState({
                   ingredients: res,
                   source_img: source_img
-
                 })
               })
               .then(() => {
@@ -76,9 +86,12 @@ export default class RecipePage extends React.Component {
           }
           else {
             this.setState({recipe_id:res[0].id, ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img })
-            Axios.get(`http://localhost:5001/favorites/${this.state.users_id}/favID/${res[0].id}`)
+            getIDfav(this.state.users_id,res[0].id)
             .then(res=>{
-              if(res) this.setState({favorite:'btn-floating halfway-fab red'})
+              if(res) {
+                window.localStorage.setItem('recipe',JSON.stringify({favid:res.data.id}))
+                this.setState({favorite:'btn-floating halfway-fab red',favid:res.data.id})
+              }
             })
           }
         })
@@ -86,59 +99,45 @@ export default class RecipePage extends React.Component {
     }
   }
 
-  handleOnClick = () => {
-    getFood2Fork('chicken')
-      .then((res) => {
-        console.log(res)
-      })
-  }
-
   toggleFav = () =>{
     if(this.state.favorite === 'btn-floating disabled halfway-fab red'){
-      console.log('jjj',this.context)
-      getUser(this.context)
+      postFav(this.state.users_id,this.state.recipe_id)
       .then(res=>{
-        //console.log(res.id)
-        //console.log(this.state.recipe_id)
-        return Axios.post('http://localhost:5001/favorites',{
-          users_id:res.id,
-          recipe_id:this.state.recipe_id
-        })
-      })
-      .then(fav=>{
-        console.log(fav.data.id)
-        this.setState({favorite:'btn-floating halfway-fab red',favid:fav.data.id})
+        window.localStorage.setItem('recipe',JSON.stringify({favid:res.id}))
+        this.setState({favorite:'btn-floating halfway-fab red',favid:res.id})
       })
     }
     else{
-      console.log(this.state.favid)
-      Axios.delete(`http://localhost:5001/favorites/${this.state.favid}`)
-      .then(()=>this.setState({favorite:'btn-floating disabled halfway-fab red'}))
+      Axios.delete(`https://cookwithme.herokuapp.com/favorites/${this.state.favid}`)
+      .then(()=>{
+        this.setState({favorite:'btn-floating disabled halfway-fab red'})
+        window.localStorage.setItem('recipe',JSON.stringify({favid:null}))
+      })
     }
   }
-
   render() {
     const { title,ingredients, steps } = this.state
-    console.log('render title',title)
     if (!ingredients || !steps) {
-      return (<img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='' onClick={this.handleOnClick}/>);
-       // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
+      return (<div style={{textAlign:'center',height:'92vh'}}><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
     }
     else {
       return (<React.Fragment>
-        <div className="row">
+        <div className="row" style={{height:'91vh'}}>
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
-                <img src={this.state.source_img} />
-                <span className="card-title">{title}</span>
+                <img src={this.state.source_img} style={{maxHeight: '500px'}} alt='' />
+                
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
+              </div>
+              <div class="card-content">
+                <span className="card-title">{title}</span>
               </div>
             </div>
           </div>
           <div className="col s12 m5">
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'indianred' }}>
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown' }}>
               <form action="#">
                 <h5>Ingredients</h5>
                 {
@@ -146,7 +145,7 @@ export default class RecipePage extends React.Component {
                     return (
                       <React.Fragment>
                         <p>
-                        <span className="black-text">{ingred}</span>
+                        <span className="white-text">{ingred}</span>
                           
                         </p>
                       </React.Fragment>
@@ -155,8 +154,8 @@ export default class RecipePage extends React.Component {
                 }
               </form>
             </div>
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'indianred' }}>
-              <span className="black-text">
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown' }}>
+              <span className="white-text">
                 {
                   steps.map((steps, i) => {
                     return (
