@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getUser } from '../services/services';
+import { getUser, getIDfav } from '../services/services';
 import AuthContext from '../contexts/auth';
 import Axios from 'axios';
 import firebase from '../firebase';
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import '../components/UserProfile.css'
+import { async } from 'q';
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -37,29 +38,29 @@ export default class UserProfile extends Component {
       if (user) {
         getUser(user.email)
           .then((res) => {
-            console.log('user info from UP: ', res)
-            this.setState({
+            console.log('ID is: ', res.id)
+            return this.setState({
               users_id: res.id
             })
+          })
+          .then(() => {
+            this.GetFavorites()
+            this.GetYourRecipes();
           })
       }
       else {
         this.setState({ user: null })
-        .then(() => {
-          this.GetFavorites();
-          this.GetYourRecipes();
-        })
       }
     })
   }
 
 
   handleUser = (props) => {
-    console.log(props.user)
+    // console.log(props.user)
     if (!this.state.users_id) {
       getUser(props.user.email)
         .then((res) => {
-          console.log('user info: ', res)
+          // console.log('user info: ', res)
           this.setState({
             users_id: res.id 
           })
@@ -70,14 +71,14 @@ export default class UserProfile extends Component {
 
   GetFavorites = () => {
     const { users_id} = this.state;
+    let favesArr = [];
     Axios.get(`https://cookwithme.herokuapp.com/favorites/users/${users_id}`)
       .then(res => {
-        let favesArr = [];
         // const {favorites} = this.state;
         for (let i = 0; i < res.data.length; i++) {
           let favesID = res.data[i].recipe_id
           // Get the recipe object for each
-          Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`)
+          return Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`)
             .then(recipe => {
               // console.log('recipe data: ', recipe.data)
               favesArr.push(recipe.data)
@@ -92,34 +93,40 @@ export default class UserProfile extends Component {
       .catch(err => console.log(err))
   }
 
-  GetYourRecipes = () => {
+  makeRequestsFromArray = (arr) => {
     const { users_id} = this.state;
+    let index = 0;
+    function request() {
+        return Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id[index]}`).then(() => {
+            index++;
+            if (index >= arr.length) {
+                return 'done'
+            }
+            return request();
+        });
+    }
+    return request();
+}
+
+
+  GetYourRecipes = () => {
+    console.log('reading GetYourRecipes Func')
+    const { users_id} = this.state;
+
     Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id}`)
+    // console.log('userID', users_id)
       .then(res => {
+        console.log('RES is: ', res)
         console.log('recipe date: ', res.data)
-        let recipeArr = [];
-        // const {favorites} = this.state;
-        for (let i = 0; i < res.data.length; i++) {
-          let recipeID = res.data[i].id
-          // Get the recipe object for each
-          Axios.get(`https://cookwithme.herokuapp.com/recipes/${recipeID}`)
-            .then(recipe => {
-              // console.log('recipe data: ', recipe.data)
-              recipeArr.push(recipe.data)
-              // console.log('recipeArr: ', recipeArr)
-              return recipeArr
-            })
-            .catch(err => console.log(err))
-        }
-        console.log('recipeArr: ', recipeArr)
-        this.setState({ yourRecipes: recipeArr })
+        this.setState({ yourRecipes: res.data })
       })
       .catch(err => console.log(err))
   }
 
+
   ListFavorites = () => {
     const { favorites } = this.state;
-    if (!favorites) return <></>
+    if (!favorites) return <><p>There are no Faves!</p></>
     return (
       <>
         {/* MOBILE APP */}
