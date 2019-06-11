@@ -207,7 +207,7 @@ class Cookmode extends Component {
     return <>
     <this.letRedirect />
       <div className='cookBG contentmiddle'>
-        <div className="row container ">
+        <div className="row container " style={{marginTop: '25px'}}>
           <div className="">
             <div className="card-panel white opacitywebmobile" style={{ maxHeight: '500px', overflow: 'scroll',borderRadius:'38px' }}>
               <span className="black-text fontwebmobile" style={{ fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif', opacity: 1 }}>
@@ -231,19 +231,19 @@ class Cookmode extends Component {
         </div>
         <div className='row container' style={{textAlign:'center'}}>
           <div className='col s4 m4' style={{ paddingLeft: 'auto' }}>
-            <a className="btn-floating btn-large waves-light red" onClick={this.HandleBackClick}><i className="material-icons">arrow_back</i></a>
+            <button className="btn-floating btn-large waves-light red" onClick={this.HandleBackClick}><i className="material-icons">arrow_back</i></button>
           </div>
           <div className='col s4 m4' style={{display:this.state.play_arrow}}>
-            <a className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.startAssistant}>play_arrow</i></a>
+            <button className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.startAssistant}>play_arrow</i></button>
           </div>
           <div className='col s4 m4' style={{display:this.state.pause}}>
-            <a className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.stopAssistant}>pause</i></a>
+            <button className="btn-floating btn-large waves-light red" ><i className="material-icons" onClick={this.stopAssistant}>pause</i></button>
           </div>
           <div className='col s4 m4'>
-            <a className="btn-floating btn-large waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></a>
+            <button className="btn-floating btn-large waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></button>
           </div>
         </div>
-        <Link to='/'><div><i class="medium material-icons">highlight_off</i></div></Link>
+        <Link to='/'><div><i className="medium material-icons">highlight_off</i></div></Link>
       </div>
     </>
   }
