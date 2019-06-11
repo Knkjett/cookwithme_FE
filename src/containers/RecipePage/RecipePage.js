@@ -1,6 +1,7 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
-import {postFav,getIDfav,findRecipe, checkRecipe,postRecipes,getUser} from '../../services/services';
+import './RecipePage.css'
+import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
@@ -38,7 +39,7 @@ export default class RecipePage extends React.Component {
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
       }
-      firebase.auth().onAuthStateChanged(user=>{
+      this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
         getUser(user.email)
         .then(res=>this.setState({users_id:res.id}))
       })
@@ -99,6 +100,10 @@ export default class RecipePage extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    this.unsubscribe()
+  }
+
   toggleFav = () =>{
     if(this.state.favorite === 'btn-floating disabled halfway-fab red'){
       postFav(this.state.users_id,this.state.recipe_id)
@@ -119,15 +124,16 @@ export default class RecipePage extends React.Component {
     const { title,ingredients, steps } = this.state
     if (!ingredients || !steps) {
       return (<div style={{textAlign:'center',height:'92vh'}}><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
+       // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {
       return (<React.Fragment>
-        <div className="row" style={{height:'91vh'}}>
+        <div className="row pageHeight" style={{paddingRight:'0.75rem !important'}}>
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
-          <div className="col s12 m7">
+          <div className="col s12 m7" style={{padding:0,paddingRight:'0.75rem !important'}}>
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
-                <img src={this.state.source_img} style={{maxHeight: '500px'}} alt='' />
+                <img src={this.state.source_img} style={{maxHeight: '500px'}} />
                 
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
@@ -137,7 +143,7 @@ export default class RecipePage extends React.Component {
             </div>
           </div>
           <div className="col s12 m5">
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown' }}>
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown',margin:0 }}>
               <form action="#">
                 <h5>Ingredients</h5>
                 {

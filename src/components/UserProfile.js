@@ -62,6 +62,8 @@ export default class UserProfile extends Component {
           this.setState({
             users_id: res.id
           })
+          this.GetFavorites();
+          this.GetYourRecipes();
         })
     }
     return <></>

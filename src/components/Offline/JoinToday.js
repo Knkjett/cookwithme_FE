@@ -21,8 +21,9 @@ class JoinToday extends Component{
   }
 
   render(){
+    const {email} = this.state
     return(
-    <form className='col s12 l6 center-align' style={{paddingTop:'30px', paddingBottom:'30px'}}>
+    <form className='col s12 l6 center-align' style={{paddingTop:'30px', paddingBottom:'30px'}} action={`https://formspree.io/${email}`} method='POST'>
     <div className='row'>
         <div className='input-field col s12 l6'>
           <input id='email' type='email' name='email' value={this.state.email} onChange={this.handleInput} className='validate'/>
@@ -43,7 +44,7 @@ class JoinToday extends Component{
           <label htmlFor='cPassword'>Confirm Password</label>
         </div>
       </div>
-      <button className='btn-large' onClick={this.handleSumbit}>Sign Up</button>
+      <button type='submit' className='btn-large' onClick={this.handleSumbit} >Sign Up</button>
     </form>
   )}
 }
