@@ -56,13 +56,11 @@ export default class UserProfile extends Component {
 
 
   handleUser = (props) => {
-    // console.log(props.user)
     if (!this.state.users_id) {
       getUser(props.user.email)
         .then((res) => {
-          // console.log('user info: ', res)
           this.setState({
-            users_id: res.id 
+            users_id: res.id
           })
         })
     }
@@ -70,51 +68,46 @@ export default class UserProfile extends Component {
   }
 
   GetFavorites = () => {
-    const { users_id} = this.state;
+    const { users_id } = this.state;
     let favesArr = [];
     Axios.get(`https://cookwithme.herokuapp.com/favorites/users/${users_id}`)
       .then(res => {
-        // const {favorites} = this.state;
         for (let i = 0; i < res.data.length; i++) {
           let favesID = res.data[i].recipe_id
           // Get the recipe object for each
           return Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`)
             .then(recipe => {
-              // console.log('recipe data: ', recipe.data)
               favesArr.push(recipe.data)
-              // console.log('recipeArr: ', recipeArr)
               return favesArr
             })
             .catch(err => console.log(err))
         }
-        // console.log('recipeArr: ', favesArr)
         this.setState({ favorites: favesArr })
       })
       .catch(err => console.log(err))
   }
 
   makeRequestsFromArray = (arr) => {
-    const { users_id} = this.state;
+    const { users_id } = this.state;
     let index = 0;
     function request() {
-        return Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id[index]}`).then(() => {
-            index++;
-            if (index >= arr.length) {
-                return 'done'
-            }
-            return request();
-        });
+      return Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id[index]}`).then(() => {
+        index++;
+        if (index >= arr.length) {
+          return 'done'
+        }
+        return request();
+      });
     }
     return request();
-}
+  }
 
 
   GetYourRecipes = () => {
     console.log('reading GetYourRecipes Func')
-    const { users_id} = this.state;
+    const { users_id } = this.state;
 
     Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id}`)
-    // console.log('userID', users_id)
       .then(res => {
         console.log('RES is: ', res)
         console.log('recipe date: ', res.data)
@@ -126,7 +119,7 @@ export default class UserProfile extends Component {
 
   ListFavorites = () => {
     const { favorites } = this.state;
-    if (!favorites) return <><p>There are no Faves!</p></>
+    if (!favorites) return <><h3>There are no Faves!</h3></>
     return (
       <>
         {/* MOBILE APP */}
@@ -171,7 +164,7 @@ export default class UserProfile extends Component {
 
   ListYourRecipes = () => {
     const { yourRecipes } = this.state;
-    if (!yourRecipes) return <></>
+    if (!yourRecipes) return <><p>Time to Create!</p></>
     return (
       <>
         {
@@ -216,7 +209,7 @@ export default class UserProfile extends Component {
 
   render() {
     //const { favorites } = this.state
-    console.log('state is: ',this.state)
+    console.log('state is: ', this.state)
     return (<>
       <AuthContext.Consumer>
         {
