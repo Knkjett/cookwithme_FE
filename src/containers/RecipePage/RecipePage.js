@@ -118,20 +118,21 @@ export default class RecipePage extends React.Component {
   render() {
     const { title,ingredients, steps } = this.state
     if (!ingredients || !steps) {
-      return (<div style={{textAlign:'center',height:'92vh'}}><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
+      return (<div><img class='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
+      // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {
       return (<React.Fragment>
-        <div className="row" style={{height:'91vh'}}>
+        <div className="row">
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
           <div className="col s12 m7">
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
                 <img src={this.state.source_img} style={{maxHeight: '500px'}} alt='' />
                 
-                <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
+                <button className={this.state.favorite} ><i className="material-icons">favorite</i></button>
               </div>
-              <div class="card-content">
+              <div className="card-content">
                 <span className="card-title">{title}</span>
               </div>
             </div>
@@ -144,7 +145,7 @@ export default class RecipePage extends React.Component {
                   ingredients.map((ingred, i) => {
                     return (
                       <React.Fragment>
-                        <p>
+                        <p key={i}>
                         <span className="white-text">{ingred}</span>
                           
                         </p>
@@ -160,7 +161,7 @@ export default class RecipePage extends React.Component {
                   steps.map((steps, i) => {
                     return (
                       <React.Fragment>
-                        <li>
+                        <li key={i}>
                           {steps}
                         </li>
                       </React.Fragment>
@@ -172,7 +173,7 @@ export default class RecipePage extends React.Component {
             <Link to={{
               pathname: `/cookmode/`,
               cook: { ingredients: this.state.ingredients, steps: this.state.steps }
-            }}> <div className='btn' style={{color:'crimson'}}>Cook Now
+            }}> <div className='btn' style={{color:'white'}}>Cook Now
                 </div> </Link>
                 
           </div>

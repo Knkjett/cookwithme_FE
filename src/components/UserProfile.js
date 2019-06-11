@@ -33,6 +33,7 @@ export default class UserProfile extends Component {
   }
 
   componentDidMount = () => {
+
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         getUser(user.email)
@@ -55,14 +56,16 @@ export default class UserProfile extends Component {
 
 
   handleUser = (props) => {
-    console.log(props.user)
+    // console.log(props.user)
     if (!this.state.users_id) {
       getUser(props.user.email)
         .then((res) => {
-          console.log('user info: ', res)
+          console.log('user info: ', res.id)
           this.setState({
             users_id: res.id 
           })
+          this.GetFavorites();
+          this.GetYourRecipes();
         })
     }
     return <></>
