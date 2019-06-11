@@ -61,7 +61,7 @@ export default class UserProfile extends Component {
         .then((res) => {
           console.log('user info: ', res)
           this.setState({
-            users_id: res.id
+            users_id: res.id 
           })
         })
     }
@@ -209,11 +209,7 @@ export default class UserProfile extends Component {
 
   render() {
     //const { favorites } = this.state
-<<<<<<< HEAD
-    console.log('state is: ',this.state)
-=======
     // console.log('state is: ',this.state)
->>>>>>> origin
     return (<>
       <AuthContext.Consumer>
         {

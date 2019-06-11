@@ -66,14 +66,8 @@ const getFood2Fork = async(query) => {
 
 const defaultRecipes = () => {
   let recipes_arr = null
-<<<<<<< HEAD
-  return axios.get('https://www.food2fork.com/api/search?key=0a689ee4c676e04aaae774935df0e3d8')
-        .then(res=>{
-            console.log(res.data)
-=======
   return axios.get('https://www.food2fork.com/api/search?key=9e56004d7a3bc861088111ea75a9a429&q=chicken')
   .then(res=>{
->>>>>>> origin
             recipes_arr = res.data.recipes.filter(e=>{
                 return e.publisher ==='Closet Cooking' || e.publisher === "The Pioneer Woman" || e.publisher === 'All Recipes'
             })
