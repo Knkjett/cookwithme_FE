@@ -7,7 +7,6 @@ import firebase from '../firebase';
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import '../components/UserProfile.css'
 import { async } from 'q';
-
 export default class UserProfile extends Component {
   constructor(props) {
     super(props)
@@ -60,7 +59,7 @@ export default class UserProfile extends Component {
       getUser(props.user.email)
         .then((res) => {
           this.setState({
-            users_id: res.id
+            users_id: res.id 
           })
           this.GetFavorites();
           this.GetYourRecipes();
@@ -117,7 +116,6 @@ export default class UserProfile extends Component {
       })
       .catch(err => console.log(err))
   }
-
 
   ListFavorites = () => {
     const { favorites } = this.state;
