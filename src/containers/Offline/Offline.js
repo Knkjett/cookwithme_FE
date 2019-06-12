@@ -12,25 +12,25 @@ class Offline extends Component {
         {
         image_url: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2016/7/22/3/FNM090116_Grilled-Steak-and-Greek-Corn-Salad_s4x3.jpg.rend.hgtvcom.826.620.suffix/1469255050835.jpeg",
         publisher_url: 'http://foodnetwork.com',
-        source_url: 'https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019',
+        source_url: 'http://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019',
         title:'Grilled Steak with Greek Corn Salad',
       },
       {
         image_url: "https://images.media-allrecipes.com/userphotos/560x315/5079227.jpg",
         publisher_url: 'http://allrecipes.com',
-        source_url: 'https://www.allrecipes.com/recipe/162760/fluffy-pancakes/',
+        source_url: 'http://www.allrecipes.com/recipe/162760/fluffy-pancakes/',
         title: 'Fluffy Pancakes'
       },
       {
         image_url:'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/3/14/0/0181847_pork-chops_s4x3.jpg.rend.hgtvcom.826.620.suffix/1393206943617.jpeg.jpg',
         publisher_url:'http://foodnetwork.com',
-        source_url:'https://www.foodnetwork.com/recipes/sunny-anderson/easy-grilled-pork-chops-recipe-2106547',
+        source_url:'http://www.foodnetwork.com/recipes/sunny-anderson/easy-grilled-pork-chops-recipe-2106547',
         title:'Easy Grilled Pork Chops'
       },
       {
         image_url: 'https://images.media-allrecipes.com/userphotos/720x405/2606852.jpg',
         publisher_url: 'http://allrecipes.com',
-        source_url: 'https://www.allrecipes.com/recipe/229960/shrimp-scampi-with-pasta/',
+        source_url: 'http://www.allrecipes.com/recipe/229960/shrimp-scampi-with-pasta/',
         title: 'Shrimp Scampi with Pasta'
       },
       {
