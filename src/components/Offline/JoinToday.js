@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
-
+import { createUser } from '../../services/services'
+import Materialize from 'materialize-css';
+import firebase from '../../firebase';
 class JoinToday extends Component{
   constructor(props){
     super(props)
@@ -17,7 +19,24 @@ class JoinToday extends Component{
   }
   handleSumbit = (e)=>{
     e.preventDefault();
-
+    const { email, cEmail, password, cPassword } = this.state;
+        if(password !== cPassword){
+            Materialize.toast({html: 'Password did not match'})
+        } 
+        else if(email !== cEmail){
+          Materialize.toast({html: 'Email did not match'})
+        }
+        else if(password===cPassword || email === cEmail){
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(res=> {
+                createUser(email , res.user.uid, {
+                })
+            })
+             .catch(err => {
+                 const { message } = err;
+                 Materialize.toast({html: message})
+             })
+        }
   }
 
   render(){
