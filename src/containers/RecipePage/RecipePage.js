@@ -55,6 +55,7 @@ export default class RecipePage extends React.Component {
   //   let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
   //   let publisher_url = "http://foodnetwork.com"
   //  let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
+  console.log(url)
       checkRecipe(url)
         .then((res) => {
           if (!res) {

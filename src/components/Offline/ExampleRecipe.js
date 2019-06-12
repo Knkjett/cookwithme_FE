@@ -8,7 +8,7 @@ export default (props) => {
     </div>
     <Link to={{
       pathname: `/recipepage/${props.ele.title}`,
-      state: { url: props.ele.source_url, publisher: props.ele.publisher_url, source_img: props.ele.image_url }
+      state: { url: props.ele.source_url, publisher_url: props.ele.publisher_url, source_img: props.ele.image_url }
     }}>
       <img className='foodImg'
         src={props.ele.image_url}
