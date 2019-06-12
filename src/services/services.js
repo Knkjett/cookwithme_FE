@@ -53,7 +53,7 @@ const getFood2Fork = async(query) => {
         // baseURL: `https://www.food2fork.com/api/search?key=ee476d8f542bef2e97d8bf30c7f3c0ca&q=${query}`,
 // baseURL: `https://www.food2fork.com/api/search?key=9e56004d7a3bc861088111ea75a9a429&q=${query}`
         // baseURL: `https://www.food2fork.com/api/search?key=a8839d03739298aec777e6819a1184c8&q=${query}`,
-        baseURL: `https://www.food2fork.com/api/search?key=100badb571d2bc0c4ab6c3f6545f843f&q=${query}`
+        baseURL: `https://www.food2fork.com/api/search?key=aa4e7ae20e1849bc4ab7eb553db7d984&q=${query}`
     })
       .then((res)=>{
         recipes_arr = res.data.recipes.filter(e=>{
