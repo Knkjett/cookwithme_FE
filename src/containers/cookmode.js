@@ -203,6 +203,21 @@ class Cookmode extends Component {
   }
 
   render() {
+    //console.log(this.props.location.cook)
+    //let {id,publisher_url, url, source_img,title} = this.props.location.cook
+    let id = null;
+    let publisher_url = null;
+    let url = null;
+    let source_img = null;
+    let title =null;
+    if(this.props.location.cook){
+      id = this.props.location.cook.id
+      publisher_url = this.props.location.cook.publisher_url
+      url = this.props.location.cook.url
+      source_img = this.props.location.cook.source_img
+      title = this.props.location.cook.title
+    }
+    
     const { steps, currentStepIndex } = this.state;
     return <>
     <this.letRedirect />
@@ -243,7 +258,11 @@ class Cookmode extends Component {
             <button className="btn-floating btn-large waves-light red" onClick={this.HandleForwardClick}><i className="material-icons">arrow_forward</i></button>
           </div>
         </div>
-        <Link to='/'><div><i className="medium material-icons">highlight_off</i></div></Link>
+        <Link to={{
+              pathname: `/recipepage/${title}`,
+              state: {id, publisher_url, url, source_img}
+        }}><div><i className="medium material-icons">highlight_off</i></div></Link>
+        {/* <Link to='/'><div><i className="medium material-icons">highlight_off</i></div></Link> */}
       </div>
     </>
   }
