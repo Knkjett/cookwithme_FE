@@ -10,7 +10,7 @@
     }
 
     .opacitywebmobile{
-        opacity: .5
+        opacity: .9
     }
 
     .contentmiddle{
@@ -32,7 +32,7 @@
         font-size: 20px
     }
     .opacitywebmobile{
-        opacity: .7
+        opacity: .9
     }
     .contentmiddle{
         flex-direction: column;

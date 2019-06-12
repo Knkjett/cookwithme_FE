@@ -41,21 +41,26 @@ export default class RecipePage extends React.Component {
       const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
       .then((res)=>{
+        
         this.setState({recipe_id:res[0].id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
         recentViewed(res[0].id)
       })
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
-      }
+      } 
 
       
 
     }
     else{
-    let {publisher_url, url, source_img} = this.props.location.state
+    let {id,publisher_url, url, source_img} = this.props.location.state
+    this.setState({id,publisher_url, url, source_img})
   //   let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
   //   let publisher_url = "http://foodnetwork.com"
   //  let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
+      if(url){
+
+      
       checkRecipe(url)
         .then((res) => {
           if (!res) {
@@ -105,6 +110,15 @@ export default class RecipePage extends React.Component {
           }
         })
 
+      }
+      else{
+        Axios.get(`https://cookwithme.herokuapp.com/recipes/${id}`)
+        .then(res=>{
+          const {id,ingredients,steps,source_img} = res.data
+          this.setState({recipe_id:id,ingredients,steps,source_img})
+        })
+        
+      }
     }
   }
 
@@ -130,6 +144,7 @@ export default class RecipePage extends React.Component {
   }
   render() {
     const { title,ingredients, steps } = this.state
+    const {id,publisher_url, url, source_img } = this.state
     if (!ingredients || !steps) {
       return (<div style={{textAlign:'center',height:'92vh'}}><img alt='loader' className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
        // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
@@ -150,8 +165,8 @@ export default class RecipePage extends React.Component {
               </div>
             </div>
           </div>
-          <div className="col s12 m5">
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown',margin:0 }}>
+          <div className="col s12 m5" style={{padding:0,padding:'0.25rem'}}>
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'mediumseagreen',margin:0 }}>
               <form action="#">
                 <h5>Ingredients</h5>
                 {
@@ -168,7 +183,8 @@ export default class RecipePage extends React.Component {
                 }
               </form>
             </div>
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'sandybrown' }}>
+            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'mediumseagreen' }}>
+            <h5>Instructions</h5>
               <span className="white-text">
                 {
                   steps.map((steps, i) => {
@@ -185,8 +201,9 @@ export default class RecipePage extends React.Component {
             </div>
             <Link to={{
               pathname: `/cookmode/`,
-              cook: { ingredients: this.state.ingredients, steps: this.state.steps }
+                cook: { ingredients: this.state.ingredients, steps: this.state.steps, id, publisher_url, url, source_img,title:this.state.title }
             }}> <div className='btn' style={{color:'white'}}>Cook Now
+
                 </div> </Link>
                 
           </div>
