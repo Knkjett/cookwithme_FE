@@ -41,7 +41,13 @@ export default class RecipePage extends React.Component {
       const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
       .then((res)=>{
-        
+        if(!localStorage.getItem('recipe')){
+          let init = {
+              favid : null
+            }
+          
+          localStorage.setItem('recipe', JSON.stringify(init))
+        }
         this.setState({recipe_id:res[0].id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
         recentViewed(res[0].id)
       })
@@ -102,6 +108,14 @@ export default class RecipePage extends React.Component {
             .then(res=>{
               if(res) {
                 recentViewed(res.data.id)
+                if(!localStorage.getItem('recipe')){
+                  let init = {
+                    recipe: {
+                      favid : null
+                    }
+                  }
+                  localStorage.setItem('recipe', JSON.stringify(init))
+                }
                 window.localStorage.setItem('recipe',JSON.stringify({favid:res.data.id}))
                 this.setState({favorite:'btn-floating halfway-fab red',favid:res.data.id})
               
