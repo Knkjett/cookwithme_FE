@@ -218,7 +218,7 @@ class Cookmode extends Component {
           <div className="" style={{width:'50%'}}>
             <ul className="collapsible" data-collapsible="accordion"  >
               <li>
-                <div className="collapsible-header" style={{opacity:0.6}}>
+                <div className="collapsible-header" style={{opacity:0.9}}>
                   <i className="material-icons">dehaze</i>Ingredients</div>
                 <div className="collapsible-body ingredient-scroll" >
                   <ul style={{backgroundColor:'white',opacity:0.7}}>

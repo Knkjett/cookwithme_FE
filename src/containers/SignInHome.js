@@ -22,7 +22,7 @@ class SignInHome extends Component {
         // })
 
         axios.get('https://cookwithme.herokuapp.com/recipes/user/all')
-        .then(res=>this.setState({recipes:res.data},()=>console.log(this.state)))
+        .then(res=>this.setState({recipes:res.data}))
         var elems = document.querySelectorAll('.fixed-action-btn');
         M.FloatingActionButton.init(elems, {
             direction: 'left',
@@ -51,10 +51,10 @@ class SignInHome extends Component {
                     user => {
                         if (this.state.recipes === null) return <div><img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>;
                         else return <>
-                            <div className="containerPadding">
+                            <div className="containerPadding" style={{minHeight: '92vh'}}>
                                 <div className="row" style={{ marginBottom: '0px' }}>
                                 <div className="col s12 m3" >
-                                <div className="card">
+                                <div className="card" style={{margin:'0px',marginTop:'50px'}}>
                                 {/* no-shadows */}
                                     <div className="card-content" style={{ height: '336.17px', textAlign: 'center',background:'white', position:'relative' }}>
                                         <span className="welcomeText">Welcome to Cook With Me</span>
@@ -62,7 +62,7 @@ class SignInHome extends Component {
                                 </div>
                                 </div>
                                     {this.state.recipes.map((obj, i) => {
-                                        console.log(obj)
+                                        
                                         return <div className="col s12 m3" key={i}>
                                             <Link to={{
                                                         pathname: `/recipepage/${obj.title}`,
