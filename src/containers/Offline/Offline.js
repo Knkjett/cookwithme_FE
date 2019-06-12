@@ -16,10 +16,10 @@ class Offline extends Component {
         title:'Grilled Steak with Greek Corn Salad',
       },
       {
-        image_url: "https://images.media-allrecipes.com/userphotos/560x315/4521371.jpg",
+        image_url: "https://images.media-allrecipes.com/userphotos/560x315/5079227.jpg",
         publisher_url: 'http://allrecipes.com',
-        source_url: 'www.allrecipes.com/recipe/256653/on-the-farm-scrambled-eggs/',
-        title: 'On-the-Farm Scrambled Eggs'
+        source_url: 'https://www.allrecipes.com/recipe/162760/fluffy-pancakes/',
+        title: 'Fluffy Pancakes'
       },
       {
         image_url:'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/3/14/0/0181847_pork-chops_s4x3.jpg.rend.hgtvcom.826.620.suffix/1393206943617.jpeg.jpg',
@@ -30,7 +30,7 @@ class Offline extends Component {
       {
         image_url: 'https://images.media-allrecipes.com/userphotos/720x405/2606852.jpg',
         publisher_url: 'http://allrecipes.com',
-        source_url: 'www.allrecipes.com/recipe/229960/shrimp-scampi-with-pasta/',
+        source_url: 'https://www.allrecipes.com/recipe/229960/shrimp-scampi-with-pasta/',
         title: 'Shrimp Scampi with Pasta'
       },
       {

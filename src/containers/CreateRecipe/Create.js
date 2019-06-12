@@ -280,7 +280,7 @@ class Create extends Component {
     try {
       const snapshot = await newImage.put(this.state.file);
       const url = await snapshot.ref.getDownloadURL();
-      postRecipes(users_id, title, url, source_url, ingredientsArray, stepsArray)
+      postRecipes(users_id, title, url, source_url,null, ingredientsArray, stepsArray)
         .then(() => {
           this.setState({
             Redirect : true

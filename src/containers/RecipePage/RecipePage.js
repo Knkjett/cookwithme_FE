@@ -1,7 +1,7 @@
 import React from 'react';
 import {ingredientScrape, stepScrape} from '../../services/webscrape';
 import './RecipePage.css'
-import {postFav,getIDfav,findRecipe, checkRecipe, getFood2Fork, postRecipes,getUser} from '../../services/services';
+import {postFav,getIDfav,findRecipe, checkRecipe, recentViewed, postRecipes,getUser} from '../../services/services';
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
@@ -35,7 +35,11 @@ export default class RecipePage extends React.Component {
     if (!this.props.location.state){
       const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
-      .then(res=>this.setState({recipe_id:res.id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img}))
+      .then((res)=>{
+        console.log(res)
+        this.setState({recipe_id:res[0].id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
+        recentViewed(res[0].id)
+      })
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
       }
@@ -47,14 +51,14 @@ export default class RecipePage extends React.Component {
 
     }
     else{
-    let {publisher, url, source_img} = this.props.location.state
+    let {publisher_url, url, source_img} = this.props.location.state
   //   let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
-  //   let publisher = "http://foodnetwork.com"
+  //   let publisher_url = "http://foodnetwork.com"
   //  let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
       checkRecipe(url)
         .then((res) => {
           if (!res) {
-            ingredientScrape(publisher, url)
+            ingredientScrape(publisher_url, url)
               .then((res) => {
                 this.setState({
                   ingredients: res,
@@ -63,14 +67,14 @@ export default class RecipePage extends React.Component {
               })
               .then(() => {
                 if (this.state.steps && this.state.ingredients) {
-                  postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
+                  postRecipes(null, title, source_img, url, publisher_url, this.state.ingredients, this.state.steps)
                   .then(res=>{
                     this.setState({recipe_id:res.id})
+                    recentViewed(res.id)
                   })
-                }
-                
+                } 
               })
-            stepScrape(publisher, url)
+            stepScrape(publisher_url, url)
               .then((res) => {
                 this.setState({
                   steps: res
@@ -78,9 +82,10 @@ export default class RecipePage extends React.Component {
               })
               .then(() => {
                 if (this.state.steps && this.state.ingredients) {
-                  postRecipes(null, title, source_img, url, this.state.ingredients, this.state.steps)
+                  postRecipes(null, title, source_img, url, publisher_url, this.state.ingredients, this.state.steps)
                   .then(res=>{
                     this.setState({recipe_id:res.id})
+                    recentViewed(res.id)
                   })
                 }
               })
@@ -90,8 +95,10 @@ export default class RecipePage extends React.Component {
             getIDfav(this.state.users_id,res[0].id)
             .then(res=>{
               if(res) {
+                recentViewed(res.data.id)
                 window.localStorage.setItem('recipe',JSON.stringify({favid:res.data.id}))
                 this.setState({favorite:'btn-floating halfway-fab red',favid:res.data.id})
+              
               }
             })
           }
@@ -123,7 +130,7 @@ export default class RecipePage extends React.Component {
   render() {
     const { title,ingredients, steps } = this.state
     if (!ingredients || !steps) {
-      return (<div style={{textAlign:'center',height:'92vh'}}><img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
+      return (<div style={{textAlign:'center',height:'92vh'}}><img alt='loader' className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
        // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
     }
     else {
@@ -133,7 +140,7 @@ export default class RecipePage extends React.Component {
           <div className="col s12 m7" style={{padding:0,paddingRight:'0.75rem !important'}}>
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
-                <img src={this.state.source_img} style={{maxHeight: '500px'}} />
+                <img alt='Recipe' src={this.state.source_img} style={{maxHeight: '500px'}} />
                 
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
@@ -150,7 +157,7 @@ export default class RecipePage extends React.Component {
                   ingredients.map((ingred, i) => {
                     return (
                       <React.Fragment>
-                        <p>
+                        <p key={i}>
                         <span className="white-text">{ingred}</span>
                           
                         </p>
@@ -166,7 +173,7 @@ export default class RecipePage extends React.Component {
                   steps.map((steps, i) => {
                     return (
                       <React.Fragment>
-                        <li>
+                        <li key={i}>
                           {steps}
                         </li>
                       </React.Fragment>

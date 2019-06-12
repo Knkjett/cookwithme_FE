@@ -54,7 +54,6 @@ class SignInHome extends Component {
                                 {/* no-shadows */}
                                     <div className="card-content" style={{ height: '336.17px', textAlign: 'center',background:'white', position:'relative' }}>
                                         <span className="welcomeText">Welcome to Cook With Me</span>
-
                                     </div>
                                 </div>
                                 </div>
@@ -70,9 +69,7 @@ class SignInHome extends Component {
                                                     <img alt='' style={{ height: '236.17px' }} src={obj.image_url} />
                                                 </div>
                                                 <div className="card-content" style={{ height: '100px', textAlign: 'center',background:'whitesmoke' }}>
-                                                    
                                                         <span className="textSize">{obj.title}</span>
-                                                    
                                                 </div>
                                             </div>
                                             </Link>

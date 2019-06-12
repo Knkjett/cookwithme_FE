@@ -24,11 +24,11 @@ const findRecipe = async (title) => {
     })));
 }
 
-const postRecipes = (users_id = null, title, source_img, source_url = null, ingredients, steps) => {
+const postRecipes = (users_id = null, title, source_img, source_url = null, publisher = null, ingredients, steps) => {
   return (axios({
     method: 'post',
     baseURL: `${recipebaseURL}/`,
-    data: { users_id, title, source_img, source_url, ingredients, steps }
+    data: { users_id, title, source_img, source_url, publisher, ingredients, steps }
   })
     .then((res) => {
       return res.data
@@ -99,9 +99,23 @@ const createUser = (email, token) => {
   }))
 }
 
+const recentViewed = (id) =>{
+  let recent = [];
+  if (!localStorage.getItem('recentlyViewed')) {
+    localStorage.setItem('recentlyViewed', JSON.stringify([]))
+  }
+  if(JSON.parse(localStorage.getItem('recentlyViewed'))!== []){
+     recent = JSON.parse(localStorage.getItem('recentlyViewed'))
+    recent.push(id)
+    if(recent.length > 10){
+      recent.pop();
+    }
+    localStorage.setItem('recentlyViewed', JSON.stringify(recent))
+    }
+}
 
    
 
-export {postFav,getIDfav,getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes,createUser}
+export {postFav,getIDfav,getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes,createUser, recentViewed}
 
 
