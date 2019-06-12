@@ -10,27 +10,27 @@ class Offline extends Component {
     this.state = {
       recipes: [
         {
-        image_url: "http://static.food2fork.com/Bacon2BWrapped2BJalapeno2BPopper2BStuffed2BChicken2B5002B5909939b0e65.jpg",
-        publisher_url: 'http://closetcooking.com',
-        source_url: 'http://www.closetcooking.com/2012/11/bacon-wrapped-jalapeno-popper-stuffed.html',
-        title:'Bacon Wrapped Jalapeno Popper Stuffed Chicken',
+        image_url: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2016/7/22/3/FNM090116_Grilled-Steak-and-Greek-Corn-Salad_s4x3.jpg.rend.hgtvcom.826.620.suffix/1469255050835.jpeg",
+        publisher_url: 'http://foodnetwork.com',
+        source_url: 'https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019',
+        title:'Grilled Steak with Greek Corn Salad',
       },
       {
-        image_url: "https://images.media-allrecipes.com/userphotos/560x315/4521371.jpg",
+        image_url: "https://images.media-allrecipes.com/userphotos/560x315/5079227.jpg",
         publisher_url: 'http://allrecipes.com',
-        source_url: 'www.allrecipes.com/recipe/256653/on-the-farm-scrambled-eggs/',
-        title: 'On-the-Farm Scrambled Eggs'
+        source_url: 'https://www.allrecipes.com/recipe/162760/fluffy-pancakes/',
+        title: 'Fluffy Pancakes'
       },
       {
-        image_url:'http://static.food2fork.com/Buffalo2BChicken2BChowder2B5002B0075c131caa8.jpg',
-        publisher_url:'http://closetcooking.com',
-        source_url:'http://www.closetcooking.com/2011/11/buffalo-chicken-chowder.html',
-        title:'Buffalo Chicken Chowder'
+        image_url:'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/3/14/0/0181847_pork-chops_s4x3.jpg.rend.hgtvcom.826.620.suffix/1393206943617.jpeg.jpg',
+        publisher_url:'http://foodnetwork.com',
+        source_url:'https://www.foodnetwork.com/recipes/sunny-anderson/easy-grilled-pork-chops-recipe-2106547',
+        title:'Easy Grilled Pork Chops'
       },
       {
         image_url: 'https://images.media-allrecipes.com/userphotos/720x405/2606852.jpg',
         publisher_url: 'http://allrecipes.com',
-        source_url: 'www.allrecipes.com/recipe/229960/shrimp-scampi-with-pasta/',
+        source_url: 'https://www.allrecipes.com/recipe/229960/shrimp-scampi-with-pasta/',
         title: 'Shrimp Scampi with Pasta'
       },
       {
