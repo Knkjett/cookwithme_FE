@@ -84,7 +84,7 @@ class SignInHome extends Component {
                 }
             </AuthContext.Consumer>
 
-            <div className="fixed-action-btn click-to-toggle  direction-left">
+            <div className="fixed-action-btn click-to-toggle">
                                 <button className="btn-floating btn-large red">
                                     <i className="large material-icons">search</i>
                                 </button>
@@ -93,7 +93,9 @@ class SignInHome extends Component {
                                         <form>
                                             <div className="input-field">
                                                 <input id="search" type="search" required style={{ background: 'aliceblue', width: '300px', height: '50px', border:'1px solid black' }} value={this.state.search} onChange={this.handleChange} />
+
                                                 <button style={{display:'none'}} className='btn waves-light' type='submit' name='action' onClick={this.handleSearch}>Search
+
                                  <i className='material-icons right'>send</i>
                                                         </button>
                                             </div>
