@@ -107,7 +107,7 @@ const recentViewed = (id) =>{
   }
   if(JSON.parse(localStorage.getItem('recentlyViewed'))!== []){
      recent = JSON.parse(localStorage.getItem('recentlyViewed'))
-    recent.push(id)
+    recent.unshift(id)
     if(recent.length > 10){
       recent.pop();
     }

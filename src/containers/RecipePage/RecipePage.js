@@ -28,9 +28,14 @@ export default class RecipePage extends React.Component {
     
     let title = this.props.location.pathname.split('/recipepage/')[1]
     this.setState({title})
-    getUser(this.context)
-    .then(res=>{
-      this.setState({users_id:res.id});
+    // getUser(this.context)
+    // .then(res=>{
+    //   this.setState({users_id:res.id});
+    // })
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
+      console.log(user)
+      getUser(user.email)
+      .then(res=>this.setState({users_id:res.id}))
     })
     if (!this.props.location.state){
       const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
@@ -43,10 +48,7 @@ export default class RecipePage extends React.Component {
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
       }
-      this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
-        getUser(user.email)
-        .then(res=>this.setState({users_id:res.id}))
-      })
+
       
 
     }
@@ -168,8 +170,8 @@ export default class RecipePage extends React.Component {
                 {
                   ingredients.map((ingred, i) => {
                     return (
-                      <React.Fragment>
-                        <p key={i}>
+                      <React.Fragment key={i}>
+                        <p >
                         <span className="white-text">{ingred}</span>
                           
                         </p>
@@ -185,8 +187,8 @@ export default class RecipePage extends React.Component {
                 {
                   steps.map((steps, i) => {
                     return (
-                      <React.Fragment>
-                        <li key={i}>
+                      <React.Fragment key={i}>
+                        <li>
                           {steps}
                         </li>
                       </React.Fragment>
