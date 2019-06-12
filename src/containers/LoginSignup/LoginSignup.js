@@ -66,7 +66,7 @@ export default class LoginSignup extends React.Component {
         e.preventDefault();
         const { regEmail, regPassword, confirmPassword } = this.state;
         if(confirmPassword !== regPassword){
-            Materialize.toast({html: 'password did not match'})
+            Materialize.toast({html: 'Password did not match'})
         } else {
             firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
             .then(res=> {
