@@ -24,11 +24,11 @@ const findRecipe = async (title) => {
     })));
 }
 
-const postRecipes = (users_id = null, title, source_img, source_url = null, publisher = null, ingredients, steps) => {
+const postRecipes = (users_id = null, title, source_img, source_url = null, publisher_url = null, ingredients, steps) => {
   return (axios({
     method: 'post',
     baseURL: `${recipebaseURL}/`,
-    data: { users_id, title, source_img, source_url, publisher, ingredients, steps }
+    data: { users_id, title, source_img, source_url, publisher_url, ingredients, steps }
   })
     .then((res) => {
       return res.data

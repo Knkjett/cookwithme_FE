@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 import './SignInHome.css';
 import {getFood2Fork,defaultRecipes } from '../services/services'
 import AuthContext from '../contexts/auth'
@@ -19,6 +20,9 @@ class SignInHome extends Component {
             let favs = Array(recipes.length).fill(0, 0)
             this.setState({ recipes: recipes, favs: favs })
         })
+
+        axios.get('https://cookwithme.herokuapp.com/recipes/user/all')
+        .then(res=>console.log(res.data))
         var elems = document.querySelectorAll('.fixed-action-btn');
         M.FloatingActionButton.init(elems, {
             direction: 'left',
@@ -61,7 +65,7 @@ class SignInHome extends Component {
                                         return <div className="col s12 m3" key={i}>
                                             <Link to={{
                                                         pathname: `/recipepage/${obj.title}`,
-                                                        state: { url: obj.source_url, publisher: obj.publisher_url, source_img : obj.image_url }
+                                                        state: { url: obj.source_url, publisher_url: obj.publisher_url, source_img : obj.image_url }
                                                     }}>
                                             <div className="card "> 
                                             {/* no-shadows */}
