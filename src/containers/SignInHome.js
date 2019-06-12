@@ -16,13 +16,13 @@ class SignInHome extends Component {
         search: ''
     }
     componentDidMount() {
-        defaultRecipes().then(recipes => {
-            let favs = Array(recipes.length).fill(0, 0)
-            this.setState({ recipes: recipes, favs: favs })
-        })
+        // defaultRecipes().then(recipes => {
+        //     let favs = Array(recipes.length).fill(0, 0)
+        //     this.setState({ recipes: recipes, favs: favs })
+        // })
 
         axios.get('https://cookwithme.herokuapp.com/recipes/user/all')
-        .then(res=>console.log(res.data))
+        .then(res=>this.setState({recipes:res.data},()=>console.log(this.state)))
         var elems = document.querySelectorAll('.fixed-action-btn');
         M.FloatingActionButton.init(elems, {
             direction: 'left',
@@ -62,15 +62,16 @@ class SignInHome extends Component {
                                 </div>
                                 </div>
                                     {this.state.recipes.map((obj, i) => {
+                                        console.log(obj)
                                         return <div className="col s12 m3" key={i}>
                                             <Link to={{
                                                         pathname: `/recipepage/${obj.title}`,
-                                                        state: { url: obj.source_url, publisher_url: obj.publisher_url, source_img : obj.image_url }
+                                                        state: { id:obj.id,url: obj.source_url, publisher_url: obj.publisher_url, source_img : obj.source_img || obj.image_url }
                                                     }}>
                                             <div className="card "> 
                                             {/* no-shadows */}
                                                 <div className="card-image">
-                                                    <img alt='' style={{ height: '236.17px' }} src={obj.image_url} />
+                                                    <img alt='' style={{ height: '236.17px' }} src={obj.source_img || obj.image_url} />
                                                 </div>
                                                 <div className="card-content" style={{ height: '100px', textAlign: 'center',background:'whitesmoke' }}>
                                                         <span className="textSize">{obj.title}</span>
