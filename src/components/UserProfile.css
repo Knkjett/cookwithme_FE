@@ -10,6 +10,7 @@
   background-size: cover;
   height: 100%;
   background-size: center; 
+
 }
 
 .tab-bar {
@@ -60,6 +61,5 @@
 @media only screen and (max-width: 500px) {
   .show-on-small {
     display: block !important;
-    height: calc(100vh - 56px);
   }
 }

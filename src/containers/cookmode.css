@@ -39,13 +39,13 @@
         justify-content: center;
         align-items: center;
         display:flex;
-        height:92vh;
+        height:93vh;
     }
 }
 
 .ingredient-scroll{
     overflow: scroll;
-    max-height: 200px;
+    max-height: 150px;
 }
 
 
