@@ -47,13 +47,14 @@ export default class RecipePage extends React.Component {
       })
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
-      }
+      } 
 
       
 
     }
     else{
     let {id,publisher_url, url, source_img} = this.props.location.state
+    this.setState({id,publisher_url, url, source_img})
   //   let url = "https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-steak-with-greek-corn-salad-3562019"
   //   let publisher_url = "http://foodnetwork.com"
   //  let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
@@ -143,6 +144,7 @@ export default class RecipePage extends React.Component {
   }
   render() {
     const { title,ingredients, steps } = this.state
+    const {id,publisher_url, url, source_img } = this.state
     if (!ingredients || !steps) {
       return (<div style={{textAlign:'center',height:'92vh'}}><img alt='loader' className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>);
        // <h1 style={{ marginTop: '0px', paddingTop: '150px', height: 'calc(100vh - 150px)', width: '60%' }} onClick={this.handleOnClick}>Loading</h1>);
@@ -199,7 +201,7 @@ export default class RecipePage extends React.Component {
             </div>
             <Link to={{
               pathname: `/cookmode/`,
-              cook: { ingredients: this.state.ingredients, steps: this.state.steps }
+              cook: { ingredients: this.state.ingredients, steps: this.state.steps, id, publisher_url, url, source_img,title:this.state.title }
             }}> <div className='btn' style={{color:'crimson'}}>Cook Now
                 </div> </Link>
                 
