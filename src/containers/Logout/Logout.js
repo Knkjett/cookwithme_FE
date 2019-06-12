@@ -16,7 +16,7 @@ export default class Logout extends React.Component {
   handleTimer = () =>{
     setInterval(()=>{ 
      this.setState({redirect : true})
-     }, 3000);
+     }, 900000000);
   }
   handleRedirect = () =>{
     if(this.state.redirect){
@@ -34,7 +34,7 @@ export default class Logout extends React.Component {
         <div className="card-panel grey lighten-5 z-depth-1" style={{margin:'0px'}}>
           <div className="row valign-wrapper">
             <div className="col s2">
-              <img src={require('../../assets/baker.png')}  alt="" className="circle responsive-img "/> 
+              <img src='https://media.giphy.com/media/xULW8DcQMhlZFs6baU/giphy.gif' alt="" className="circle responsive-img " style={{marginLeft: '70px'}}/> 
             </div>
             <div className="col s10">
               <span className="black-text center">

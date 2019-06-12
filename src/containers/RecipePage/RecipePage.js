@@ -138,7 +138,7 @@ export default class RecipePage extends React.Component {
       return (<React.Fragment>
         <div className="row pageHeight" style={{paddingRight:'0.75rem !important'}}>
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
-          <div className="col s12 m7" style={{padding:0,paddingRight:'0.75rem !important'}}>
+          <div className="col s12 m7" style={{padding:0,paddingRight:'0.75rem !important', marginTop: '50px'}}>
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
                 <img alt='Recipe' src={this.state.source_img} style={{maxHeight: '500px'}} />
@@ -186,7 +186,7 @@ export default class RecipePage extends React.Component {
             <Link to={{
               pathname: `/cookmode/`,
               cook: { ingredients: this.state.ingredients, steps: this.state.steps }
-            }}> <div className='btn' style={{color:'crimson'}}>Cook Now
+            }}> <div className='btn' style={{color:'white'}}>Cook Now
                 </div> </Link>
                 
           </div>
