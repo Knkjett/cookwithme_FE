@@ -99,24 +99,40 @@ const createUser = (email, token) => {
     data: { email, token}
   }))
 }
-
-const recentViewed = (id) =>{
+const updateUser = (user, recentlyViewed) => {
+  return (axios({
+    method: 'put',
+    baseURL: `${usersbaseURL}/${user}`,
+    data: { recentlyViewed }
+  }))
+}
+const readRecent = async(id)=>{
+  return await(axios({
+    method: 'get',
+    baseURL: `${usersbaseURL}/recent/${id}`
+  }))
+  .then((res)=>{
+    return res.data
+  })
+}
+const recentViewed = (user, id, title, source_img) =>{
   let recent = [];
   if (!localStorage.getItem('recentlyViewed')) {
     localStorage.setItem('recentlyViewed', JSON.stringify([]))
   }
   if(JSON.parse(localStorage.getItem('recentlyViewed'))!== []){
      recent = JSON.parse(localStorage.getItem('recentlyViewed'))
-    recent.unshift(id)
+    recent.unshift({id: id, title:title, source_img: source_img})
     if(recent.length > 10){
       recent.pop();
     }
     localStorage.setItem('recentlyViewed', JSON.stringify(recent))
+    let list = localStorage.getItem('recentlyViewed')
+    updateUser(user, JSON.parse(list))
     }
 }
 
-   
 
-export {postFav,getIDfav,getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes,createUser, recentViewed}
+export {postFav,getIDfav,getUser, findRecipe, postRecipes ,checkRecipe,getFood2Fork,defaultRecipes,createUser, recentViewed, readRecent}
 
 
