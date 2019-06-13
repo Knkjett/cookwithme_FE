@@ -180,7 +180,7 @@ export default class RecipePage extends React.Component {
             </div>
           </div>
           <div className="col s12 m5" style={{padding:0,padding:'0.25rem'}}>
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'mediumseagreen',margin:0 }}>
+            <div className="card-panel" style={{ maxHeight: '280px', overflow: 'scroll',backgroundColor: '#6d4c41',margin:0 }}>
               <form action="#">
                 <h5>Ingredients</h5>
                 {
@@ -197,16 +197,16 @@ export default class RecipePage extends React.Component {
                 }
               </form>
             </div>
-            <div className="card-panel" style={{ maxHeight: '300px', overflow: 'scroll',backgroundColor:'mediumseagreen' }}>
+            <div className="card-panel" style={{ maxHeight: '280px', overflow: 'scroll',backgroundColor:'#6d4c41', marginTop: '25px' }}>
             <h5>Instructions</h5>
               <span className="white-text">
                 {
                   steps.map((steps, i) => {
                     return (
                       <React.Fragment key={i}>
-                        <li>
+                       <p> <li>
                           {steps}
-                        </li>
+                       </li></p>
                       </React.Fragment>
                     );
                   })
