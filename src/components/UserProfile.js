@@ -21,6 +21,7 @@ export default class UserProfile extends Component {
 
   componentDidUpdate = () => {
     // Scroll to top of page upon loading
+    
     window.scrollTo(0, 0);
 
     // Carousel Initialization
@@ -33,66 +34,78 @@ export default class UserProfile extends Component {
   }
 
   componentDidMount = () => {
-    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        getUser(user.email)
-          .then((res) => {
-            console.log('ID is: ', res.id)
-            return this.setState({
-              users_id: res.id
-            })
-          })
-          .then(() => {
-            this.GetFavorites()
-            this.GetYourRecipes();
-          })
-      }
-      else {
-        this.setState({ user: null })
-      }
+    // this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+    //     getUser(user.email)
+    //       .then((res) => {
+    //         console.log('ID is: ', res.id)
+    //         this.setState({
+    //           users_id: res.id
+    //         })
+    //       })
+    //       .then(() => {
+    //         this.GetFavorites()
+    //         this.GetYourRecipes();
+    //       })
+    //   }
+    //   else {
+    //     this.setState({ user: null })
+    //   }
+    // })
+
+    const users_id = window.localStorage.getItem('users_id')
+    this.setState({users_id},()=>{
+      //console.log(this.state)
+      this.GetFavorites()
+      this.GetYourRecipes();
     })
+    
+
   }
 
 
-  handleUser = (props) => {
-    if (!this.state.users_id) {
-      getUser(props.user.email)
-        .then((res) => {
-          this.setState({
-            users_id: res.id 
-          })
-          this.GetFavorites();
-          this.GetYourRecipes();
-        })
-    }
-    return <></>
-  }
+  // handleUser = (props) => {
+  //   if (!this.state.users_id) {
+  //     getUser(props.user.email)
+  //       .then((res) => {
+  //         this.setState({
+  //           users_id: res.id 
+  //         })
+  //         this.GetFavorites();
+  //         this.GetYourRecipes();
+  //       })
+  //   }
+  //   return <></>
+  // }
 
   GetFavorites = () => {
     const { users_id } = this.state;
-    let favesArr = [];
+    
     Axios.get(`https://cookwithme.herokuapp.com/favorites/users/${users_id}`)
       .then(res => {
+        const promises = []
         for (let i = 0; i < res.data.length; i++) {
           let favesID = res.data[i].recipe_id
-          // Get the recipe object for each
-          return Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`)
-            .then(recipe => {
-              favesArr.push(recipe.data)
-              return favesArr
-            })
-            .catch(err => console.log(err))
+          promises.push(Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`))
         }
-        this.setState({ favorites: favesArr })
+        return promises;
+      })
+      .then(promises =>{
+        return Promise.all(promises)
+      })
+      .then(results =>{
+        const favorites = results.map(e => e.data);
+        this.setState({favorites});
       })
       .catch(err => console.log(err))
+      
   }
 
   makeRequestsFromArray = (arr) => {
     const { users_id } = this.state;
     let index = 0;
     function request() {
-      return Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id[index]}`).then(() => {
+      Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id[index]}`).then(() => {
         index++;
         if (index >= arr.length) {
           return 'done'
@@ -105,13 +118,13 @@ export default class UserProfile extends Component {
 
 
   GetYourRecipes = () => {
-    console.log('reading GetYourRecipes Func')
+    //console.log('reading GetYourRecipes Func')
     const { users_id } = this.state;
 
     Axios.get(`https://cookwithme.herokuapp.com/recipes/users/${users_id}`)
       .then(res => {
-        console.log('RES is: ', res)
-        console.log('recipe date: ', res.data)
+        //console.log('RES is: ', res)
+        //console.log('recipe date: ', res.data)
         this.setState({ yourRecipes: res.data })
       })
       .catch(err => console.log(err))
@@ -208,8 +221,8 @@ export default class UserProfile extends Component {
 
 
   render() {
-    //const { favorites } = this.state
-    console.log('state is: ', this.state)
+    const { favorites } = this.state
+    console.log(favorites)
     return (<>
       <AuthContext.Consumer>
         {
@@ -224,7 +237,7 @@ export default class UserProfile extends Component {
             else {
               return (
                 <div className='background'>
-                  <this.handleUser user={user} />
+                  {/* <this.handleUser user={user} /> */}
                   {/* -------------------------- Styling for Mobile App ----------------------------*/}
                   <div className="show-on-small hide-on-med-and-up" style={{ backgroundColor: 'orange' }}>
                     <h3 style={{ marginTop: '0px', textAlign: 'center', paddingTop: '150px' }}>{`Welcome back, ${user.email}!`}</h3>
@@ -281,7 +294,8 @@ export default class UserProfile extends Component {
                             <span style={{ color: 'red', fontSize: '30px', position: 'relative', top: '55px', }}>Your Favorites</span>
                           </div>
                         </div>
-                        <this.ListFavorites />
+                        {/* <this.ListFavorites /> */}
+                        {this.ListFavorites()}
                       </div>
                     </div>
                     {/* YOUR RECIPES  */}

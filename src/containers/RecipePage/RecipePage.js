@@ -25,18 +25,19 @@ export default class RecipePage extends React.Component {
   }
   componentDidMount = (props) => {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
-    
+    const users_id = window.localStorage.getItem('users_id')
+    //console.log('users_id',users_id)
     let title = this.props.location.pathname.split('/recipepage/')[1]
-    this.setState({title})
+    this.setState({title,users_id})
     // getUser(this.context)
     // .then(res=>{
     //   this.setState({users_id:res.id});
     // })
-    this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
-      console.log(user)
-      getUser(user.email)
-      .then(res=>this.setState({users_id:res.id}))
-    })
+    // this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
+    //   console.log(user)
+    //   getUser(user.email)
+    //   .then(res=>this.setState({users_id:res.id}))
+    // })
     if (!this.props.location.state){
       const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
