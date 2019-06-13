@@ -209,7 +209,7 @@ class MobilePhone extends Component {
     }
   }
   Phone = () => {
-    return (<div className='marvel-device iphone-x' style={{ width: '100%' }}>
+    return (<div className='marvel-device iphone-x'>
       <div className='notch'>
         <div className='camera'></div>
         <div className='speaker'></div>
@@ -314,10 +314,10 @@ class MobilePhone extends Component {
   }
   render() {
     return (<>
-      <div className='col s12 m5'>
+      <div className='col s12 m5 l5'>
         <this.Phone />
       </div>
-      <div className='col s12 offset-m1 m6'>
+      <div className='col s12 offset-m4 m3 offset-l2 l5'>
         <h4>Try Me!</h4>
         <span className='flow-text'>Mobile </span>
         <span className='flow-text'>Friendly</span>
