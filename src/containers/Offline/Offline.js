@@ -8,7 +8,12 @@ class Offline extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipes: [
+      recipes: [{
+        image_url:'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/8/11/0/LR0105_Peach-Crisp.jpg.rend.hgtvcom.826.620.suffix/1371587310665.jpeg',
+        publisher_url: 'http://foodnetwork.com',
+        source_url: 'https://www.foodnetwork.com/recipes/anne-burrell/peach-crisp-recipe-1939806',
+        title:'Peach Crisp',
+      },
         {
         image_url: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2016/7/22/3/FNM090116_Grilled-Steak-and-Greek-Corn-Salad_s4x3.jpg.rend.hgtvcom.826.620.suffix/1469255050835.jpeg",
         publisher_url: 'http://foodnetwork.com',
@@ -139,7 +144,7 @@ class Offline extends Component {
       </div>
       <this.PhonePreview />
       <div className='orange lighten-3' style={{textAlign: 'center'}}>
-        <h3>Wide selection of Recipes</h3>
+        <h3 style={{padding: '12px'}}>Wide selection of Recipes</h3>
       </div>
       <div className='foodSlider' >
         <this.Recipes />
