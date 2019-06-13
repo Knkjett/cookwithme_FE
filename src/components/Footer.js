@@ -15,13 +15,13 @@ class Footer extends Component {
           <Link to='/' className='brand-logo'>CookWithMe</Link>
           <ul id='nav-mobile' className='right hide-on-med-and-down'>
             <li><a href='/#/userprofile'>User Profile</a></li>
-            <li><a href='!#'>About Us</a></li>
+            <li><a href='/#/AboutUs'>About Us</a></li>
           </ul>
         </div>
       </nav>
       <ul className='sidenav' id='mobile-demo'>
         <li><a href='/#/userprofile'>User Profile</a></li>
-        <li><a href='!#'>About Us</a></li>
+        <li><a href='/#/AboutUs'>About Us</a></li>
       </ul>
     </>)
   }
