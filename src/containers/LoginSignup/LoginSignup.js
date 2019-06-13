@@ -17,6 +17,7 @@ export default class LoginSignup extends React.Component {
             regEmail: '',
             regPassword: '',
             confirmPassword: '',
+            hidden: true, 
         }
     }
     componentDidMount = () => {
@@ -42,6 +43,7 @@ export default class LoginSignup extends React.Component {
                 $('#iwp').addClass('rotateb');
             });
         });
+
            
     }
 
@@ -86,6 +88,10 @@ export default class LoginSignup extends React.Component {
         }
          
     }
+    toggleShow = (e) => {
+        e.preventDefault();
+      this.setState({hidden: !this.state.hidden})
+    }
 
     render() {
 
@@ -109,8 +115,9 @@ export default class LoginSignup extends React.Component {
                                                             <label htmlFor='email'>Email</label>
                                                         </div>
                                                         <div className='input-field' >
-                                                            <input id='password' type='password' className='validate' name='password' autoComplete='new-password' value={password} onChange={this.handleChange} />
+                                                            <input id='password' type={this.state.hidden ? 'password': 'text'} className='validate' name='password' autoComplete='new-password' value={password} onChange={this.handleChange} />
                                                             <label htmlFor='password'>Password</label>
+                                                            <button className=" btn waves-light" onClick={this.toggleShow}>Show/Hide</button>
                                                         </div>
                                                         <div className='input-field'>
                                                             <label htmlFor='chk'>
