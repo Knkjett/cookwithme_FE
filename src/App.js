@@ -18,6 +18,7 @@ import {getUser} from './services/services'
 import firebase from './firebase';
 import AuthContext from './contexts/auth';
 import EmailContext from './contexts/email'
+import AboutUs from './components/AboutUs';
 
 const Err = () => {
   return (<>
@@ -68,6 +69,7 @@ class App extends Component {
               <Route path='/userprofile' exact component={UserProfile} />
               <Route path='/cookmode' exact component={Cookmode} />
               <Route path='/logout' exact component={Logout} />
+              <Route path='/Aboutus' exact component={AboutUs} />
               <Route component={Err} />
             </Switch>
             <Route path='/' component={Footer} />

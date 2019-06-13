@@ -234,17 +234,23 @@ class MobilePhone extends Component {
     return (<>
       <div className='row'>
         <div className='bubble grayBubble col m8'>
+         <small>Today 9:39 AM</small>
           <p className='flow-text'>Choose from a wide selection of recipes right from your device!</p>
+          <small>Delivered</small>
         </div>
       </div>
       <div className='row'>
         <div className='bubble grayBubble col m8'>
+          <small>Today 9:39 AM</small>
           <p className='flow-text'>Anywhere. Anytime. Get your desired recipe while on the move!</p>
+          <small>Delivered</small>
         </div>
       </div>
       <div className='row'>
         <div className='bubble blueBubble col offset-m4 m8'>
+        <small>Today 9:41 AM</small>
           <p className='flow-text'>I'm Starved!</p>
+          <small>Delivered</small>
         </div>
       </div>
     </>)
@@ -314,7 +320,7 @@ class MobilePhone extends Component {
       <div className='col s12 offset-m1 m6'>
         <h4>Try Me!</h4>
         <span className='flow-text'>Mobile </span>
-        <span className='flow-text flavorText'>Friendly</span>
+        <span className='flow-text'>Friendly</span>
         <span className='flow-text'> Design</span>
         <this.SpeechPreview />
       </div>
