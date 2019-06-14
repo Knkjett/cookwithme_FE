@@ -40,24 +40,7 @@ export default class UserProfile extends Component {
       this.GetFavorites()
       this.GetYourRecipes();
     })
-    
-
   }
-
-
-  // handleUser = (props) => {
-  //   if (!this.state.users_id) {
-  //     getUser(props.user.email)
-  //       .then((res) => {
-  //         this.setState({
-  //           users_id: res.id 
-  //         })
-  //         this.GetFavorites();
-  //         this.GetYourRecipes();
-  //       })
-  //   }
-  //   return <></>
-  // }
 
   GetFavorites = () => {
     const { users_id } = this.state;
