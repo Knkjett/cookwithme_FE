@@ -209,7 +209,7 @@ class MobilePhone extends Component {
     }
   }
   Phone = () => {
-    return (<div className='marvel-device iphone-x' style={{ width: '100%' }}>
+    return (<div className='marvel-device iphone-x'>
       <div className='notch'>
         <div className='camera'></div>
         <div className='speaker'></div>
@@ -233,24 +233,25 @@ class MobilePhone extends Component {
   SpeechHome = () => {
     return (<>
       <div className='row'>
+      <p><small>Today 9:39 AM</small></p>
         <div className='bubble grayBubble col m8'>
-         <small>Today 9:39 AM</small>
           <p className='flow-text'>Choose from a wide selection of recipes right from your device!</p>
-          <small>Delivered</small>
+          {/* <small>Delivered</small> */}
         </div>
+        
       </div>
       <div className='row'>
+      <p><small>Today 9:39 AM</small></p>
         <div className='bubble grayBubble col m8'>
-          <small>Today 9:39 AM</small>
           <p className='flow-text'>Anywhere. Anytime. Get your desired recipe while on the move!</p>
-          <small>Delivered</small>
+          {/* <small>Delivered</small> */}
         </div>
       </div>
       <div className='row'>
+      <p className='col offset-m4'><small>Today 9:41 AM</small></p>
         <div className='bubble blueBubble col offset-m4 m8'>
-        <small>Today 9:41 AM</small>
           <p className='flow-text'>I'm Starved!</p>
-          <small>Delivered</small>
+          {/* <small>Sent</small> */}
         </div>
       </div>
     </>)
@@ -258,20 +259,25 @@ class MobilePhone extends Component {
   SpeechRecipe = () =>{
     return (<>
       <div className='row'>
+      <p><small>Today 9:52 AM</small></p>
         <div className='bubble grayBubble col m8'>
           <p className='flow-text'>Preview the recipe's ingredients and steps with an easy to read minimalistic design!</p>
+        {/* <small>Delivered</small> */}
         </div>
       </div>
       <div className='row'>
+      <p className='col offset-m4'><small>Today 9:53 AM</small></p>
         <div className='bubble blueBubble col offset-m4 m8'>
           <p className='flow-text'>Wow!</p>
         </div>
       </div>
+      <p><small>Today 9:54 AM</small></p>
       <div className='row'>
         <div className='bubble grayBubble col m8'>
           <p className='flow-text'>When you're ready. Press Cook to get things started with Arytom! Our Voice Assist!</p>
         </div>
       </div>
+      <p className='col offset-m4'><small>Today 10:30 AM</small></p>
       <div className='row'>
         <div className='bubble blueBubble col offset-m4 m8'>
           <p className='flow-text'>All prepped! Lets get cooking!</p>
@@ -282,16 +288,19 @@ class MobilePhone extends Component {
   SpeechCook = () =>{
     return(<>
     <div className='row'>
+    <p><small>Today 10:31 AM</small></p>
     <div className='bubble grayBubble col m8'>
       <p className='flow-text'>Start cooking with voice command! Say: 'Start' to get started!</p>
     </div>
   </div>
   <div className='row'>
+  <p className='col offset-m4'><small>Today 10:31 AM</small></p>
     <div className='bubble blueBubble col offset-m4 m8'>
       <p className='flow-text'>Start!</p>
     </div>
   </div>
   <div className='row'>
+  <p><small>Today 10:35 AM</small></p>
     <div className='bubble grayBubble col m8'>
       <p className='flow-text'>Say: 'Next' for next step and 'Previous' for previous step!</p>
     </div>
@@ -314,10 +323,10 @@ class MobilePhone extends Component {
   }
   render() {
     return (<>
-      <div className='col s12 m5'>
+      <div className='col s12 m5 l5'>
         <this.Phone />
       </div>
-      <div className='col s12 offset-m1 m6'>
+      <div className='col s12 offset-m4 m3 offset-l2 l5'>
         <h4>Try Me!</h4>
         <span className='flow-text'>Mobile </span>
         <span className='flow-text'>Friendly</span>

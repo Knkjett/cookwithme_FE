@@ -13,6 +13,7 @@ import UserProfile from './components/UserProfile';
 import Landing from './containers/Landing';
 import Logout from './containers/Logout/Logout';
 
+import {getUser} from './services/services'
 //====Context
 import firebase from './firebase';
 import AuthContext from './contexts/auth';
@@ -27,14 +28,21 @@ const Err = () => {
 class App extends Component {
   state = {
     user: null,
-    email: null
+    email: null,
+    users_id:null,
   }
 
 
   componentDidMount = () => {
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user, email: user.email });
+        getUser(user.email)
+        .then(res=>{
+          this.setState({ user, email: user.email,users_id:res.id },()=>{
+            window.localStorage.setItem('users_id',(this.state.users_id))
+          });
+      })
+        
       }
       else {
         this.setState({ user: null })

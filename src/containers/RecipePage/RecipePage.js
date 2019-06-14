@@ -25,18 +25,19 @@ export default class RecipePage extends React.Component {
   }
   componentDidMount = (props) => {
     // NEED A MIDDLE PAGE THAT WILL REDIRECT TO RECIPE FROM HOME PAGE
-    
+    const users_id = window.localStorage.getItem('users_id')
+    //console.log('users_id',users_id)
     let title = this.props.location.pathname.split('/recipepage/')[1]
-    this.setState({title})
+    this.setState({title,users_id})
     // getUser(this.context)
     // .then(res=>{
     //   this.setState({users_id:res.id});
     // })
-    this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
-      console.log(user)
-      getUser(user.email)
-      .then(res=>this.setState({users_id:res.id}))
-    })
+    // this.unsubscribe = firebase.auth().onAuthStateChanged(user=>{
+    //   console.log(user)
+    //   getUser(user.email)
+    //   .then(res=>this.setState({users_id:res.id}))
+    // })
     if (!this.props.location.state){
       const recipe_object = JSON.parse(window.localStorage.getItem('recipe'))
       findRecipe(title)
@@ -49,7 +50,7 @@ export default class RecipePage extends React.Component {
           localStorage.setItem('recipe', JSON.stringify(init))
         }
         this.setState({recipe_id:res[0].id,ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img})
-        recentViewed(res[0].id)
+        recentViewed(this.state.users_id,res[0].id, title, res[0].source_img)
       })
       if(recipe_object.favid){
         this.setState({favorite:'btn-floating halfway-fab red',favid:recipe_object.favid})
@@ -65,8 +66,6 @@ export default class RecipePage extends React.Component {
   //   let publisher_url = "http://foodnetwork.com"
   //  let source_img = 'http://static.food2fork.com/icedcoffee5766.jpg'
       if(url){
-
-      
       checkRecipe(url)
         .then((res) => {
           if (!res) {
@@ -74,7 +73,7 @@ export default class RecipePage extends React.Component {
               .then((res) => {
                 this.setState({
                   ingredients: res,
-                  source_img: source_img
+                  source_img: source_img,
                 })
               })
               .then(() => {
@@ -82,7 +81,7 @@ export default class RecipePage extends React.Component {
                   postRecipes(null, title, source_img, url, publisher_url, this.state.ingredients, this.state.steps)
                   .then(res=>{
                     this.setState({recipe_id:res.id})
-                    recentViewed(res.id)
+                    recentViewed(this.state.users_id,res.id, title, source_img)
                   })
                 } 
               })
@@ -97,7 +96,7 @@ export default class RecipePage extends React.Component {
                   postRecipes(null, title, source_img, url, publisher_url, this.state.ingredients, this.state.steps)
                   .then(res=>{
                     this.setState({recipe_id:res.id})
-                    recentViewed(res.id)
+                    recentViewed(this.state.users_id,res.id,title, source_img)
                   })
                 }
               })
