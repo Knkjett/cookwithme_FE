@@ -3,7 +3,7 @@ import React from 'react';
 export default (props) => {
    return (
        <React.Fragment>
-            <img src='https://media.giphy.com/media/3o7qDWp7hxhi1N8oF2/giphy.gif' style={{maxHeight: '200px', marginTop: '80px'}} className='right' />
+            <img src='https://media.giphy.com/media/3o7qDWp7hxhi1N8oF2/giphy.gif' style={{maxHeight: '200px', marginTop: '80px'}} className='right' alt='' />
           <div className="col s12 m8 offset-m2 l6 offset-l3" >
         <div className="card-panel grey lighten-5 z-depth-1 ">
         <h3 className='center'>Founders of Cook With Me</h3>
