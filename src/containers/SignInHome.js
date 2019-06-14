@@ -51,7 +51,7 @@ class SignInHome extends Component {
                     user => {
                         if (this.state.recipes === null) return <div><img className='divElement' src='https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif' alt='Loading'/></div>;
                         else return <>
-                            <div className="containerPadding" style={{minHeight: '92vh'}}>
+                            <div className="containerPadding" style={{minHeight: '92vh',backgroundColor:'snow'}}>
                                 <div className="row" style={{ marginBottom: '0px' }}>
                                 <div className="col s12 m3" >
                                 <div className="card" style={{margin:'0px',marginTop:'50px'}}>
