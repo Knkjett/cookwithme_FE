@@ -146,7 +146,7 @@ class Offline extends Component {
       <div className='orange lighten-3' style={{textAlign: 'center'}}>
         <h3 style={{padding: '12px'}}>Wide selection of Recipes</h3>
       </div>
-      <div className='foodSlider' >
+      <div className='foodSlider' style={{border: '1px solid black',paddingTop: '15px'}} >
         <this.Recipes />
       </div>
       <div className='container z-depth-5' style={{ marginTop: '40px', backgroundColor: '#F1F1F1' }}>
