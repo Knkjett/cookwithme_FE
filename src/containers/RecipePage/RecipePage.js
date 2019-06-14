@@ -5,7 +5,7 @@ import {postFav,getIDfav,findRecipe, checkRecipe, recentViewed, postRecipes,getU
 import EmailContext from '../../contexts/email'
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
-import firebase from '../../firebase'
+//import firebase from '../../firebase'
 
 
 export default class RecipePage extends React.Component {
@@ -166,22 +166,22 @@ export default class RecipePage extends React.Component {
       return (<React.Fragment>
         <div className="row pageHeight" style={{paddingRight:'0.75rem !important'}}>
           {/* <img className="col s12 m7 materialboxed hoverable" src={this.state.source_img} alt='' /> */}
-          <div className="col s12 m7" style={{padding:0,paddingRight:'0.75rem !important', marginTop: '50px'}}>
+          <div className="col s12 m7" style={{padding:0,paddingRight:'0.75rem !important', marginTop: '45px'}}>
             <div className="card" style={{margin:0}}>
               <div className="card-image" onClick={e=>this.toggleFav()}>
                 <img alt='Recipe' src={this.state.source_img} style={{maxHeight: '500px'}} />
                 
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
-              <div className="card-content">
+              <div className="card-content"  style={{backgroundColor:'#616161', color:'white'}}>
                 <span className="card-title">{title}</span>
               </div>
             </div>
           </div>
           <div className="col s12 m5" style={{padding:0,padding:'0.25rem'}}>
-            <div className="card-panel" style={{ maxHeight: '280px', overflow: 'scroll',backgroundColor: '#6d4c41',margin:0 }}>
+            <div className="card-panel" style={{ maxHeight: '260px', overflow: 'scroll',backgroundColor: '#616161',margin:0, marginTop:'8px' }}>
               <form action="#">
-                <h5>Ingredients</h5>
+                <h5>*Ingredients*</h5>
                 {
                   ingredients.map((ingred, i) => {
                     return (
@@ -196,8 +196,8 @@ export default class RecipePage extends React.Component {
                 }
               </form>
             </div>
-            <div className="card-panel" style={{ maxHeight: '280px', overflow: 'scroll',backgroundColor:'#6d4c41', marginTop: '25px' }}>
-            <h5>Instructions</h5>
+            <div className="card-panel" style={{ maxHeight: '260px', overflow: 'scroll',backgroundColor:'#616161', marginTop: '25px' }}>
+            <h5>*Instructions*</h5>
               <span className="white-text">
                 {
                   steps.map((steps, i) => {

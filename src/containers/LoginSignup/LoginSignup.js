@@ -93,6 +93,10 @@ export default class LoginSignup extends React.Component {
       this.setState({hidden: !this.state.hidden})
     }
 
+    demoLogin = (e) =>{
+        e.preventDefault();
+        this.setState({email: 'johnie@gmail.com', password: '123456'})
+    }
     render() {
 
         const { email, password, regEmail, regPassword, confirmPassword } = this.state;
@@ -117,7 +121,7 @@ export default class LoginSignup extends React.Component {
                                                         <div className='input-field' >
                                                             <input id='password' type={this.state.hidden ? 'password': 'text'} className='validate' name='password' autoComplete='new-password' value={password} onChange={this.handleChange} />
                                                             <label htmlFor='password'>Password</label>
-                                                            <button className=" btn waves-light" onClick={this.toggleShow}>Show/Hide</button>
+                                                            <button className=" btn waves-light" onClick={this.toggleShow}>Show/Hide</button><button className=" btn waves-light" onClick={this.demoLogin}>demo</button>
                                                         </div>
                                                         <div className='input-field'>
                                                             <label htmlFor='chk'>

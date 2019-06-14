@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import './SignInHome.css';
-import {getFood2Fork,defaultRecipes } from '../services/services'
+import {getFood2Fork } from '../services/services'
 import AuthContext from '../contexts/auth'
 import EmailContext from '../contexts/email'
 import M from 'materialize-css';
