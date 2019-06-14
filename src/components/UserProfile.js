@@ -33,26 +33,7 @@ export default class UserProfile extends Component {
     Materialize.Collapsible.init(elems2, { accordion: true });
   }
 
-  componentDidMount = () => {
-    // this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
-    //   if (user) {
-    //     getUser(user.email)
-    //       .then((res) => {
-    //         console.log('ID is: ', res.id)
-    //         this.setState({
-    //           users_id: res.id
-    //         })
-    //       })
-    //       .then(() => {
-    //         this.GetFavorites()
-    //         this.GetYourRecipes();
-    //       })
-    //   }
-    //   else {
-    //     this.setState({ user: null })
-    //   }
-    // })
-
+  componentDidMount = () =>{
     const users_id = window.localStorage.getItem('users_id')
     this.setState({users_id},()=>{
       //console.log(this.state)
@@ -83,10 +64,10 @@ export default class UserProfile extends Component {
     
     Axios.get(`https://cookwithme.herokuapp.com/favorites/users/${users_id}`)
       .then(res => {
-        const promises = []
+        const promises = [];
         for (let i = 0; i < res.data.length; i++) {
-          let favesID = res.data[i].recipe_id
-          promises.push(Axios.get(`https://cookwithme.herokuapp.com/recipes/${favesID}`))
+          let favRecID = res.data[i].recipe_id
+          promises.push(Axios.get(`https://cookwithme.herokuapp.com/recipes/${favRecID}`))
         }
         return promises;
       })
@@ -98,7 +79,6 @@ export default class UserProfile extends Component {
         this.setState({favorites});
       })
       .catch(err => console.log(err))
-      
   }
 
   makeRequestsFromArray = (arr) => {
@@ -173,6 +153,36 @@ export default class UserProfile extends Component {
         }
       </>
     )
+  }
+
+  
+  ListNewFav = () => {
+    const { favorites } = this.state;
+    return <>
+      <h4 style={{color:'red',paddingLeft:'calc(3.5%)',paddingBottom:'0px'}}>Favorites</h4>
+      <ul class='hs'>
+        {
+          favorites.map((e,i)=>{
+            return <li class='item'>
+                <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container">
+                <Link to={{
+                  pathname: `/recipepage/${e.title}`,
+                  state: { url: e.source_url, publisher: e.publisher_url, source_img: e.image_url }
+                }}>
+                  <div className="card-image">
+                    <img src={e.source_img} alt='food pic' style={{ height: '180px', }} />
+                  </div>
+                  <div className="card-content" style={{ height: '75px', textAlign: 'center', background: 'whitesmoke' }}>
+                    <p>{e.title}</p>
+                  </div>
+                </Link>
+              </div>
+            </li>
+          })
+        }
+      </ul>
+    
+    </>
   }
 
   ListYourRecipes = () => {
@@ -286,18 +296,10 @@ export default class UserProfile extends Component {
                   <div className="show-on-large hide-on-small-only">
                     <h1 style={{ marginTop: '0px', textAlign: 'center', paddingTop: '50px' }}>{`Welcome back, ${user.email}!`}</h1>
                     {/* FAVORTITES */}
-                    <div className="row">
-                      <div className="row userSlider" style={{ display: 'inline-flex', width: '80%', overflow: 'scroll' }}>
-                        {/* FAVORITES CARDS */}
-                        <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container">
-                          <div className="card-content" style={{ height: '180px', textAlign: 'center', background: 'white', position: 'relative' }} >
-                            <span style={{ color: 'red', fontSize: '30px', position: 'relative', top: '55px', }}>Your Favorites</span>
-                          </div>
-                        </div>
+                    
                         {/* <this.ListFavorites /> */}
-                        {this.ListFavorites()}
-                      </div>
-                    </div>
+                        {this.ListNewFav()}
+                    
                     {/* YOUR RECIPES  */}
                     <div className="row">
                       <div className="row" style={{ display: 'inline-flex', width: '80%', overflow: 'scroll' }}>
