@@ -95,7 +95,7 @@ export default class LoginSignup extends React.Component {
 
     demoLogin = (e) =>{
         e.preventDefault();
-        this.setState({email: 'testing@gmail.com', password: 'testing'})
+        this.setState({email: 'john@gmail.com', password: 'Admin123'})
     }
     render() {
 
