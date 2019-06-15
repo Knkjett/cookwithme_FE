@@ -103,10 +103,11 @@ export default class RecipePage extends React.Component {
           }
           else {
             this.setState({recipe_id:res[0].id, ingredients: res[0].ingredients, steps: res[0].steps, source_img: res[0].source_img })
+            recentViewed(this.state.users_id, res[0].id,title, res[0].source_img)
             getIDfav(this.state.users_id,res[0].id)
             .then(res=>{
               if(res) {
-                recentViewed(res.data.id)
+          
                 if(!localStorage.getItem('recipe')){
                   let init = {
                     recipe: {
@@ -129,6 +130,7 @@ export default class RecipePage extends React.Component {
         .then(res=>{
           const {id,ingredients,steps,source_img} = res.data
           this.setState({recipe_id:id,ingredients,steps,source_img})
+          recentViewed(this.state.users_id,id, title, source_img)
         })
         
       }
