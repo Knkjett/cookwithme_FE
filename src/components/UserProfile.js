@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getUser, getIDfav } from '../services/services';
 import AuthContext from '../contexts/auth';
 import Axios from 'axios';
-import firebase from '../firebase';
 import Materialize from 'materialize-css/dist/js/materialize.min.js';
 import '../components/UserProfile.css'
-import { async } from 'q';
+
+
 export default class UserProfile extends Component {
   constructor(props) {
     super(props)
@@ -21,7 +20,7 @@ export default class UserProfile extends Component {
 
   componentDidUpdate = () => {
     // Scroll to top of page upon loading
-    
+
     window.scrollTo(0, 0);
 
     // Carousel Initialization
@@ -33,35 +32,18 @@ export default class UserProfile extends Component {
     Materialize.Collapsible.init(elems2, { accordion: true });
   }
 
-  componentDidMount = () =>{
-    const users_id = window.localStorage.getItem('users_id')
-    this.setState({users_id},()=>{
-      //console.log(this.state)
+  componentDidMount = () => {
+    const users_id = window.localStorage.getItem('users_id');
+    const recentlyViewed = window.localStorage.getItem('recentlyViewed');
+    this.setState({ users_id, recentlyViewed }, () => {
       this.GetFavorites()
       this.GetYourRecipes();
     })
-    
-
   }
-
-
-  // handleUser = (props) => {
-  //   if (!this.state.users_id) {
-  //     getUser(props.user.email)
-  //       .then((res) => {
-  //         this.setState({
-  //           users_id: res.id 
-  //         })
-  //         this.GetFavorites();
-  //         this.GetYourRecipes();
-  //       })
-  //   }
-  //   return <></>
-  // }
 
   GetFavorites = () => {
     const { users_id } = this.state;
-    
+
     Axios.get(`https://cookwithme.herokuapp.com/favorites/users/${users_id}`)
       .then(res => {
         const promises = [];
@@ -71,12 +53,12 @@ export default class UserProfile extends Component {
         }
         return promises;
       })
-      .then(promises =>{
+      .then(promises => {
         return Promise.all(promises)
       })
-      .then(results =>{
+      .then(results => {
         const favorites = results.map(e => e.data);
-        this.setState({favorites});
+        this.setState({ favorites });
       })
       .catch(err => console.log(err))
   }
@@ -109,6 +91,7 @@ export default class UserProfile extends Component {
       })
       .catch(err => console.log(err))
   }
+
 
   ListFavorites = () => {
     const { favorites } = this.state;
@@ -155,16 +138,16 @@ export default class UserProfile extends Component {
     )
   }
 
-  
+
   ListNewFav = () => {
     const { favorites } = this.state;
     return <>
-      <h4 style={{color:'red',paddingLeft:'calc(3.5%)',paddingBottom:'0px'}}>Favorites</h4>
+      <h4 style={{ color: 'red', paddingLeft: 'calc(3.5%)', paddingBottom: '0px' }}>Favorites</h4>
       <ul className='hs'>
         {
-          favorites.map((e,i)=>{
+          favorites.map((e, i) => {
             return <li className='item'>
-                <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" key={i}>
+              <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" key={i}>
                 <Link to={{
                   pathname: `/recipepage/${e.title}`,
                   state: { url: e.source_url, publisher: e.publisher_url, source_img: e.image_url }
@@ -181,7 +164,7 @@ export default class UserProfile extends Component {
           })
         }
       </ul>
-    
+
     </>
   }
 
@@ -230,9 +213,39 @@ export default class UserProfile extends Component {
   }
 
 
+  // ListRecentlyViewed = () => {
+  //   const { recentlyViewed } = this.state;
+  //   // console.log('imListFunc' ,recentlyViewed)
+  //   if (recentlyViewed===[]) return <><p>None To Show Yet...</p></>
+  //   console.log('we got here!')
+  //   return <>
+  //   {console.log('we got here')}
+  //     <h5>Recently Viewed:</h5>
+  //     <div className="carousel">
+  //       {
+  //         recentlyViewed.map((e, i) => {
+  //           if (e==={}) console.log('e is empty')
+  //           return <>
+  //             <div className="carousel-item" key={i}>
+  //               <div className="card sticky-action">
+  //                 <div className="card-image ">
+  //                   <img src={e.source_img} alt='food-pic' />
+  //                   <span className="card-title">{e.title}</span>
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           </>
+  //         })
+  //       }
+  //     </div>
+  //   </>
+  // }
+
+
   render() {
     const { favorites } = this.state
-    console.log(favorites)
+    console.log('in state: ', this.state.recentlyViewed)
+    // console.log(favorites)
     return (<>
       <AuthContext.Consumer>
         {
@@ -273,8 +286,9 @@ export default class UserProfile extends Component {
                       <li>
                         <div className="collapsible-header">Recently Viewed</div>
                         <div className="collapsible-body">
-                          <div className="row userSlider" style={{ display: 'inline-flex', width: '100vw', overflow: 'scroll' }}>
-                            {/* RECENTLY VIEWED CARD */}
+                          {/* {this.ListRecentlyViewed()} */}
+                          {/* <div className="row userSlider" style={{ display: 'inline-flex', width: '100vw', overflow: 'scroll' }}>
+                            RECENTLY VIEWED CARD
                             <div className="col s6 card small card-container">
                               <div className="card-image">
                                 <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg" alt='food pic' />
@@ -286,7 +300,7 @@ export default class UserProfile extends Component {
                                 <a href="/#">This is a link</a>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </li>
                     </ul>
@@ -296,10 +310,10 @@ export default class UserProfile extends Component {
                   <div className="show-on-large hide-on-small-only">
                     <h1 style={{ marginTop: '0px', textAlign: 'center', paddingTop: '50px' }}>{`Welcome back, ${user.email}!`}</h1>
                     {/* FAVORTITES */}
-                    
-                        {/* <this.ListFavorites /> */}
-                        {this.ListNewFav()}
-                    
+
+                    {/* <this.ListFavorites /> */}
+                    {this.ListNewFav()}
+
                     {/* YOUR RECIPES  */}
                     <div className="row">
                       <div className="row" style={{ display: 'inline-flex', width: '80%', overflow: 'scroll' }}>
@@ -316,47 +330,7 @@ export default class UserProfile extends Component {
                       </div>
                     </div>
                     {/* RECENTLY VIEWED CAROUSEL */}
-                    {/* <h5>Recently Viewed:</h5>
-                    <div className="carousel">
-                      <div className="carousel-item">
-                        <div className="card sticky-action">
-                          <div className="card-image ">
-                            <img src="http://baliindiancuisine.com/wp-content/uploads/2014/12/Indian-fast-food-recipes.jpg?h=350" alt='food-pic' />
-                            <span className="card-title">Recipe Name</span>
-                          </div>
-                          <div className="card-content">
-                            <p>This is a content.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="carousel-item">
-                        <div className="card">
-                          <div className="card-image">
-                            <img src="https://images.pexels.com/photos/160933/girl-rabbit-friendship-love-160933.jpeg?h=350&auto=compress&cs=tinysrgb" alt='food-pic' />
-                            <span className="card-title">This is a Title</span>
-                          </div>
-                          <span className="card-content">This is a content</span>
-                        </div>
-                      </div>
-                      <div className="carousel-item">
-                        <div className="card">
-                          <div className="card-image">
-                            <img src="https://images.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg?h=350&auto=compress&cs=tinysrgb" alt='food-pic' />
-                            <span className="card-title">This is a Title</span>
-                          </div>
-                          <span className="card-content">This is a content</span>
-                        </div>
-                      </div>
-                      <div className="carousel-item">
-                        <div className="card">
-                          <div className="card-image">
-                            <img src="https://images.pexels.com/photos/573299/pexels-photo-573299.jpeg?h=350&auto=compress&cs=tinysrgb" alt='food-pic' />
-                            <span className="card-title">This is a Title</span>
-                          </div>
-                          <span className="card-content">This is a content</span>
-                        </div>
-                      </div>
-                    </div> */}
+                    {/* {this.ListRecentlyViewed()} */}
                   </div>
                 </div>
               )
