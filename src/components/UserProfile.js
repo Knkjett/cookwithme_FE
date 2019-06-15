@@ -34,7 +34,7 @@ export default class UserProfile extends Component {
 
   componentDidMount = () => {
     const users_id = window.localStorage.getItem('users_id');
-    const recentlyViewed = window.localStorage.getItem('recentlyViewed');
+    const recentlyViewed = JSON.parse(window.localStorage.getItem('recentlyViewed'));
     this.setState({ users_id, recentlyViewed }, () => {
       this.GetFavorites()
       this.GetYourRecipes();
@@ -177,7 +177,7 @@ export default class UserProfile extends Component {
           yourRecipes.map((e, i) => {
             return (<>
               {/* Mobile App  */}
-              <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container" key={i}>
+              <div className="show-on-small hide-on-med-and-up col s12 m3 card no-shadows card-container">
                 <Link to={{
                   pathname: `/recipepage/${e.title}`,
                   state: { url: e.source_url, publisher: e.publisher_url, source_img: e.image_url }
@@ -213,33 +213,34 @@ export default class UserProfile extends Component {
   }
 
 
-  // ListRecentlyViewed = () => {
-  //   const { recentlyViewed } = this.state;
-  //   // console.log('imListFunc' ,recentlyViewed)
-  //   if (recentlyViewed===[]) return <><p>None To Show Yet...</p></>
-  //   console.log('we got here!')
-  //   return <>
-  //   {console.log('we got here')}
-  //     <h5>Recently Viewed:</h5>
-  //     <div className="carousel">
-  //       {
-  //         recentlyViewed.map((e, i) => {
-  //           if (e==={}) console.log('e is empty')
-  //           return <>
-  //             <div className="carousel-item" key={i}>
-  //               <div className="card sticky-action">
-  //                 <div className="card-image ">
-  //                   <img src={e.source_img} alt='food-pic' />
-  //                   <span className="card-title">{e.title}</span>
-  //                 </div>
-  //               </div>
-  //             </div>
-  //           </>
-  //         })
-  //       }
-  //     </div>
-  //   </>
-  // }
+  ListRecentlyViewed = () => {
+    const { recentlyViewed } = this.state;
+    console.log(recentlyViewed)
+    // console.log('imListFunc' ,recentlyViewed)
+    if (recentlyViewed===[] || recentlyViewed===[{}]) return <><p>None To Show Yet...</p></>
+    console.log('we got here!')
+    return <>
+    {console.log('we got here')}
+      <h5>Recently Viewed:</h5>
+      <div className="carousel">
+        {
+          recentlyViewed.map((e, i) => {
+            if (e==={}) console.log('e is empty')
+            return <>
+              <div className="carousel-item" key={i}>
+                <div className="card sticky-action">
+                  <div className="card-image ">
+                    <img src={e.source_img} alt='food-pic' />
+                    <span className="card-title">{e.title}</span>
+                  </div>
+                </div>
+              </div>
+            </>
+          })
+        }
+      </div>
+    </>
+  }
 
 
   render() {
@@ -286,7 +287,7 @@ export default class UserProfile extends Component {
                       <li>
                         <div className="collapsible-header">Recently Viewed</div>
                         <div className="collapsible-body">
-                          {/* {this.ListRecentlyViewed()} */}
+                          <this.ListRecentlyViewed />
                           {/* <div className="row userSlider" style={{ display: 'inline-flex', width: '100vw', overflow: 'scroll' }}>
                             RECENTLY VIEWED CARD
                             <div className="col s6 card small card-container">
@@ -330,7 +331,7 @@ export default class UserProfile extends Component {
                       </div>
                     </div>
                     {/* RECENTLY VIEWED CAROUSEL */}
-                    {/* {this.ListRecentlyViewed()} */}
+                    <this.ListRecentlyViewed />
                   </div>
                 </div>
               )
