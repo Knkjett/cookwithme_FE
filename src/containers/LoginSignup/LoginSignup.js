@@ -95,7 +95,7 @@ export default class LoginSignup extends React.Component {
 
     demoLogin = (e) =>{
         e.preventDefault();
-        this.setState({email: 'johnie@gmail.com', password: '123456'})
+        this.setState({email: 'johnn@gmail.com', password: 'Admin123'})
     }
     render() {
 
@@ -114,15 +114,13 @@ export default class LoginSignup extends React.Component {
                                                     <div className='card-content'>
                                                         <span className='card-title login-title'>Login</span>
                                                         <i className='material-icons btn-floating halfway-fab waves-light red' id='bt'>person_add</i>
-                                                        <div className='input-field'>
                                                             <input id='email' type='email' className='validate' aria-describedby='emailHelp' name='email' value={email} onChange={this.handleChange} />
                                                             <label htmlFor='email'>Email</label>
-                                                        </div>
-                                                        <div className='input-field' >
+                                                            <div>
                                                             <input id='password' type={this.state.hidden ? 'password': 'text'} className='validate' name='password' autoComplete='new-password' value={password} onChange={this.handleChange} />
-                                                            <label htmlFor='password'>Password</label>
+                                                            <label htmlFor='password'>Password</label> 
+                                                            </div><br></br>
                                                             <button className=" btn waves-light" onClick={this.toggleShow}>Show/Hide</button><button className=" btn waves-light" onClick={this.demoLogin}>demo</button>
-                                                        </div>
                                                         <div className='input-field'>
                                                             <label htmlFor='chk'>
                                                                 <input type='checkbox' id='chk' />
