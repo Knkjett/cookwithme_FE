@@ -89,7 +89,7 @@ class SignInHome extends Component {
                 }
             </AuthContext.Consumer>
 
-            <div className="fixed-action-btn click-to-toggle">
+            <div className="fixed-action-btn click-to-toggle" style={{bottom:'70px'}}>
                                 <button className="btn-floating btn-large red">
                                     <i className="large material-icons">search</i>
                                 </button>
