@@ -173,21 +173,21 @@ export default class RecipePage extends React.Component {
                 
                 <a className={this.state.favorite} ><i className="material-icons">favorite</i></a>
               </div>
-              <div className="card-content"  style={{backgroundColor:'#bcaaa4 ', color:'white'}}>
+              <div className="card-content"  style={{backgroundColor:'burlywood ', color:'white'}}>
                 <span className="card-title">{title}</span>
               </div>
             </div>
           </div>
           <div className="col s12 m5" style={{padding:0,padding:'0.25rem'}}>
-            <div className="card-panel" style={{ maxHeight: '260px', overflow: 'scroll',backgroundColor: '#bcaaa4 ',margin:0, marginTop:'8px' }}>
+            <div className="card-panel" style={{ maxHeight: '260px', overflow: 'scroll',backgroundColor: 'burlywood ',margin:0, marginTop:'8px' }}>
               <form action="#">
-                <h5>*Ingredients*</h5>
+                <h5>Ingredients</h5>
                 {
                   ingredients.map((ingred, i) => {
                     return (
                       <React.Fragment key={i}>
                         <p >
-                        <span className="white-text">{ingred}</span>
+                        <span className="black-text">{ingred}</span>
                           
                         </p>
                       </React.Fragment>
@@ -196,9 +196,9 @@ export default class RecipePage extends React.Component {
                 }
               </form>
             </div>
-            <div className="card-panel" style={{ maxHeight: '260px', overflow: 'scroll',backgroundColor:'#bcaaa4', marginTop: '25px' }}>
-            <h5>*Instructions*</h5>
-              <span className="white-text">
+            <div className="card-panel" style={{ maxHeight: '260px', overflow: 'scroll',backgroundColor:'burlywood', marginTop: '25px' }}>
+            <h5>Instructions</h5>
+              <span className="black-text">
                 {
                   steps.map((steps, i) => {
                     return (
@@ -215,7 +215,7 @@ export default class RecipePage extends React.Component {
             <Link to={{
               pathname: `/cookmode/`,
                 cook: { ingredients: this.state.ingredients, steps: this.state.steps, id, publisher_url, url, source_img,title:this.state.title }
-            }}> <div className='btn' style={{color:'white'}}>Cook Now
+            }}> <div className='btn' style={{color:'black'}}>Cook Now
 
                 </div> </Link>
                 
