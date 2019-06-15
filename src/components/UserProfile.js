@@ -160,11 +160,11 @@ export default class UserProfile extends Component {
     const { favorites } = this.state;
     return <>
       <h4 style={{color:'red',paddingLeft:'calc(3.5%)',paddingBottom:'0px'}}>Favorites</h4>
-      <ul class='hs'>
+      <ul className='hs'>
         {
           favorites.map((e,i)=>{
-            return <li class='item'>
-                <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container">
+            return <li className='item'>
+                <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" key={i}>
                 <Link to={{
                   pathname: `/recipepage/${e.title}`,
                   state: { url: e.source_url, publisher: e.publisher_url, source_img: e.image_url }
@@ -208,7 +208,7 @@ export default class UserProfile extends Component {
                 </Link>
               </div>
               {/* Web App  */}
-              <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" >
+              <div className="show-on-large hide-on-small-only col s12 m3 card no-shadows card-container" key={i}>
                 <Link to={{
                   pathname: `/recipepage/${e.title}`,
                   state: { url: e.source_url, publisher: e.publisher_url, source_img: e.image_url }
