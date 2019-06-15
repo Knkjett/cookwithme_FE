@@ -263,6 +263,7 @@ class Cookmode extends Component {
               state: {id, publisher_url, url, source_img}
         }}><div><i className="medium material-icons">highlight_off</i></div></Link>
         {/* <Link to='/'><div><i className="medium material-icons">highlight_off</i></div></Link> */}
+        <button onClick={e=>Jarvis.say(steps[currentStepIndex])}>Demo</button>
       </div>
     </>
   }
